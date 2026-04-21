@@ -28,12 +28,7 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
 
         body {
             background-color: var(--bg-dark);
@@ -49,453 +44,158 @@
             background-attachment: fixed;
         }
 
-        .app-container {
-            width: 100%;
-            max-width: 650px;
-            position: relative;
-        }
+        .app-container { width: 100%; max-width: 650px; position: relative; }
 
-        /* الهيدر والعلامة التجارية */
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+        header { text-align: center; margin-bottom: 2rem; }
 
         .brand-title {
-            font-family: 'Cairo', sans-serif;
-            font-weight: 900;
-            font-size: 3.5rem;
-            letter-spacing: -1px;
+            font-weight: 900; font-size: 3.5rem; letter-spacing: -1px;
             background: linear-gradient(135deg, #ffffff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
 
-        .brand-dot {
-            color: var(--secondary);
-            -webkit-text-fill-color: var(--secondary);
-            animation: pulse 2s infinite;
-        }
+        .brand-dot { color: var(--secondary); -webkit-text-fill-color: var(--secondary); animation: pulse 2s infinite; }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
-        .tagline {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
+        .tagline { color: var(--text-muted); font-size: 1.1rem; font-weight: 600; }
 
-        /* الملاحة الرئيسية (Tabs) */
         .main-nav {
-            display: flex;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 0.5rem;
-            margin-bottom: 1.5rem;
-            gap: 0.5rem;
+            display: flex; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 0.5rem; margin-bottom: 1.5rem; gap: 0.5rem;
         }
 
         .nav-btn {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 0.8rem;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: var(--transition);
+            flex: 1; background: transparent; border: none; color: var(--text-muted);
+            font-size: 1rem; font-weight: 700; padding: 0.8rem; border-radius: 12px;
+            cursor: pointer; transition: var(--transition);
         }
 
-        .nav-btn.active {
-            background: var(--surface-hover);
-            color: var(--primary);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+        .nav-btn.active { background: var(--surface-hover); color: var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
-        /* الحاوية الرئيسية */
         .card {
-            background: rgba(17, 21, 34, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
+            background: rgba(17, 21, 34, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;
         }
 
-        .view-section {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
+        .view-section { display: none; animation: fadeIn 0.4s ease; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .view-section.active {
-            display: block;
-        }
-
-        /* العرض وإدخال كلمة المرور */
         .display-box {
-            background: #000;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            transition: var(--transition);
+            background: #000; border: 2px solid var(--border); border-radius: 12px;
+            padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 1rem; transition: var(--transition); gap: 10px;
         }
 
-        .display-box:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
+        .display-box:focus-within { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
 
         .password-input {
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.4rem;
-            width: 100%;
-            outline: none;
-            letter-spacing: 2px;
-            direction: ltr;
-            text-align: left;
+            background: transparent; border: none; color: var(--text);
+            font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; width: 100%;
+            outline: none; letter-spacing: 2px; direction: ltr; text-align: left;
         }
+
+        .icon-btn {
+            background: transparent; border: none; color: var(--text-muted); font-size: 1.2rem;
+            cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: var(--transition);
+        }
+        .icon-btn:hover { color: var(--primary); background: var(--surface-hover); }
 
         .btn-action {
-            background: var(--surface-hover);
-            color: var(--text);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.6rem 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            white-space: nowrap;
-            margin-right: 1rem;
+            background: var(--surface-hover); color: var(--text); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.6rem 1.2rem; font-weight: 700; cursor: pointer;
+            transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;
         }
 
-        .btn-action:hover {
-            background: var(--primary);
-            color: #000;
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
+        .btn-action:hover { background: var(--primary); color: #000; border-color: var(--primary); transform: translateY(-2px); }
 
-        /* شريط القوة */
-        .strength-container {
-            margin-bottom: 2rem;
-            background: var(--surface-hover);
-            padding: 1rem;
-            border-radius: 12px;
-        }
+        .strength-container { margin-bottom: 2rem; background: var(--surface-hover); padding: 1rem; border-radius: 12px; }
+        .strength-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; font-weight: 700; }
+        .strength-bars { display: flex; gap: 8px; height: 8px; margin-bottom: 1rem; flex-direction: row-reverse; }
+        .bar { flex: 1; background: var(--border); border-radius: 4px; transition: all 0.5s ease; }
 
-        .strength-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            font-weight: 700;
-        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem; color: var(--text-muted); }
+        .stats-grid span.val { color: var(--text); font-weight: 700; direction: ltr; display: inline-block; }
 
-        .strength-bars {
-            display: flex;
-            gap: 8px;
-            height: 8px;
-            margin-bottom: 1rem;
-            flex-direction: row-reverse;
-        }
-
-        .bar {
-            flex: 1;
-            background: var(--border);
-            border-radius: 4px;
-            transition: all 0.5s ease;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .stats-grid span.val {
-            color: var(--text);
-            font-weight: 700;
-            direction: ltr;
-            display: inline-block;
-        }
-
-        /* تبويبات التوليد الفرعية */
-        .sub-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            overflow-x: auto;
-            padding-bottom: 5px;
-        }
-
+        .sub-tabs { display: flex; gap: 10px; margin-bottom: 1.5rem; overflow-x: auto; padding-bottom: 5px; }
         .sub-tab {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: var(--transition);
+            background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
+            padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; white-space: nowrap; transition: var(--transition);
         }
+        .sub-tab.active { background: var(--secondary); color: #000; border-color: var(--secondary); }
 
-        .sub-tab.active {
-            background: var(--secondary);
-            color: #000;
-            border-color: var(--secondary);
-        }
-
-        /* عناصر التحكم */
-        .control-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .control-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            background: var(--border);
-            border-radius: 4px;
-            outline: none;
-            direction: ltr;
-        }
-
+        .control-group { margin-bottom: 1.5rem; }
+        .control-header { display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-weight: 600; }
+        .slider { -webkit-appearance: none; width: 100%; height: 6px; background: var(--border); border-radius: 4px; outline: none; direction: ltr; }
         .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-            transition: var(--transition);
+            -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+            background: var(--primary); cursor: pointer; transition: var(--transition);
         }
+        .slider::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 15px var(--primary-glow); }
 
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-            padding: 0.8rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            transition: var(--transition);
+            display: flex; align-items: center; gap: 0.8rem; cursor: pointer; padding: 0.8rem;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 10px; transition: var(--transition);
         }
-
-        .checkbox-group:hover {
-            border-color: var(--primary);
-        }
-
-        .checkbox-group input {
-            display: none;
-        }
-
+        .checkbox-group:hover { border-color: var(--primary); }
+        .checkbox-group input { display: none; }
         .custom-checkbox {
-            width: 22px;
-            height: 22px;
-            border: 2px solid var(--text-muted);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
+            width: 22px; height: 22px; border: 2px solid var(--text-muted); border-radius: 6px;
+            display: flex; align-items: center; justify-content: center; transition: var(--transition);
         }
-
-        .checkbox-group input:checked + .custom-checkbox {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
+        .checkbox-group input:checked + .custom-checkbox { background: var(--primary); border-color: var(--primary); }
         .custom-checkbox::after {
-            content: '';
-            width: 5px;
-            height: 10px;
-            border: solid #000;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-            display: none;
+            content: ''; width: 5px; height: 10px; border: solid #000; border-width: 0 2px 2px 0;
+            transform: rotate(45deg); display: none;
         }
-
-        .checkbox-group input:checked + .custom-checkbox::after {
-            display: block;
-        }
+        .checkbox-group input:checked + .custom-checkbox::after { display: block; }
+        .label-text { font-size: 0.95rem; user-select: none; font-weight: 600; }
 
         .text-input {
-            width: 100%;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.8rem;
-            border-radius: 10px;
-            outline: none;
-            font-family: 'JetBrains Mono', monospace;
-            direction: ltr;
+            width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+            padding: 0.8rem; border-radius: 10px; outline: none; font-family: 'JetBrains Mono', monospace; direction: ltr;
         }
-        .text-input:focus {
-            border-color: var(--primary);
-        }
+        .text-input:focus { border-color: var(--primary); }
 
         .generate-btn-main {
-            width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #000;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
+            width: 100%; padding: 1.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 800;
+            cursor: pointer; margin-top: 1rem; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 0.8rem;
         }
+        .generate-btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 229, 255, 0.4); }
 
-        .generate-btn-main:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.4);
-        }
-
-        /* السجل (History) */
-        .history-list {
-            max-height: 400px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding-right: 5px;
-        }
-
-        .history-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 1rem;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .history-pwd {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1rem;
-            direction: ltr;
-            letter-spacing: 1px;
-        }
-
-        .history-meta {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.3rem;
-        }
+        .history-list { max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; padding-right: 5px; }
+        .history-item { background: var(--surface); border: 1px solid var(--border); padding: 1rem; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .history-pwd { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; direction: ltr; letter-spacing: 1px; filter: blur(5px); transition: filter 0.3s; cursor: pointer; }
+        .history-pwd:hover, .history-pwd.revealed { filter: blur(0); }
+        .history-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
 
         .alert-box {
-            background: rgba(255, 234, 0, 0.1);
-            border: 1px solid var(--warning);
-            color: var(--warning);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background: rgba(255, 234, 0, 0.1); border: 1px solid var(--warning); color: var(--warning);
+            padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; line-height: 1.5;
         }
 
-        /* التذييل / الشفافية */
-        .transparency-footer {
-            margin-top: 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .transparency-footer span {
-            color: var(--success);
-            font-weight: 700;
-        }
+        .transparency-footer { margin-top: 2rem; text-align: center; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .transparency-footer span { color: var(--success); font-weight: 700; }
 
         .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--text);
-            color: var(--bg-dark);
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-weight: 800;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: var(--transition);
-            opacity: 0;
-            z-index: 1000;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--text); color: var(--bg-dark); padding: 1rem 2rem; border-radius: 30px;
+            font-weight: 800; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: var(--transition); opacity: 0; z-index: 1000;
         }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        /* سكرول بار مخصص */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-        @media (max-width: 600px) {
-            .options-grid { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .brand-title { font-size: 2.8rem; }
-        }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr; } .brand-title { font-size: 2.8rem; } }
     </style>
 </head>
 <body>
@@ -508,28 +208,31 @@
 
         <nav class="main-nav">
             <button class="nav-btn active" data-view="generate">توليد كلمة مرور</button>
-            <button class="nav-btn" data-view="check">فحص القوة</button>
+            <button class="nav-btn" data-view="check">فحص القوة والتسريب</button>
             <button class="nav-btn" data-view="history">السجل المحلي</button>
         </nav>
 
         <main class="card">
-            <!-- 1. قسم توليد كلمات المرور -->
+            <!-- 1. قسم التوليد -->
             <section id="view-generate" class="view-section active">
                 
                 <div class="display-box">
                     <input type="text" id="gen-output" class="password-input" readonly>
-                    <button class="btn-action" id="btn-copy-gen">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        نسخ
-                    </button>
+                    <button class="icon-btn" id="toggle-vis-gen" title="إظهار/إخفاء">👁️</button>
+                    <button class="btn-action" id="btn-copy-gen">نسخ</button>
                 </div>
 
-                <!-- مؤشر قوة مصغر للتوليد -->
-                <div class="strength-bars" style="margin-bottom: 1.5rem;">
-                    <div class="bar" id="gen-bar-4"></div>
-                    <div class="bar" id="gen-bar-3"></div>
-                    <div class="bar" id="gen-bar-2"></div>
-                    <div class="bar" id="gen-bar-1"></div>
+                <div class="strength-container" style="padding: 0.8rem; margin-bottom: 1.5rem;">
+                    <div class="strength-header" style="margin-bottom: 0.5rem; font-size: 0.85rem;">
+                        <span id="gen-label">قوية</span>
+                        <span style="color: var(--text-muted);">الوقت للاختراق: <span id="gen-time" style="color:var(--text); direction:ltr; display:inline-block;">---</span></span>
+                    </div>
+                    <div class="strength-bars" style="margin-bottom: 0;">
+                        <div class="bar" id="gen-bar-4"></div>
+                        <div class="bar" id="gen-bar-3"></div>
+                        <div class="bar" id="gen-bar-2"></div>
+                        <div class="bar" id="gen-bar-1"></div>
+                    </div>
                 </div>
 
                 <div class="sub-tabs">
@@ -539,13 +242,9 @@
                     <div class="sub-tab" data-mode="pin">رقم سري (PIN)</div>
                 </div>
 
-                <!-- إعدادات العشوائي -->
                 <div id="mode-random" class="mode-settings active">
                     <div class="control-group">
-                        <div class="control-header">
-                            <span>الطول</span>
-                            <span id="val-length">16</span>
-                        </div>
+                        <div class="control-header"><span>الطول</span><span id="val-length">16</span></div>
                         <input type="range" id="sl-length" class="slider" min="6" max="128" value="16">
                     </div>
                     <div class="options-grid">
@@ -567,7 +266,6 @@
                     </div>
                 </div>
 
-                <!-- إعدادات العبارة -->
                 <div id="mode-passphrase" class="mode-settings" style="display: none;">
                     <div class="control-group">
                         <div class="control-header"><span>عدد الكلمات</span><span id="val-words">4</span></div>
@@ -592,17 +290,15 @@
                     <label class="checkbox-group"><input type="checkbox" id="cb-pass-cap" checked><div class="custom-checkbox"></div><span class="label-text">تكبير الحرف الأول من كل كلمة</span></label>
                 </div>
 
-                <!-- إعدادات سهلة النطق -->
                 <div id="mode-pronounceable" class="mode-settings" style="display: none;">
                     <div class="control-group">
                         <div class="control-header"><span>الطول</span><span id="val-pronounce">10</span></div>
                         <input type="range" id="sl-pronounce" class="slider" min="4" max="30" value="10">
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">يتم توليد الكلمة بنمط (ساكن - متحرك) لتسهيل قراءتها وحفظها.</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">يتم توليد الكلمة بنمط (ساكن - متحرك) لتسهيل قراءتها.</p>
                     <label class="checkbox-group"><input type="checkbox" id="cb-pron-cap" checked><div class="custom-checkbox"></div><span class="label-text">أول حرف كبير</span></label>
                 </div>
 
-                <!-- إعدادات PIN -->
                 <div id="mode-pin" class="mode-settings" style="display: none;">
                     <div class="control-group">
                         <div class="control-header"><span>طول الرمز السري</span><span id="val-pin">6</span></div>
@@ -610,17 +306,14 @@
                     </div>
                 </div>
 
-                <button class="generate-btn-main" id="btn-generate">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
-                    توليد كلمة المرور
-                </button>
+                <button class="generate-btn-main" id="btn-generate">توليد كلمة المرور</button>
             </section>
 
-            <!-- 2. قسم فحص القوة -->
+            <!-- 2. قسم فحص القوة والتسريب -->
             <section id="view-check" class="view-section">
-                <div class="control-group">
-                    <div class="control-header"><span>أدخل كلمة المرور لفحصها:</span></div>
-                    <input type="text" id="check-input" class="password-input" placeholder="اكتب هنا..." style="background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 12px; border: 1px solid var(--border);">
+                <div class="display-box" style="margin-bottom: 1rem;">
+                    <input type="password" id="check-input" class="password-input" placeholder="اكتب كلمة مرور لفحصها...">
+                    <button class="icon-btn" id="toggle-vis-chk">👁️</button>
                 </div>
 
                 <div class="strength-container">
@@ -634,26 +327,31 @@
                         <div class="bar" id="chk-bar-2"></div>
                         <div class="bar" id="chk-bar-1"></div>
                     </div>
-                    <div class="stats-grid">
+                    <div class="stats-grid" style="margin-bottom: 1.5rem;">
                         <div>الوقت للاختراق: <span class="val" id="chk-time">---</span></div>
-                        <div>الإنتروبي (Entropy): <span class="val" id="chk-entropy">0 bits</span></div>
+                        <div>الإنتروبي: <span class="val" id="chk-entropy">0 bits</span></div>
                         <div>الطول: <span class="val" id="chk-length">0</span></div>
-                        <div>تنوع الرموز: <span class="val" id="chk-pool">0</span></div>
+                        <div>حجم القاموس: <span class="val" id="chk-pool">0</span></div>
                     </div>
+
+                    <button class="btn-action" id="btn-pwned" style="width: 100%; justify-content: center; background: var(--surface); border-color: var(--secondary); color: var(--secondary);">
+                        🔍 فحص ما إذا كانت مسربة عالمياً (HaveIBeenPwned)
+                    </button>
+                    <div id="pwned-result" style="margin-top: 1rem; text-align: center; font-weight: bold; display: none;"></div>
                 </div>
+
                 <div class="alert-box" style="background: rgba(0, 229, 255, 0.1); border-color: var(--primary); color: var(--text);">
-                    <svg width="24" height="24" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    التقييم يتم محلياً على جهازك. لا يتم حفظ أو إرسال ما تكتبه هنا إطلاقاً.
+                    <svg width="30" height="30" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <div>
+                        <strong>خصوصية تامة (k-Anonymity):</strong> عند فحص التسريب، نقوم بتشفير الكلمة بخوارزمية SHA-1 محلياً، ونرسل <strong>أول 5 رموز فقط</strong> من التشفير للإنترنت. من المستحيل رياضياً معرفة كلمتك.
+                    </div>
                 </div>
             </section>
 
             <!-- 3. قسم السجل -->
             <section id="view-history" class="view-section">
                 <div class="alert-box">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4m0 4h.01"/></svg>
-                    <div>
-                        <strong>تنبيه الخصوصية:</strong> يتم حفظ هذا السجل في متصفحك الحالي (Local Storage). يُنصح بمسحه إذا كنت تستخدم جهازاً عاماً.
-                    </div>
+                    <div><strong>تنبيه:</strong> كلمات المرور مموهة افتراضياً لحمايتك من المتلصصين. اضغط على أي كلمة لإظهارها، ويتم حفظ السجل في متصفحك الحالي فقط.</div>
                 </div>
 
                 <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
@@ -661,16 +359,14 @@
                     <button class="btn-action" id="btn-export-history" style="border-color: var(--success); color: var(--success);">تصدير (TXT)</button>
                 </div>
 
-                <div class="history-list" id="history-list">
-                    <!-- يتم الحقن عبر JS -->
-                </div>
+                <div class="history-list" id="history-list"></div>
             </section>
         </main>
 
         <div class="transparency-footer">
             مُـوَلِّـد يعمل حصرياً على متصفحك (Client-Side).<br>
-            نستخدم خوارزمية <span>Web Crypto API</span> (مقياس تشفيري آمن)<br>
-            بدون خوادم، بدون تتبع، وبدون إنترنت. 🛡️
+            نستخدم خوارزمية <span>Web Crypto API</span> لتوليد آمن 100%<br>
+            بدون خوادم، بدون تتبع. 🛡️
         </div>
     </div>
 
@@ -705,35 +401,33 @@
             });
         });
 
-        // --- ربط عناصر التحكم (DOM Elements) ---
-        // Random
-        const slLength = document.getElementById('sl-length');
-        const valLength = document.getElementById('val-length');
-        const cbUpper = document.getElementById('cb-upper');
-        const cbLower = document.getElementById('cb-lower');
-        const cbNumbers = document.getElementById('cb-numbers');
-        const cbSymbols = document.getElementById('cb-symbols');
-        const cbExclude = document.getElementById('cb-exclude');
-        const txtCustomSymbols = document.getElementById('custom-symbols');
+        // --- إظهار/إخفاء كلمة المرور ---
+        function toggleVisibility(inputId, btnId) {
+            const input = document.getElementById(inputId);
+            if (input.type === "text") {
+                input.type = "password";
+                document.getElementById(btnId).style.color = "var(--text-muted)";
+            } else {
+                input.type = "text";
+                document.getElementById(btnId).style.color = "var(--primary)";
+            }
+        }
+        document.getElementById('toggle-vis-gen').addEventListener('click', () => toggleVisibility('gen-output', 'toggle-vis-gen'));
+        document.getElementById('toggle-vis-chk').addEventListener('click', () => toggleVisibility('check-input', 'toggle-vis-chk'));
+
+        // --- ربط عناصر التحكم ---
+        const slLength = document.getElementById('sl-length'), valLength = document.getElementById('val-length');
+        const cbUpper = document.getElementById('cb-upper'), cbLower = document.getElementById('cb-lower');
+        const cbNumbers = document.getElementById('cb-numbers'), cbSymbols = document.getElementById('cb-symbols');
+        const cbExclude = document.getElementById('cb-exclude'), txtCustomSymbols = document.getElementById('custom-symbols');
         
-        // Passphrase
-        const slWords = document.getElementById('sl-words');
-        const valWords = document.getElementById('val-words');
-        const selSeparator = document.getElementById('sel-separator');
-        const cbPassCap = document.getElementById('cb-pass-cap');
-        const cbPassNum = document.getElementById('cb-pass-num');
+        const slWords = document.getElementById('sl-words'), valWords = document.getElementById('val-words');
+        const selSeparator = document.getElementById('sel-separator'), cbPassCap = document.getElementById('cb-pass-cap'), cbPassNum = document.getElementById('cb-pass-num');
 
-        // Pronounceable & PIN
-        const slPronounce = document.getElementById('sl-pronounce');
-        const valPronounce = document.getElementById('val-pronounce');
-        const cbPronCap = document.getElementById('cb-pron-cap');
-        const slPin = document.getElementById('sl-pin');
-        const valPin = document.getElementById('val-pin');
+        const slPronounce = document.getElementById('sl-pronounce'), valPronounce = document.getElementById('val-pronounce'), cbPronCap = document.getElementById('cb-pron-cap');
+        const slPin = document.getElementById('sl-pin'), valPin = document.getElementById('val-pin');
 
-        // Output & Action
-        const genOutput = document.getElementById('gen-output');
-        const btnGenerate = document.getElementById('btn-generate');
-        const btnCopyGen = document.getElementById('btn-copy-gen');
+        const genOutput = document.getElementById('gen-output'), btnGenerate = document.getElementById('btn-generate');
         const toast = document.getElementById('toast');
 
         // تحديث قيم السلايدر
@@ -742,84 +436,45 @@
         slPronounce.addEventListener('input', e => { valPronounce.textContent = e.target.value; generatePassword(); });
         slPin.addEventListener('input', e => { valPin.textContent = e.target.value; generatePassword(); });
 
-        // إعادة التوليد عند تغيير الخيارات[cbUpper, cbLower, cbNumbers, cbSymbols, cbExclude, cbPassCap, cbPassNum, cbPronCap, selSeparator, txtCustomSymbols].forEach(el => {
-            el.addEventListener('change', () => {
-                // منع إلغاء كل شيء في العشوائي
-                if(currentMode === 'random' && !cbUpper.checked && !cbLower.checked && !cbNumbers.checked && !cbSymbols.checked) {
-                    cbLower.checked = true;
-                }
+        // منع إزالة التحديد عن كل الخيارات وإعادة التوليد
+        const randomCheckboxes = [cbUpper, cbLower, cbNumbers, cbSymbols];
+        randomCheckboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                if (!randomCheckboxes.some(c => c.checked)) cbLower.checked = true; // إجبار اختيار واحد على الأقل
                 generatePassword();
             });
         });
 
-        // --- القواميس والمجموعات ---
-        const charPools = {
-            upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            lower: 'abcdefghijklmnopqrstuvwxyz',
-            numbers: '0123456789'
-        };
+        const otherControls =[cbExclude, cbPassCap, cbPassNum, cbPronCap, selSeparator, txtCustomSymbols];
+        otherControls.forEach(el => el.addEventListener('change', generatePassword));
+
+        // --- القواميس ---
+        const charPools = { upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', lower: 'abcdefghijklmnopqrstuvwxyz', numbers: '0123456789' };
         const ambiguousChars = /[il1Lo0O]/g;
-        
-        // 256 كلمة لضمان (8 بت لكل كلمة)
-        const wordlist =[
-            "apple", "bacon", "cabin", "dance", "eagle", "fable", "galaxy", "habit", "ice", "jacket",
-            "kayak", "lake", "magic", "nacho", "oasis", "pacific", "quail", "rabbit", "safari", "taco",
-            "unicorn", "valley", "waffle", "yacht", "zebra", "acorn", "basket", "cactus", "desert", "echo",
-            "falcon", "ghost", "hammer", "island", "jungle", "koala", "lemon", "mango", "ninja", "ocean",
-            "panda", "quantum", "radar", "salad", "tiger", "umbra", "velvet", "wagon", "xenon", "yogurt",
-            "zombie", "anchor", "balloon", "castle", "dragon", "engine", "forest", "guitar", "helmet", "igloo",
-            "jewel", "kettle", "lizard", "monkey", "nebula", "orchid", "pirate", "quartz", "rocket", "spider",
-            "turtle", "umpire", "vampire", "wizard", "yellow", "zigzag", "bridge", "camera", "diamond", "energy",
-            "flower", "garden", "honey", "insect", "jigsaw", "kangaroo", "lantern", "magnet", "noodle", "orange",
-            "puzzle", "ribbon", "shadow", "tomato", "volcano", "window", "animal", "bottle", "circle", "dollar",
-            "planet", "music", "water", "paper", "stone", "river", "metal", "plant", "bread", "chair",
-            "table", "house", "train", "plane", "mouse", "clock", "watch", "shirt", "shoes", "pants",
-            "grass", "cloud", "storm", "snow", "rain", "wind", "light", "night", "dream", "sleep",
-            "smile", "laugh", "happy", "brave", "smart", "clean", "fresh", "sweet", "quick", "quiet",
-            "white", "black", "green", "brown", "silver", "copper", "bronze", "iron", "steel", "glass",
-            "wood", "brick", "paint", "brush", "canvas", "frame", "photo", "image", "sound", "voice",
-            "heart", "blood", "brain", "nerve", "bone", "joint", "muscle", "skin", "hair", "tooth",
-            "berry", "grape", "peach", "plum", "melon", "onion", "garlic", "beans", "wheat", "sugar",
-            "spice", "salt", "pepper", "cream", "butter", "cheese", "meat", "steak", "roast", "baker",
-            "cook", "chef", "farm", "barn", "field", "tractor", "plow", "seed", "crop", "corn",
-            "rice", "oats", "barley", "straw", "hay", "horse", "sheep", "goat", "cow", "pig",
-            "chicken", "duck", "goose", "turkey", "hound", "puppy", "kitten", "feline", "canine", "bird",
-            "fish", "shark", "whale", "dolphin", "seal", "walrus", "otter", "beaver", "badger", "fox",
-            "wolf", "bear", "moose", "deer", "elk", "horn", "antler", "hoof", "claw", "paw",
-            "tail", "wing", "feather", "beak", "nest", "cave", "den", "burrow", "tunnel", "road",
-            "path", "trail", "street", "avenue", "highway", "freeway", "alley", "city", "town", "village",
-            "county", "state", "nation", "border", "coast", "shore", "beach", "cliff", "ridge", "peak"
-        ];
+        const wordlist =["apple","bacon","cabin","dance","eagle","fable","galaxy","habit","ice","jacket","kayak","lake","magic","nacho","oasis","pacific","quail","rabbit","safari","taco","unicorn","valley","waffle","yacht","zebra","acorn","basket","cactus","desert","echo","falcon","ghost","hammer","island","jungle","koala","lemon","mango","ninja","ocean","panda","quantum","radar","salad","tiger","umbra","velvet","wagon","xenon","yogurt","zombie","anchor","balloon","castle","dragon","engine","forest","guitar","helmet","igloo","jewel","kettle","lizard","monkey","nebula","orchid","pirate","quartz","rocket","spider","turtle","umpire","vampire","wizard","yellow","zigzag","bridge","camera","diamond","energy","flower","garden","honey","insect","jigsaw","kangaroo","lantern","magnet","noodle","orange","puzzle","ribbon","shadow","tomato","volcano","window","animal","bottle","circle","dollar","planet","music","water","paper","stone","river","metal","plant","bread","chair","table","house","train","plane","mouse","clock","watch","shirt","shoes","pants","grass","cloud","storm","snow","rain","wind","light","night","dream","sleep","smile","laugh","happy","brave","smart","clean","fresh","sweet","quick","quiet","white","black","green","brown","silver","copper","bronze","iron","steel","glass","wood","brick","paint","brush","canvas","frame","photo","image","sound","voice","heart","blood","brain","nerve","bone","joint","muscle","skin","hair","tooth","berry","grape","peach","plum","melon","onion","garlic","beans","wheat","sugar","spice","salt","pepper","cream","butter","cheese","meat","steak","roast","baker","cook","chef","farm","barn","field","tractor","plow","seed","crop","corn","rice","oats","barley","straw","hay","horse","sheep","goat","cow","pig","chicken","duck","goose","turkey","hound","puppy","kitten","feline","canine","bird","fish","shark","whale","dolphin","seal","walrus","otter","beaver","badger","fox","wolf","bear","moose","deer","elk","horn","antler","hoof","claw","paw","tail","wing","feather","beak","nest","cave","den","burrow","tunnel","road","path","trail","street","avenue","highway","freeway","alley","city","town","village","county","state","nation","border","coast","shore","beach","cliff","ridge","peak"];
 
         // --- التشفير والرياضيات ---
         function getSecureRandomInt(max) {
             const array = new Uint32Array(1);
             const limit = 4294967296 - (4294967296 % max);
-            do {
-                window.crypto.getRandomValues(array);
-            } while (array[0] >= limit);
+            do { window.crypto.getRandomValues(array); } while (array[0] >= limit);
             return array[0] % max;
         }
 
-        // --- خوارزميات التوليد ---
         function genRandomStr() {
             let pools =[];
             let fullCharset = '';
-            
             let u = charPools.upper, l = charPools.lower, n = charPools.numbers, s = txtCustomSymbols.value;
+            
             if(cbExclude.checked) {
-                u = u.replace(ambiguousChars, '');
-                l = l.replace(ambiguousChars, '');
-                n = n.replace(ambiguousChars, '');
-                s = s.replace(ambiguousChars, '');
+                u = u.replace(ambiguousChars, ''); l = l.replace(ambiguousChars, '');
+                n = n.replace(ambiguousChars, ''); s = s.replace(ambiguousChars, '');
             }
 
             if (cbUpper.checked && u) pools.push(u);
             if (cbLower.checked && l) pools.push(l);
             if (cbNumbers.checked && n) pools.push(n);
             if (cbSymbols.checked && s) pools.push(s);
-
-            if(pools.length === 0) { pools.push(charPools.lower); } // خيار احتياطي
             
             pools.forEach(p => fullCharset += p);
             
@@ -827,10 +482,7 @@
             let password = '';
             let requiredChars =[];
 
-            // ضمان حرف واحد من كل مجموعة مختارة
-            pools.forEach(pool => {
-                requiredChars.push(pool[getSecureRandomInt(pool.length)]);
-            });
+            pools.forEach(pool => requiredChars.push(pool[getSecureRandomInt(pool.length)]));
 
             for (let i = requiredChars.length; i < length; i++) {
                 password += fullCharset[getSecureRandomInt(fullCharset.length)];
@@ -841,7 +493,6 @@
                 const pos = getSecureRandomInt(passArray.length + 1);
                 passArray.splice(pos, 0, char);
             });
-
             return passArray.join('');
         }
 
@@ -859,15 +510,12 @@
         }
 
         function genPronounceable() {
-            const v = "aeiou";
-            const c = "bcdfghjklmnpqrstvwxyz";
+            const v = "aeiou", c = "bcdfghjklmnpqrstvwxyz";
             const length = parseInt(slPronounce.value);
             let res = "";
             let isVowel = getSecureRandomInt(2) === 0;
-            
             for(let i=0; i<length; i++) {
-                if(isVowel) res += v[getSecureRandomInt(v.length)];
-                else res += c[getSecureRandomInt(c.length)];
+                res += isVowel ? v[getSecureRandomInt(v.length)] : c[getSecureRandomInt(c.length)];
                 isVowel = !isVowel;
             }
             if(cbPronCap.checked) res = res.charAt(0).toUpperCase() + res.slice(1);
@@ -877,9 +525,7 @@
         function genPIN() {
             const length = parseInt(slPin.value);
             let res = "";
-            for(let i=0; i<length; i++) {
-                res += charPools.numbers[getSecureRandomInt(10)];
-            }
+            for(let i=0; i<length; i++) res += charPools.numbers[getSecureRandomInt(10)];
             return res;
         }
 
@@ -900,23 +546,17 @@
             showToast("تم التوليد والحفظ في السجل!");
         });
 
-        // --- قوة كلمة المرور والإنتروبي ---
+        // --- قوة كلمة المرور ---
         function analyzePassword(pwd) {
             let poolSize = 0;
             if (/[a-z]/.test(pwd)) poolSize += 26;
             if (/[A-Z]/.test(pwd)) poolSize += 26;
             if (/[0-9]/.test(pwd)) poolSize += 10;
-            if (/[^a-zA-Z0-9]/.test(pwd)) {
-                // حساب عدد الرموز الفريدة المستخدمة تقريبياً
-                poolSize += 32; 
-            }
+            if (/[^a-zA-Z0-9]/.test(pwd)) poolSize += 32; 
             
-            // حالة خاصة للعبارات
             if(pwd.length > 15 && /[a-zA-Z]/.test(pwd) && /[-_ .]/.test(pwd)) {
                 const words = pwd.split(/[-_ .]/).filter(x => x.length > 2).length;
-                if(words >= 3) {
-                    return { entropy: words * 8 + (poolSize > 26 ? 10 : 0), poolSize: "قاموس كلمات", length: pwd.length };
-                }
+                if(words >= 3) return { entropy: words * 8 + (poolSize > 26 ? 10 : 0), poolSize: "قاموس كلمات", length: pwd.length };
             }
 
             if(poolSize === 0) poolSize = 1;
@@ -925,7 +565,7 @@
         }
 
         function getCrackTime(entropy) {
-            const guessesPerSec = 1e11; // 100 مليار تخمين/ث
+            const guessesPerSec = 1e11; 
             const secs = Math.pow(2, entropy) / guessesPerSec;
             if (secs < 1) return "فوراً";
             if (secs < 60) return "بضع ثوانٍ";
@@ -950,21 +590,19 @@
                 barsArray[i].style.background = color;
                 barsArray[i].style.boxShadow = `0 0 10px ${color}80`;
             }
-            if(labelEl) {
-                labelEl.textContent = text;
-                labelEl.style.color = color;
-            }
+            if(labelEl) { labelEl.textContent = text; labelEl.style.color = color; }
         }
 
         function updateGenStrength(pwd) {
             const res = analyzePassword(pwd);
             const bars =[document.getElementById('gen-bar-1'), document.getElementById('gen-bar-2'), document.getElementById('gen-bar-3'), document.getElementById('gen-bar-4')];
-            updateUIBars(res.entropy, bars);
+            updateUIBars(res.entropy, bars, document.getElementById('gen-label'));
+            document.getElementById('gen-time').textContent = getCrackTime(res.entropy);
         }
 
-        // فحص مباشر
         const chkInput = document.getElementById('check-input');
         chkInput.addEventListener('input', e => {
+            document.getElementById('pwned-result').style.display = 'none';
             const pwd = e.target.value;
             const res = analyzePassword(pwd);
             const bars =[document.getElementById('chk-bar-1'), document.getElementById('chk-bar-2'), document.getElementById('chk-bar-3'), document.getElementById('chk-bar-4')];
@@ -985,16 +623,56 @@
             document.getElementById('chk-pool').textContent = res.poolSize;
         });
 
+        // --- فحص HIBP API للتسريبات ---
+        document.getElementById('btn-pwned').addEventListener('click', async () => {
+            const pwd = chkInput.value;
+            const resDiv = document.getElementById('pwned-result');
+            if(!pwd) return showToast("يرجى إدخال كلمة مرور أولاً");
+            
+            resDiv.style.display = 'block';
+            resDiv.style.color = 'var(--text)';
+            resDiv.textContent = "جاري التشفير والفحص...";
+
+            try {
+                // تشفير SHA-1 محلياً
+                const buffer = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(pwd));
+                const hashArray = Array.from(new Uint8Array(buffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+                
+                const prefix = hashHex.substring(0, 5); // نرسل أول 5 فقط للإنترنت
+                const suffix = hashHex.substring(5);
+
+                const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
+                const text = await response.text();
+                
+                const lines = text.split('\n');
+                let foundCount = 0;
+                for(let line of lines) {
+                    if(line.startsWith(suffix)) {
+                        foundCount = parseInt(line.split(':')[1]);
+                        break;
+                    }
+                }
+
+                if(foundCount > 0) {
+                    resDiv.style.color = "var(--danger)";
+                    resDiv.innerHTML = `⚠️ تحذير: هذه الكلمة مسربة وتم العثور عليها <strong>${foundCount.toLocaleString()}</strong> مرة! لا تستخدمها أبداً.`;
+                } else {
+                    resDiv.style.color = "var(--success)";
+                    resDiv.innerHTML = `✅ ممتاز: لم يتم العثور على هذه الكلمة في أي تسريب معروف.`;
+                }
+            } catch (err) {
+                resDiv.style.color = "var(--warning)";
+                resDiv.textContent = "حدث خطأ أثناء الاتصال بقاعدة البيانات. تأكد من اتصالك بالإنترنت.";
+            }
+        });
+
         // --- السجل (History) ---
         let historyData = JSON.parse(localStorage.getItem('mowallid_history') || '[]');
 
         function saveToHistory(pwd) {
-            const item = {
-                pwd: pwd,
-                date: new Date().toLocaleString('ar-SA')
-            };
-            historyData.unshift(item);
-            if(historyData.length > 50) historyData.pop(); // الاحتفاظ بآخر 50 فقط
+            historyData.unshift({ pwd: pwd, date: new Date().toLocaleString('ar-SA') });
+            if(historyData.length > 50) historyData.pop();
             localStorage.setItem('mowallid_history', JSON.stringify(historyData));
             renderHistory();
         }
@@ -1007,15 +685,15 @@
                 return;
             }
 
-            historyData.forEach((item, index) => {
+            historyData.forEach((item) => {
                 const div = document.createElement('div');
                 div.className = 'history-item';
                 div.innerHTML = `
-                    <div>
-                        <div class="history-pwd">${item.pwd.replace(/</g, "&lt;")}</div>
+                    <div style="flex-grow: 1; overflow: hidden;">
+                        <div class="history-pwd" title="انقر لإظهار الكلمة" onclick="this.classList.toggle('revealed')">${item.pwd.replace(/</g, "&lt;")}</div>
                         <div class="history-meta">${item.date}</div>
                     </div>
-                    <button class="btn-action" style="margin-right:0;" onclick="copyText('${item.pwd.replace(/'/g, "\\'")}')">نسخ</button>
+                    <button class="btn-action" style="margin-right:1rem;" onclick="copyText('${item.pwd.replace(/'/g, "\\'")}')">نسخ</button>
                 `;
                 list.appendChild(div);
             });
@@ -1023,10 +701,8 @@
 
         document.getElementById('btn-clear-history').addEventListener('click', () => {
             if(confirm("هل أنت متأكد من مسح جميع كلمات المرور المحفوظة؟")) {
-                historyData =[];
-                localStorage.removeItem('mowallid_history');
-                renderHistory();
-                showToast("تم مسح السجل بنجاح");
+                historyData =[]; localStorage.removeItem('mowallid_history');
+                renderHistory(); showToast("تم مسح السجل بنجاح");
             }
         });
 
@@ -1038,37 +714,29 @@
             const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Mowallid_Passwords.txt';
-            a.click();
+            a.href = url; a.download = 'Mowallid_Passwords.txt'; a.click();
             URL.revokeObjectURL(url);
         });
 
         // --- النسخ والتنبيهات ---
         function showToast(msg) {
-            toast.textContent = msg;
-            toast.classList.add('show');
+            toast.textContent = msg; toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
         window.copyText = async (text) => {
             try {
-                await navigator.clipboard.writeText(text);
-                showToast("تم النسخ للحافظة!");
+                await navigator.clipboard.writeText(text); showToast("تم النسخ للحافظة!");
             } catch(e) {
-                const el = document.createElement('textarea');
-                el.value = text;
-                document.body.appendChild(el);
-                el.select();
-                document.execCommand('copy');
-                document.body.removeChild(el);
-                showToast("تم النسخ للحافظة!");
+                const el = document.createElement('textarea'); el.value = text;
+                document.body.appendChild(el); el.select(); document.execCommand('copy');
+                document.body.removeChild(el); showToast("تم النسخ للحافظة!");
             }
         };
 
-        btnCopyGen.addEventListener('click', () => copyText(genOutput.value));
+        document.getElementById('btn-copy-gen').addEventListener('click', () => copyText(genOutput.value));
 
-        // التهيئة الأولية
+        // التهيئة
         generatePassword();
         renderHistory();
     </script>
