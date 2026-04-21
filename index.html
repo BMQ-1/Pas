@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VaultKey - مولد كلمات مرور آمن يعمل محلياً 100% بدون إنترنت">
-    <title>VaultKey - مولد كلمات مرور آمن</title>
+    <meta name="description" content="مُـوَلِّـد - الأداة المطلقة لتوليد كلمات المرور الآمنة محلياً">
+    <title>مُـوَلِّـد | الأداة المطلقة لكلمات المرور</title>
     
-    <!-- جلب الخطوط من جوجل -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #09090e;
-            --surface: #14141f;
-            --surface-hover: #1c1c2b;
-            --border: #2a2a40;
-            --text: #f0f0f5;
-            --text-muted: #8e8ea0;
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --success: #10b981;
+            --bg-dark: #07090f;
+            --surface: #111522;
+            --surface-hover: #1a2133;
+            --border: #242c42;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #00e5ff;
+            --primary-glow: rgba(0, 229, 255, 0.3);
+            --secondary: #b388ff;
+            --danger: #ff1744;
+            --warning: #ffea00;
+            --success: #00e676;
             --radius: 16px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -36,209 +36,241 @@
         }
 
         body {
-            background-color: var(--bg);
+            background-color: var(--bg-dark);
             color: var(--text);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 2rem 1rem;
             background-image: 
-                radial-gradient(circle at 85% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 15% 30%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 10% 10%, rgba(179, 136, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(0, 229, 255, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
-        .container {
+        .app-container {
             width: 100%;
-            max-width: 540px;
+            max-width: 650px;
             position: relative;
         }
 
+        /* الهيدر والعلامة التجارية */
         header {
             text-align: center;
             margin-bottom: 2rem;
         }
 
-        .logo {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        h1 {
-            font-weight: 700;
-            font-size: 1.8rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #fff, #a5b4fc);
+        .brand-title {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .brand-dot {
+            color: var(--secondary);
+            -webkit-text-fill-color: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
 
         .tagline {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 0.25rem;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
+        /* الملاحة الرئيسية (Tabs) */
+        .main-nav {
+            display: flex;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.5rem;
+            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.8rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-btn.active {
+            background: var(--surface-hover);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* الحاوية الرئيسية */
         .card {
-            background: rgba(20, 20, 31, 0.7);
+            background: rgba(17, 21, 34, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 2rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* منطقة العرض */
+        .view-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        /* العرض وإدخال كلمة المرور */
         .display-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border);
+            background: #000;
+            border: 2px solid var(--border);
             border-radius: 12px;
             padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
             transition: var(--transition);
         }
 
         .display-box:focus-within {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
-        #password-output {
+        .password-input {
             background: transparent;
             border: none;
             color: var(--text);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             width: 100%;
             outline: none;
-            letter-spacing: 1px;
-            direction: ltr; /* هام لتبقى كلمة المرور الإنجليزية مقروءة بشكل صحيح */
+            letter-spacing: 2px;
+            direction: ltr;
             text-align: left;
         }
 
-        .copy-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
+        .btn-action {
+            background: var(--surface-hover);
+            color: var(--text);
+            border: 1px solid var(--border);
             border-radius: 8px;
             padding: 0.6rem 1.2rem;
-            font-weight: 600;
-            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            flex-shrink: 0;
+            white-space: nowrap;
             margin-right: 1rem;
         }
 
-        .copy-btn:hover {
-            background: #4f46e5;
+        .btn-action:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--primary-glow);
         }
 
-        .copy-btn:active {
-            transform: translateY(0);
-        }
-
-        /* مؤشر القوة */
+        /* شريط القوة */
         .strength-container {
             margin-bottom: 2rem;
+            background: var(--surface-hover);
+            padding: 1rem;
+            border-radius: 12px;
         }
 
         .strength-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
             font-weight: 700;
-            color: var(--text-muted);
         }
 
         .strength-bars {
             display: flex;
-            gap: 6px;
-            height: 6px;
-            margin-bottom: 0.8rem;
-            flex-direction: row-reverse; /* ليتناسب مع اتجاه القوة */
+            gap: 8px;
+            height: 8px;
+            margin-bottom: 1rem;
+            flex-direction: row-reverse;
         }
 
         .bar {
             flex: 1;
             background: var(--border);
             border-radius: 4px;
-            transition: var(--transition);
+            transition: all 0.5s ease;
         }
 
-        .crack-time {
-            font-size: 0.85rem;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            text-align: center;
         }
 
-        .crack-time span {
+        .stats-grid span.val {
             color: var(--text);
             font-weight: 700;
             direction: ltr;
             display: inline-block;
         }
 
-        /* التبويبات */
-        .tabs {
+        /* تبويبات التوليد الفرعية */
+        .sub-tabs {
             display: flex;
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            padding: 4px;
+            gap: 10px;
             margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 5px;
         }
 
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 0.6rem;
-            cursor: pointer;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
+        .sub-tab {
+            background: var(--surface);
+            border: 1px solid var(--border);
             color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
             transition: var(--transition);
         }
 
-        .tab.active {
-            background: var(--surface-hover);
-            color: var(--text);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+        .sub-tab.active {
+            background: var(--secondary);
+            color: #000;
+            border-color: var(--secondary);
         }
 
         /* عناصر التحكم */
@@ -249,8 +281,7 @@
         .control-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
         }
 
@@ -261,24 +292,22 @@
             background: var(--border);
             border-radius: 4px;
             outline: none;
-            margin-bottom: 1rem;
-            direction: ltr; /* للحفاظ على حركة السلايدر طبيعية */
+            direction: ltr;
         }
 
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: var(--primary);
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         .slider::-webkit-slider-thumb:hover {
             transform: scale(1.2);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
         .options-grid {
@@ -293,15 +322,14 @@
             gap: 0.8rem;
             cursor: pointer;
             padding: 0.8rem;
-            background: var(--surface-hover);
-            border: 1px solid transparent;
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 10px;
             transition: var(--transition);
         }
 
         .checkbox-group:hover {
-            background: rgba(42, 42, 64, 0.8);
-            border-color: var(--border);
+            border-color: var(--primary);
         }
 
         .checkbox-group input {
@@ -309,8 +337,8 @@
         }
 
         .custom-checkbox {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border: 2px solid var(--text-muted);
             border-radius: 6px;
             display: flex;
@@ -328,7 +356,7 @@
             content: '';
             width: 5px;
             height: 10px;
-            border: solid white;
+            border: solid #000;
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
             display: none;
@@ -338,83 +366,115 @@
             display: block;
         }
 
-        .label-text {
-            font-size: 0.95rem;
-            user-select: none;
-            font-weight: 600;
-        }
-
-        .generate-btn {
+        .text-input {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary), #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: var(--transition);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(99, 102, 241, 0.4);
-        }
-
-        .generate-btn:active {
-            transform: translateY(1px);
-        }
-
-        select {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--surface-hover);
+            background: var(--surface);
             border: 1px solid var(--border);
             color: var(--text);
+            padding: 0.8rem;
             border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
             outline: none;
-            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
         }
-
-        select:focus {
+        .text-input:focus {
             border-color: var(--primary);
         }
 
-        .security-badge {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--success);
+        .generate-btn-main {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            opacity: 0.9;
+            gap: 0.8rem;
         }
 
-        /* رسالة منبثقة (Toast) */
+        .generate-btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.4);
+        }
+
+        /* السجل (History) */
+        .history-list {
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding-right: 5px;
+        }
+
+        .history-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-pwd {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            direction: ltr;
+            letter-spacing: 1px;
+        }
+
+        .history-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        .alert-box {
+            background: rgba(255, 234, 0, 0.1);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* التذييل / الشفافية */
+        .transparency-footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .transparency-footer span {
+            color: var(--success);
+            font-weight: 700;
+        }
+
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: var(--success);
-            color: white;
-            padding: 0.8rem 1.5rem;
+            background: var(--text);
+            color: var(--bg-dark);
+            padding: 1rem 2rem;
             border-radius: 30px;
-            font-weight: 700;
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: var(--transition);
             opacity: 0;
             z-index: 1000;
@@ -425,174 +485,282 @@
             opacity: 1;
         }
 
-        @media (max-width: 480px) {
+        /* سكرول بار مخصص */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        @media (max-width: 600px) {
             .options-grid { grid-template-columns: 1fr; }
-            .card { padding: 1.5rem; }
-            #password-output { font-size: 1.1rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .brand-title { font-size: 2.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="app-container">
         <header>
-            <div class="logo">🛡️</div>
-            <h1>مولد VaultKey</h1>
-            <p class="tagline">آمن تشفيرياً ويعمل 100% محلياً بدون إنترنت</p>
+            <h1 class="brand-title">مُـوَلِّـد<span class="brand-dot">.</span></h1>
+            <p class="tagline">الأداة المطلقة لكلمات المرور الآمنة</p>
         </header>
 
+        <nav class="main-nav">
+            <button class="nav-btn active" data-view="generate">توليد كلمة مرور</button>
+            <button class="nav-btn" data-view="check">فحص القوة</button>
+            <button class="nav-btn" data-view="history">السجل المحلي</button>
+        </nav>
+
         <main class="card">
-            <div class="display-box">
-                <input type="text" id="password-output" readonly value="جاري التحميل...">
-                <button class="copy-btn" id="copy-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    نسخ
-                </button>
-            </div>
-
-            <div class="strength-container">
-                <div class="strength-header">
-                    <span>قوة كلمة المرور</span>
-                    <span id="strength-label">قوية</span>
-                </div>
-                <div class="strength-bars">
-                    <div class="bar" id="bar-4"></div>
-                    <div class="bar" id="bar-3"></div>
-                    <div class="bar" id="bar-2"></div>
-                    <div class="bar" id="bar-1"></div>
-                </div>
-                <div class="crack-time">
-                    الوقت المقدر للاختراق: <span id="time-to-crack">فوراً</span>
-                </div>
-            </div>
-
-            <div class="tabs">
-                <div class="tab active" data-tab="random">رموز عشوائية</div>
-                <div class="tab" data-tab="passphrase">كلمات يسهل تذكرها</div>
-            </div>
-
-            <!-- التبويب 1: رموز عشوائية -->
-            <div id="tab-random" class="tab-content active">
-                <div class="control-group">
-                    <div class="control-header">
-                        <span>طول كلمة المرور</span>
-                        <span id="length-val">16</span>
-                    </div>
-                    <input type="range" id="length-slider" class="slider" min="8" max="64" value="16">
-                </div>
-
-                <div class="options-grid">
-                    <label class="checkbox-group">
-                        <input type="checkbox" id="cb-upper" checked>
-                        <div class="custom-checkbox"></div>
-                        <span class="label-text">حروف كبيرة (A-Z)</span>
-                    </label>
-                    <label class="checkbox-group">
-                        <input type="checkbox" id="cb-lower" checked>
-                        <div class="custom-checkbox"></div>
-                        <span class="label-text">حروف صغيرة (a-z)</span>
-                    </label>
-                    <label class="checkbox-group">
-                        <input type="checkbox" id="cb-numbers" checked>
-                        <div class="custom-checkbox"></div>
-                        <span class="label-text">أرقام (0-9)</span>
-                    </label>
-                    <label class="checkbox-group">
-                        <input type="checkbox" id="cb-symbols" checked>
-                        <div class="custom-checkbox"></div>
-                        <span class="label-text">رموز (!@#$)</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- التبويب 2: كلمات يسهل تذكرها (Passphrase) -->
-            <div id="tab-passphrase" class="tab-content">
-                <div class="control-group">
-                    <div class="control-header">
-                        <span>عدد الكلمات</span>
-                        <span id="word-count-val">4</span>
-                    </div>
-                    <input type="range" id="word-slider" class="slider" min="3" max="10" value="4">
-                </div>
-
-                <div class="control-group">
-                    <div class="control-header">
-                        <span>الفاصل بين الكلمات</span>
-                    </div>
-                    <select id="separator-select">
-                        <option value="-">شرطة (-)</option>
-                        <option value="_">شرطة سفلية (_)</option>
-                        <option value=" ">مسافة ( )</option>
-                        <option value=".">نقطة (.)</option>
-                        <option value="">بدون فاصل</option>
-                    </select>
-                </div>
+            <!-- 1. قسم توليد كلمات المرور -->
+            <section id="view-generate" class="view-section active">
                 
-                <div class="control-group" style="margin-top: 1rem;">
-                     <label class="checkbox-group">
-                        <input type="checkbox" id="cb-capitalize">
-                        <div class="custom-checkbox"></div>
-                        <span class="label-text">تكبير الحرف الأول من كل كلمة</span>
-                    </label>
+                <div class="display-box">
+                    <input type="text" id="gen-output" class="password-input" readonly>
+                    <button class="btn-action" id="btn-copy-gen">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        نسخ
+                    </button>
                 </div>
-            </div>
 
-            <button class="generate-btn" id="generate-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-10.09l5.67-5.67"/></svg>
-                توليد كلمة المرور
-            </button>
-            
-            <div class="security-badge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                تتم عملية التوليد محلياً على متصفحك. لا يتم إرسال أي بيانات عبر الإنترنت.
-            </div>
+                <!-- مؤشر قوة مصغر للتوليد -->
+                <div class="strength-bars" style="margin-bottom: 1.5rem;">
+                    <div class="bar" id="gen-bar-4"></div>
+                    <div class="bar" id="gen-bar-3"></div>
+                    <div class="bar" id="gen-bar-2"></div>
+                    <div class="bar" id="gen-bar-1"></div>
+                </div>
+
+                <div class="sub-tabs">
+                    <div class="sub-tab active" data-mode="random">رموز عشوائية</div>
+                    <div class="sub-tab" data-mode="passphrase">عبارة (كلمات)</div>
+                    <div class="sub-tab" data-mode="pronounceable">سهلة النطق</div>
+                    <div class="sub-tab" data-mode="pin">رقم سري (PIN)</div>
+                </div>
+
+                <!-- إعدادات العشوائي -->
+                <div id="mode-random" class="mode-settings active">
+                    <div class="control-group">
+                        <div class="control-header">
+                            <span>الطول</span>
+                            <span id="val-length">16</span>
+                        </div>
+                        <input type="range" id="sl-length" class="slider" min="6" max="128" value="16">
+                    </div>
+                    <div class="options-grid">
+                        <label class="checkbox-group"><input type="checkbox" id="cb-upper" checked><div class="custom-checkbox"></div><span class="label-text">حروف كبيرة (A-Z)</span></label>
+                        <label class="checkbox-group"><input type="checkbox" id="cb-lower" checked><div class="custom-checkbox"></div><span class="label-text">حروف صغيرة (a-z)</span></label>
+                        <label class="checkbox-group"><input type="checkbox" id="cb-numbers" checked><div class="custom-checkbox"></div><span class="label-text">أرقام (0-9)</span></label>
+                        <label class="checkbox-group"><input type="checkbox" id="cb-symbols" checked><div class="custom-checkbox"></div><span class="label-text">رموز (!@#$)</span></label>
+                    </div>
+                    <div class="control-group" style="margin-top: 1rem;">
+                        <label class="checkbox-group" style="background: rgba(255,234,0,0.05); border-color: rgba(255,234,0,0.2);">
+                            <input type="checkbox" id="cb-exclude">
+                            <div class="custom-checkbox"></div>
+                            <span class="label-text">استبعاد الرموز المتشابهة (i, l, 1, L, o, 0, O)</span>
+                        </label>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-header"><span>الرموز المخصصة (اختياري)</span></div>
+                        <input type="text" id="custom-symbols" class="text-input" value="!@#$%^&*()_+~`|}{[]:;?><,./-=">
+                    </div>
+                </div>
+
+                <!-- إعدادات العبارة -->
+                <div id="mode-passphrase" class="mode-settings" style="display: none;">
+                    <div class="control-group">
+                        <div class="control-header"><span>عدد الكلمات</span><span id="val-words">4</span></div>
+                        <input type="range" id="sl-words" class="slider" min="3" max="12" value="4">
+                    </div>
+                    <div class="options-grid">
+                        <div class="control-group">
+                            <div class="control-header"><span>الفاصل</span></div>
+                            <select id="sel-separator" class="text-input">
+                                <option value="-">شرطة (-)</option>
+                                <option value="_">شرطة سفلية (_)</option>
+                                <option value=" ">مسافة ( )</option>
+                                <option value=".">نقطة (.)</option>
+                                <option value="">بدون فاصل</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <div class="control-header"><span>إضافة رقم عشوائي؟</span></div>
+                            <label class="checkbox-group"><input type="checkbox" id="cb-pass-num"><div class="custom-checkbox"></div><span class="label-text">نعم، في النهاية</span></label>
+                        </div>
+                    </div>
+                    <label class="checkbox-group"><input type="checkbox" id="cb-pass-cap" checked><div class="custom-checkbox"></div><span class="label-text">تكبير الحرف الأول من كل كلمة</span></label>
+                </div>
+
+                <!-- إعدادات سهلة النطق -->
+                <div id="mode-pronounceable" class="mode-settings" style="display: none;">
+                    <div class="control-group">
+                        <div class="control-header"><span>الطول</span><span id="val-pronounce">10</span></div>
+                        <input type="range" id="sl-pronounce" class="slider" min="4" max="30" value="10">
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">يتم توليد الكلمة بنمط (ساكن - متحرك) لتسهيل قراءتها وحفظها.</p>
+                    <label class="checkbox-group"><input type="checkbox" id="cb-pron-cap" checked><div class="custom-checkbox"></div><span class="label-text">أول حرف كبير</span></label>
+                </div>
+
+                <!-- إعدادات PIN -->
+                <div id="mode-pin" class="mode-settings" style="display: none;">
+                    <div class="control-group">
+                        <div class="control-header"><span>طول الرمز السري</span><span id="val-pin">6</span></div>
+                        <input type="range" id="sl-pin" class="slider" min="4" max="12" value="6">
+                    </div>
+                </div>
+
+                <button class="generate-btn-main" id="btn-generate">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
+                    توليد كلمة المرور
+                </button>
+            </section>
+
+            <!-- 2. قسم فحص القوة -->
+            <section id="view-check" class="view-section">
+                <div class="control-group">
+                    <div class="control-header"><span>أدخل كلمة المرور لفحصها:</span></div>
+                    <input type="text" id="check-input" class="password-input" placeholder="اكتب هنا..." style="background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 12px; border: 1px solid var(--border);">
+                </div>
+
+                <div class="strength-container">
+                    <div class="strength-header">
+                        <span>التقييم العام:</span>
+                        <span id="check-label" style="font-size: 1.2rem;">---</span>
+                    </div>
+                    <div class="strength-bars">
+                        <div class="bar" id="chk-bar-4"></div>
+                        <div class="bar" id="chk-bar-3"></div>
+                        <div class="bar" id="chk-bar-2"></div>
+                        <div class="bar" id="chk-bar-1"></div>
+                    </div>
+                    <div class="stats-grid">
+                        <div>الوقت للاختراق: <span class="val" id="chk-time">---</span></div>
+                        <div>الإنتروبي (Entropy): <span class="val" id="chk-entropy">0 bits</span></div>
+                        <div>الطول: <span class="val" id="chk-length">0</span></div>
+                        <div>تنوع الرموز: <span class="val" id="chk-pool">0</span></div>
+                    </div>
+                </div>
+                <div class="alert-box" style="background: rgba(0, 229, 255, 0.1); border-color: var(--primary); color: var(--text);">
+                    <svg width="24" height="24" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    التقييم يتم محلياً على جهازك. لا يتم حفظ أو إرسال ما تكتبه هنا إطلاقاً.
+                </div>
+            </section>
+
+            <!-- 3. قسم السجل -->
+            <section id="view-history" class="view-section">
+                <div class="alert-box">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4m0 4h.01"/></svg>
+                    <div>
+                        <strong>تنبيه الخصوصية:</strong> يتم حفظ هذا السجل في متصفحك الحالي (Local Storage). يُنصح بمسحه إذا كنت تستخدم جهازاً عاماً.
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                    <button class="btn-action" id="btn-clear-history" style="border-color: var(--danger); color: var(--danger);">مسح السجل</button>
+                    <button class="btn-action" id="btn-export-history" style="border-color: var(--success); color: var(--success);">تصدير (TXT)</button>
+                </div>
+
+                <div class="history-list" id="history-list">
+                    <!-- يتم الحقن عبر JS -->
+                </div>
+            </section>
         </main>
+
+        <div class="transparency-footer">
+            مُـوَلِّـد يعمل حصرياً على متصفحك (Client-Side).<br>
+            نستخدم خوارزمية <span>Web Crypto API</span> (مقياس تشفيري آمن)<br>
+            بدون خوادم، بدون تتبع، وبدون إنترنت. 🛡️
+        </div>
     </div>
 
-    <div class="toast" id="toast">تم النسخ إلى الحافظة!</div>
+    <div class="toast" id="toast">تم النسخ!</div>
 
     <script>
-        // المتغيرات وعناصر الواجهة
-        const passwordOutput = document.getElementById('password-output');
-        const copyBtn = document.getElementById('copy-btn');
-        const generateBtn = document.getElementById('generate-btn');
-        const toast = document.getElementById('toast');
+        // --- إدارة الواجهة (Tabs & Modes) ---
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const views = document.querySelectorAll('.view-section');
         
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        const lengthSlider = document.getElementById('length-slider');
-        const lengthVal = document.getElementById('length-val');
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                navBtns.forEach(b => b.classList.remove('active'));
+                views.forEach(v => v.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(`view-${btn.dataset.view}`).classList.add('active');
+            });
+        });
+
+        const subTabs = document.querySelectorAll('.sub-tab');
+        const modeSettings = document.querySelectorAll('.mode-settings');
+        let currentMode = 'random';
+
+        subTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                subTabs.forEach(t => t.classList.remove('active'));
+                modeSettings.forEach(s => s.style.display = 'none');
+                tab.classList.add('active');
+                currentMode = tab.dataset.mode;
+                document.getElementById(`mode-${currentMode}`).style.display = 'block';
+                generatePassword();
+            });
+        });
+
+        // --- ربط عناصر التحكم (DOM Elements) ---
+        // Random
+        const slLength = document.getElementById('sl-length');
+        const valLength = document.getElementById('val-length');
         const cbUpper = document.getElementById('cb-upper');
         const cbLower = document.getElementById('cb-lower');
         const cbNumbers = document.getElementById('cb-numbers');
         const cbSymbols = document.getElementById('cb-symbols');
-        const allCheckboxes =[cbUpper, cbLower, cbNumbers, cbSymbols];
+        const cbExclude = document.getElementById('cb-exclude');
+        const txtCustomSymbols = document.getElementById('custom-symbols');
         
-        const wordSlider = document.getElementById('word-slider');
-        const wordCountVal = document.getElementById('word-count-val');
-        const separatorSelect = document.getElementById('separator-select');
-        const cbCapitalize = document.getElementById('cb-capitalize');
+        // Passphrase
+        const slWords = document.getElementById('sl-words');
+        const valWords = document.getElementById('val-words');
+        const selSeparator = document.getElementById('sel-separator');
+        const cbPassCap = document.getElementById('cb-pass-cap');
+        const cbPassNum = document.getElementById('cb-pass-num');
 
-        const bars =[
-            document.getElementById('bar-1'),
-            document.getElementById('bar-2'),
-            document.getElementById('bar-3'),
-            document.getElementById('bar-4')
-        ];
-        const strengthLabel = document.getElementById('strength-label');
-        const timeToCrackEl = document.getElementById('time-to-crack');
+        // Pronounceable & PIN
+        const slPronounce = document.getElementById('sl-pronounce');
+        const valPronounce = document.getElementById('val-pronounce');
+        const cbPronCap = document.getElementById('cb-pron-cap');
+        const slPin = document.getElementById('sl-pin');
+        const valPin = document.getElementById('val-pin');
 
-        // مجموعات الرموز
-        const chars = {
+        // Output & Action
+        const genOutput = document.getElementById('gen-output');
+        const btnGenerate = document.getElementById('btn-generate');
+        const btnCopyGen = document.getElementById('btn-copy-gen');
+        const toast = document.getElementById('toast');
+
+        // تحديث قيم السلايدر
+        slLength.addEventListener('input', e => { valLength.textContent = e.target.value; generatePassword(); });
+        slWords.addEventListener('input', e => { valWords.textContent = e.target.value; generatePassword(); });
+        slPronounce.addEventListener('input', e => { valPronounce.textContent = e.target.value; generatePassword(); });
+        slPin.addEventListener('input', e => { valPin.textContent = e.target.value; generatePassword(); });
+
+        // إعادة التوليد عند تغيير الخيارات[cbUpper, cbLower, cbNumbers, cbSymbols, cbExclude, cbPassCap, cbPassNum, cbPronCap, selSeparator, txtCustomSymbols].forEach(el => {
+            el.addEventListener('change', () => {
+                // منع إلغاء كل شيء في العشوائي
+                if(currentMode === 'random' && !cbUpper.checked && !cbLower.checked && !cbNumbers.checked && !cbSymbols.checked) {
+                    cbLower.checked = true;
+                }
+                generatePassword();
+            });
+        });
+
+        // --- القواميس والمجموعات ---
+        const charPools = {
             upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             lower: 'abcdefghijklmnopqrstuvwxyz',
-            numbers: '0123456789',
-            symbols: '!@#$%^&*()_+~`|}{[]:;?><,./-='
+            numbers: '0123456789'
         };
-
-        // قائمة كلمات (256 كلمة) لضمان حساب الإنتروبي بشكل دقيق (8 بت لكل كلمة)
-        // الكلمات إنجليزية لأن الأنظمة العالمية تتعامل معها بشكل أفضل في كلمات المرور
+        const ambiguousChars = /[il1Lo0O]/g;
+        
+        // 256 كلمة لضمان (8 بت لكل كلمة)
         const wordlist =[
             "apple", "bacon", "cabin", "dance", "eagle", "fable", "galaxy", "habit", "ice", "jacket",
             "kayak", "lake", "magic", "nacho", "oasis", "pacific", "quail", "rabbit", "safari", "taco",
@@ -621,13 +789,9 @@
             "tail", "wing", "feather", "beak", "nest", "cave", "den", "burrow", "tunnel", "road",
             "path", "trail", "street", "avenue", "highway", "freeway", "alley", "city", "town", "village",
             "county", "state", "nation", "border", "coast", "shore", "beach", "cliff", "ridge", "peak"
-        ]; // Exactly 256 words = 8 bits of entropy per word
+        ];
 
-        let currentMode = 'random'; 
-
-        // --- التوليد التشفيري الآمن (Cryptographically Secure) ---
-        
-        // دالة توليد رقم عشوائي آمن مع منع مشكلة الانحياز الحسابي (Modulo Bias)
+        // --- التشفير والرياضيات ---
         function getSecureRandomInt(max) {
             const array = new Uint32Array(1);
             const limit = 4294967296 - (4294967296 % max);
@@ -637,222 +801,276 @@
             return array[0] % max;
         }
 
-        // توليد كلمة مرور عشوائية
-        function generateRandomPassword() {
-            let charset = '';
-            if (cbUpper.checked) charset += chars.upper;
-            if (cbLower.checked) charset += chars.lower;
-            if (cbNumbers.checked) charset += chars.numbers;
-            if (cbSymbols.checked) charset += chars.symbols;
-
-            // في حال ألغى المستخدم تحديد جميع الخيارات
-            if (charset === '') {
-                cbLower.checked = true;
-                charset = chars.lower;
-            }
-
-            const length = parseInt(lengthSlider.value);
-            let password = '';
+        // --- خوارزميات التوليد ---
+        function genRandomStr() {
+            let pools =[];
+            let fullCharset = '';
             
-            // التأكد من وجود حرف واحد على الأقل من كل مجموعة تم اختيارها
-            const requiredChars = [];
-            if (cbUpper.checked) requiredChars.push(chars.upper[getSecureRandomInt(chars.upper.length)]);
-            if (cbLower.checked) requiredChars.push(chars.lower[getSecureRandomInt(chars.lower.length)]);
-            if (cbNumbers.checked) requiredChars.push(chars.numbers[getSecureRandomInt(chars.numbers.length)]);
-            if (cbSymbols.checked) requiredChars.push(chars.symbols[getSecureRandomInt(chars.symbols.length)]);
-
-            // ملء باقي الطول بشكل عشوائي
-            for (let i = requiredChars.length; i < length; i++) {
-                password += charset[getSecureRandomInt(charset.length)];
+            let u = charPools.upper, l = charPools.lower, n = charPools.numbers, s = txtCustomSymbols.value;
+            if(cbExclude.checked) {
+                u = u.replace(ambiguousChars, '');
+                l = l.replace(ambiguousChars, '');
+                n = n.replace(ambiguousChars, '');
+                s = s.replace(ambiguousChars, '');
             }
 
-            // خلط الحروف الإجبارية مع باقي السلسلة بشكل عشوائي
+            if (cbUpper.checked && u) pools.push(u);
+            if (cbLower.checked && l) pools.push(l);
+            if (cbNumbers.checked && n) pools.push(n);
+            if (cbSymbols.checked && s) pools.push(s);
+
+            if(pools.length === 0) { pools.push(charPools.lower); } // خيار احتياطي
+            
+            pools.forEach(p => fullCharset += p);
+            
+            const length = parseInt(slLength.value);
+            let password = '';
+            let requiredChars =[];
+
+            // ضمان حرف واحد من كل مجموعة مختارة
+            pools.forEach(pool => {
+                requiredChars.push(pool[getSecureRandomInt(pool.length)]);
+            });
+
+            for (let i = requiredChars.length; i < length; i++) {
+                password += fullCharset[getSecureRandomInt(fullCharset.length)];
+            }
+
             let passArray = password.split('');
             requiredChars.forEach(char => {
-                const insertPos = getSecureRandomInt(passArray.length + 1);
-                passArray.splice(insertPos, 0, char);
+                const pos = getSecureRandomInt(passArray.length + 1);
+                passArray.splice(pos, 0, char);
             });
 
             return passArray.join('');
         }
 
-        // توليد العبارة (Passphrase)
-        function generatePassphrase() {
-            const count = parseInt(wordSlider.value);
-            const separator = separatorSelect.value;
-            const capitalize = cbCapitalize.checked;
-            
-            let phraseWords =[];
+        function genPassphrase() {
+            const count = parseInt(slWords.value);
+            let words =[];
             for(let i = 0; i < count; i++) {
-                let word = wordlist[getSecureRandomInt(wordlist.length)];
-                if(capitalize) {
-                    word = word.charAt(0).toUpperCase() + word.slice(1);
-                }
-                phraseWords.push(word);
+                let w = wordlist[getSecureRandomInt(wordlist.length)];
+                if(cbPassCap.checked) w = w.charAt(0).toUpperCase() + w.slice(1);
+                words.push(w);
             }
-            return phraseWords.join(separator);
+            let res = words.join(selSeparator.value);
+            if(cbPassNum.checked) res += selSeparator.value + getSecureRandomInt(100);
+            return res;
         }
 
-        // --- حساب قوة كلمة المرور ---
-        function calculateEntropy(password) {
-            if (currentMode === 'passphrase') {
-                // الانتروبي للعبارة = عدد الكلمات × اللوغاريتم الثنائي لعدد الكلمات في القاموس
-                const count = parseInt(wordSlider.value);
-                return count * Math.log2(wordlist.length); // log2(256) = 8 bits per word
-            } else {
-                // الانتروبي للرموز العشوائية
-                let poolSize = 0;
-                if (cbUpper.checked) poolSize += 26;
-                if (cbLower.checked) poolSize += 26;
-                if (cbNumbers.checked) poolSize += 10;
-                if (cbSymbols.checked) poolSize += chars.symbols.length;
-                
-                if (poolSize === 0) poolSize = 26;
-                return password.length * Math.log2(poolSize);
-            }
-        }
-
-        function formatCrackTime(entropy) {
-            // افتراض أن المخترق يستطيع تجربة 100 مليار احتمال في الثانية
-            const guessesPerSecond = 100000000000; 
-            const combinations = Math.pow(2, entropy);
-            const seconds = combinations / guessesPerSecond;
-
-            if (seconds < 1) return "فوراً";
-            if (seconds < 60) return "بضع ثوانٍ";
-            if (seconds < 3600) return `${Math.floor(seconds/60)} دقائق`;
-            if (seconds < 86400) return `${Math.floor(seconds/3600)} ساعات`;
-            if (seconds < 31536000) return `${Math.floor(seconds/86400)} أيام`;
-            if (seconds < 3153600000) return `${Math.floor(seconds/31536000)} سنوات`;
-            return "قرون 🔒";
-        }
-
-        function updateUIStrength(password) {
-            const entropy = calculateEntropy(password);
+        function genPronounceable() {
+            const v = "aeiou";
+            const c = "bcdfghjklmnpqrstvwxyz";
+            const length = parseInt(slPronounce.value);
+            let res = "";
+            let isVowel = getSecureRandomInt(2) === 0;
             
-            // إعادة ضبط الألوان
-            bars.forEach(bar => {
-                bar.style.background = 'var(--border)';
-                bar.style.boxShadow = 'none';
-            });
-
-            let strengthText = "";
-            let color = "";
-            let activeBars = 0;
-
-            if (entropy <= 35) {
-                strengthText = "ضعيفة";
-                color = "var(--danger)";
-                activeBars = 1;
-            } else if (entropy <= 59) {
-                strengthText = "مقبولة";
-                color = "var(--warning)";
-                activeBars = 2;
-            } else if (entropy <= 85) {
-                strengthText = "جيدة";
-                color = "var(--primary)";
-                activeBars = 3;
-            } else {
-                strengthText = "قوية جداً";
-                color = "var(--success)";
-                activeBars = 4;
+            for(let i=0; i<length; i++) {
+                if(isVowel) res += v[getSecureRandomInt(v.length)];
+                else res += c[getSecureRandomInt(c.length)];
+                isVowel = !isVowel;
             }
-
-            strengthLabel.textContent = strengthText;
-            strengthLabel.style.color = color;
-
-            for (let i = 0; i < activeBars; i++) {
-                bars[i].style.background = color;
-                bars[i].style.boxShadow = `0 0 8px ${color}80`;
-            }
-
-            timeToCrackEl.textContent = formatCrackTime(entropy);
+            if(cbPronCap.checked) res = res.charAt(0).toUpperCase() + res.slice(1);
+            return res;
         }
 
-        // --- التنفيذ الرئيسي ---
-        function updatePassword() {
-            let newPassword = "";
-            if (currentMode === 'random') {
-                newPassword = generateRandomPassword();
-            } else {
-                newPassword = generatePassphrase();
+        function genPIN() {
+            const length = parseInt(slPin.value);
+            let res = "";
+            for(let i=0; i<length; i++) {
+                res += charPools.numbers[getSecureRandomInt(10)];
             }
-            passwordOutput.value = newPassword;
-            updateUIStrength(newPassword);
+            return res;
         }
 
-        // --- مستمعي الأحداث (Event Listeners) ---
-        
-        // التبديل بين التبويبات
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                tab.classList.add('active');
-                document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
-                currentMode = tab.dataset.tab;
-                
-                updatePassword();
-            });
+        function generatePassword() {
+            let pwd = "";
+            if(currentMode === 'random') pwd = genRandomStr();
+            else if(currentMode === 'passphrase') pwd = genPassphrase();
+            else if(currentMode === 'pronounceable') pwd = genPronounceable();
+            else if(currentMode === 'pin') pwd = genPIN();
+            
+            genOutput.value = pwd;
+            updateGenStrength(pwd);
+        }
+
+        btnGenerate.addEventListener('click', () => {
+            generatePassword();
+            saveToHistory(genOutput.value);
+            showToast("تم التوليد والحفظ في السجل!");
         });
 
-        // مؤشرات التمرير (Sliders)
-        lengthSlider.addEventListener('input', (e) => {
-            lengthVal.textContent = e.target.value;
-            updatePassword();
-        });
+        // --- قوة كلمة المرور والإنتروبي ---
+        function analyzePassword(pwd) {
+            let poolSize = 0;
+            if (/[a-z]/.test(pwd)) poolSize += 26;
+            if (/[A-Z]/.test(pwd)) poolSize += 26;
+            if (/[0-9]/.test(pwd)) poolSize += 10;
+            if (/[^a-zA-Z0-9]/.test(pwd)) {
+                // حساب عدد الرموز الفريدة المستخدمة تقريبياً
+                poolSize += 32; 
+            }
+            
+            // حالة خاصة للعبارات
+            if(pwd.length > 15 && /[a-zA-Z]/.test(pwd) && /[-_ .]/.test(pwd)) {
+                const words = pwd.split(/[-_ .]/).filter(x => x.length > 2).length;
+                if(words >= 3) {
+                    return { entropy: words * 8 + (poolSize > 26 ? 10 : 0), poolSize: "قاموس كلمات", length: pwd.length };
+                }
+            }
 
-        wordSlider.addEventListener('input', (e) => {
-            wordCountVal.textContent = e.target.value;
-            updatePassword();
-        });
+            if(poolSize === 0) poolSize = 1;
+            const entropy = pwd.length * Math.log2(poolSize);
+            return { entropy, poolSize, length: pwd.length };
+        }
 
-        // مربعات الاختيار (Checkboxes)
-        allCheckboxes.forEach(cb => cb.addEventListener('change', () => {
-            // منع إلغاء تحديد آخر خيار
-            const checkedCount = allCheckboxes.filter(box => box.checked).length;
-            if (checkedCount === 0) {
-                cb.checked = true;
+        function getCrackTime(entropy) {
+            const guessesPerSec = 1e11; // 100 مليار تخمين/ث
+            const secs = Math.pow(2, entropy) / guessesPerSec;
+            if (secs < 1) return "فوراً";
+            if (secs < 60) return "بضع ثوانٍ";
+            if (secs < 3600) return `${Math.floor(secs/60)} دقيقة`;
+            if (secs < 86400) return `${Math.floor(secs/3600)} ساعة`;
+            if (secs < 31536000) return `${Math.floor(secs/86400)} يوم`;
+            if (secs < 3153600000) return `${Math.floor(secs/31536000)} سنة`;
+            return "قرون (آمن جداً) 🔒";
+        }
+
+        function updateUIBars(entropy, barsArray, labelEl = null) {
+            barsArray.forEach(b => { b.style.background = 'var(--border)'; b.style.boxShadow = 'none'; });
+            let color = "", text = "", active = 0;
+
+            if(entropy === 0) { color = "var(--border)"; text = "---"; active = 0; }
+            else if (entropy <= 35) { color = "var(--danger)"; text = "ضعيفة جداً ❌"; active = 1; }
+            else if (entropy <= 59) { color = "var(--warning)"; text = "مقبولة ⚠️"; active = 2; }
+            else if (entropy <= 85) { color = "var(--primary)"; text = "قوية ✅"; active = 3; }
+            else { color = "var(--success)"; text = "مدرعة 🛡️"; active = 4; }
+
+            for (let i = 0; i < active; i++) {
+                barsArray[i].style.background = color;
+                barsArray[i].style.boxShadow = `0 0 10px ${color}80`;
+            }
+            if(labelEl) {
+                labelEl.textContent = text;
+                labelEl.style.color = color;
+            }
+        }
+
+        function updateGenStrength(pwd) {
+            const res = analyzePassword(pwd);
+            const bars =[document.getElementById('gen-bar-1'), document.getElementById('gen-bar-2'), document.getElementById('gen-bar-3'), document.getElementById('gen-bar-4')];
+            updateUIBars(res.entropy, bars);
+        }
+
+        // فحص مباشر
+        const chkInput = document.getElementById('check-input');
+        chkInput.addEventListener('input', e => {
+            const pwd = e.target.value;
+            const res = analyzePassword(pwd);
+            const bars =[document.getElementById('chk-bar-1'), document.getElementById('chk-bar-2'), document.getElementById('chk-bar-3'), document.getElementById('chk-bar-4')];
+            
+            if(pwd.length === 0) {
+                updateUIBars(0, bars, document.getElementById('check-label'));
+                document.getElementById('chk-time').textContent = "---";
+                document.getElementById('chk-entropy').textContent = "0 bits";
+                document.getElementById('chk-length').textContent = "0";
+                document.getElementById('chk-pool').textContent = "0";
                 return;
             }
-            updatePassword();
-        }));
 
-        separatorSelect.addEventListener('change', updatePassword);
-        cbCapitalize.addEventListener('change', updatePassword);
-        generateBtn.addEventListener('click', updatePassword);
+            updateUIBars(res.entropy, bars, document.getElementById('check-label'));
+            document.getElementById('chk-time').textContent = getCrackTime(res.entropy);
+            document.getElementById('chk-entropy').textContent = `${Math.round(res.entropy)} بت`;
+            document.getElementById('chk-length').textContent = res.length;
+            document.getElementById('chk-pool').textContent = res.poolSize;
+        });
 
-        // النسخ للحافظة
-        copyBtn.addEventListener('click', async () => {
-            if (!passwordOutput.value) return;
+        // --- السجل (History) ---
+        let historyData = JSON.parse(localStorage.getItem('mowallid_history') || '[]');
+
+        function saveToHistory(pwd) {
+            const item = {
+                pwd: pwd,
+                date: new Date().toLocaleString('ar-SA')
+            };
+            historyData.unshift(item);
+            if(historyData.length > 50) historyData.pop(); // الاحتفاظ بآخر 50 فقط
+            localStorage.setItem('mowallid_history', JSON.stringify(historyData));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('history-list');
+            list.innerHTML = '';
+            if(historyData.length === 0) {
+                list.innerHTML = '<div style="text-align:center; color:var(--text-muted); padding: 2rem;">السجل فارغ.</div>';
+                return;
+            }
+
+            historyData.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.innerHTML = `
+                    <div>
+                        <div class="history-pwd">${item.pwd.replace(/</g, "&lt;")}</div>
+                        <div class="history-meta">${item.date}</div>
+                    </div>
+                    <button class="btn-action" style="margin-right:0;" onclick="copyText('${item.pwd.replace(/'/g, "\\'")}')">نسخ</button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        document.getElementById('btn-clear-history').addEventListener('click', () => {
+            if(confirm("هل أنت متأكد من مسح جميع كلمات المرور المحفوظة؟")) {
+                historyData =[];
+                localStorage.removeItem('mowallid_history');
+                renderHistory();
+                showToast("تم مسح السجل بنجاح");
+            }
+        });
+
+        document.getElementById('btn-export-history').addEventListener('click', () => {
+            if(historyData.length === 0) return alert("السجل فارغ!");
+            let content = "مُـوَلِّـد - سجل كلمات المرور\n\n";
+            historyData.forEach(i => content += `[${i.date}] \n${i.pwd}\n\n`);
+            
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Mowallid_Passwords.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // --- النسخ والتنبيهات ---
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        window.copyText = async (text) => {
             try {
-                await navigator.clipboard.writeText(passwordOutput.value);
-                
-                // إظهار التنبيه (Toast)
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2500);
-
-            } catch (err) {
-                // دعم للمتصفحات القديمة
-                passwordOutput.select();
+                await navigator.clipboard.writeText(text);
+                showToast("تم النسخ للحافظة!");
+            } catch(e) {
+                const el = document.createElement('textarea');
+                el.value = text;
+                document.body.appendChild(el);
+                el.select();
                 document.execCommand('copy');
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2500);
+                document.body.removeChild(el);
+                showToast("تم النسخ للحافظة!");
             }
-        });
+        };
 
-        // منع الكتابة في مربع العرض مع السماح بتحديد النص
-        passwordOutput.addEventListener('keydown', (e) => {
-            if (!e.ctrlKey && !e.metaKey) {
-                e.preventDefault();
-            }
-        });
+        btnCopyGen.addEventListener('click', () => copyText(genOutput.value));
 
-        // التهيئة عند التحميل
-        updatePassword();
+        // التهيئة الأولية
+        generatePassword();
+        renderHistory();
     </script>
 </body>
 </html>
