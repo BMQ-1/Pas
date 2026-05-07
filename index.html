@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
-    <meta name="description" content="مُـوَلِّـد - الأداة المطلقة لتوليد كلمات المرور الآمنة محلياً (إصدار 2026)">
+    <meta name="description" content="مُـوَلِّـد - الأداة المطلقة لتوليد كلمات المرور الآمنة محلياً">
     <meta name="theme-color" content="#ccff00" id="meta-theme-color">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="مُـوَلِّـد">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()">
-    <!-- ⚠️ SECURITY: Any external resource added here MUST include integrity="" and crossorigin="anonymous" -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; base-uri 'none'; form-action 'none';">
+    
+    <!-- ⚠️ SECURITY: To fully secure static files in production, replace 'unsafe-inline' with sha256 hashes of the script and style blocks -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; manifest-src 'self' blob:; worker-src 'self' blob:; base-uri 'none'; form-action 'none';">
     <meta name="referrer" content="no-referrer">
     
     <link rel="manifest" id="manifest-link">
     <title>مُـوَلِّـد | الأداة المطلقة لكلمات المرور</title>
+
+    <noscript>
+        <style>body { display: flex !important; }</style>
+    </noscript>
 
     <style id="antiClickjack">body{display:none!important}</style>
     <script>
@@ -53,6 +58,9 @@
         body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; z-index: 0; }
         body::after { content: ''; position: fixed; inset: 0; background: radial-gradient(circle 600px at var(--gx, 50%) var(--gy, 30%), var(--accent-glow) 0%, transparent 70%); opacity: 0.4; pointer-events: none; z-index: -1; transition: background 0.1s ease; }
 
+        .skip-link { position: absolute; top: -100px; left: 16px; background: var(--accent); color: var(--text-dark); padding: 8px 16px; border-radius: var(--radius-sm); font-weight: bold; z-index: 10000; transition: top 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); text-decoration: none; }
+        .skip-link:focus { top: 16px; }
+
         .container { width: 100%; max-width: 560px; position: relative; z-index: 1; transition: max-width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
         @media (min-width: 900px) { .container { max-width: 880px; } .gen-grid { display: grid; grid-template-columns: 360px 1fr; gap: 32px; align-items: start; } .gen-out-col { position: sticky; top: 24px; } }
 
@@ -73,7 +81,7 @@
 
         nav { display: flex; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 4px; margin-bottom: 24px; gap: 4px; animation: fadeIn 0.6s 0.1s ease both; }
         .nav-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); font-family: var(--font-ui); font-size: 0.85rem; font-weight: 600; padding: 12px 8px; border-radius: var(--radius-pill); cursor: pointer; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .nav-btn.active { background: var(--bg-elevated); color: var(--text-main); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        .nav-btn.active { background: var(--bg-elevated); color: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
 
         .card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); position: relative; overflow: hidden; animation: scaleUp 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.15s both; }
         .view { display: none; } .view.active { display: block; animation: slideTab 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
@@ -101,25 +109,26 @@
         .c-space { width: 10px; display: inline-block; } .c-masked { -webkit-text-security: disc; color: var(--text-main); font-family: sans-serif; letter-spacing: 4px; }
         .diff-hl { background: var(--accent-glow); color: var(--accent) !important; transition: background 0.6s ease; }
 
-        .screen-warning { position: absolute; top: 8px; left: 8px; font-size: 0.65rem; background: var(--danger-dim); color: var(--danger); padding: 2px 8px; border-radius: var(--radius-pill); font-family: var(--font-mono); display: none; align-items: center; gap: 4px; border: 1px solid rgba(255,51,102,0.3); animation: fadeIn 0.3s ease; z-index: 2; }
+        .screen-warning { position: absolute; top: 8px; inset-inline-end: 8px; font-size: 0.65rem; background: var(--danger-dim); color: var(--danger); padding: 2px 8px; border-radius: var(--radius-pill); font-family: var(--font-mono); display: none; align-items: center; gap: 4px; border: 1px solid rgba(255,51,102,0.3); animation: fadeIn 0.3s ease; z-index: 2; }
 
         .actions-row { display: flex; gap: 8px; justify-content: center; }
         .btn-icon { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); width: 48px; height: 48px; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; position: relative; }
-        .btn-icon:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
+        .btn-icon:hover, .btn-icon:focus-visible { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); outline: none; }
         .btn-icon:active { transform: scale(0.92); }
         
         .btn-split { display: flex; flex: 1; height: 48px; position: relative; }
         .btn-main { background: var(--accent); color: var(--text-dark); border: none; padding: 0 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; flex: 1; position: relative; overflow: hidden; z-index: 1; }
         .btn-main::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.4); border-radius: inherit; transform: scale(2.5); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; z-index: -1; pointer-events: none; }
         .btn-main:active::after { transform: scale(0); opacity: 1; transition: 0s; }
-        .btn-main:hover { filter: brightness(1.1); box-shadow: 0 0 15px var(--accent-glow); }
+        .btn-main:hover, .btn-main:focus-visible { filter: brightness(1.1); box-shadow: 0 0 15px var(--accent-glow); outline: none; }
         .btn-main:active { transform: scale(0.98); }
         .btn-main-extra { background: var(--accent); filter: brightness(0.9); color: var(--text-dark); border: none; border-right: 1px solid rgba(0,0,0,0.15); width: 40px; border-radius: var(--radius-sm) 0 0 var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; z-index: 1; }
-        .btn-main-extra:hover { filter: brightness(1.1); }
+        .btn-main-extra:hover, .btn-main-extra:focus-visible { filter: brightness(1.1); outline: none; }
         
         .cd-badge { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; background: rgba(0,0,0,0.15); padding: 2px 6px; border-radius: 4px; }
 
-        .strength-container { margin: 20px 0; }
+        .strength-container { margin: 20px 0; cursor: pointer; border-radius: var(--radius-sm); transition: 0.2s; }
+        .strength-container:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
         .strength-bars { display: flex; gap: 6px; height: 6px; margin-bottom: 10px; direction: ltr; }
         .bar-wrap { flex: 1; background: var(--bg-elevated); border-radius: 3px; overflow: hidden; transition: box-shadow 0.4s ease;}
         
@@ -136,8 +145,9 @@
         .ep-val { color: var(--text-main); font-weight: 700; direction: ltr; display: flex; align-items: center; gap: 6px; }
         .ep-bar-mini { width: 16px; height: 4px; border-radius: 2px; }
 
-        [data-tip] { position: relative; cursor: help; }[data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(4px); background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); padding: 6px 10px; border-radius: 6px; font-size: 0.75rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.2s; z-index: 100; font-family: var(--font-ui); font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
-        [data-tip]:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+        [data-tip] { position: relative; }
+        [data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(4px); background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); padding: 6px 10px; border-radius: 6px; font-size: 0.75rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.2s; z-index: 100; font-family: var(--font-ui); font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        [data-tip]:hover::after, [data-tip]:focus-visible::after, [data-tip]:active::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         .sub-nav-wrap { position: relative; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
         .sub-nav { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 8px; }
@@ -181,7 +191,8 @@
         .tl-labels span { flex: 1; text-align: center; }
 
         .btn-outline { border: 1px solid var(--border); background: transparent; color: var(--text-main); padding: 14px; border-radius: var(--radius-sm); width: 100%; cursor: pointer; font-weight: 600; font-family: var(--font-ui); transition: 0.2s; }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); } .btn-outline:disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--border); color: var(--text-muted); background: transparent; }
+        .btn-outline:hover, .btn-outline:focus-visible { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); outline: none; } 
+        .btn-outline:disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--border); color: var(--text-muted); background: transparent; }
 
         .history-controls { display: flex; gap: 12px; margin-bottom: 20px; }
         .btn-danger { border: 1px solid var(--danger); color: var(--danger); background: transparent; flex: 1; padding: 12px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: 0.2s;}
@@ -189,13 +200,13 @@
         .btn-info { border: 1px solid var(--info); color: var(--info); background: transparent; flex: 1; padding: 12px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: 0.2s;}
         .btn-danger:hover { background: var(--danger-dim); } .btn-success:hover { background: var(--success-dim); } .btn-info:hover { background: rgba(0,216,255,0.1); }
         
-        .history-list { display: flex; flex-direction: column; gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
+        .history-list { display: flex; flex-direction: column; gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%); mask-image: linear-gradient(to bottom, black 90%, transparent 100%); }
         .history-item { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; position: relative; animation: fadeIn 0.3s; }
         .btn-del-item { position: absolute; left: 16px; top: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; transition: 0.2s; padding: 4px; border-radius: 4px; }
         .btn-del-item:hover { background: var(--danger-dim); color: var(--danger); }
         .hist-pwd { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 12px; padding-left: 28px; }
         .hist-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; box-shadow: 0 0 6px currentColor; flex-shrink: 0; }
-        .hist-val { letter-spacing: 2px; direction: ltr; overflow: hidden; text-overflow: ellipsis; }
+        .hist-val { letter-spacing: 2px; direction: ltr; word-break: break-all; white-space: pre-wrap; line-height: 1.4; padding: 4px 0; }
         .hist-val.masked { font-family: sans-serif; letter-spacing: 4px; color: var(--text-muted); font-size: 1.2rem; line-height: 1; transform: translateY(4px); }
         .btn-reveal { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; transition: 0.2s; display: flex; } .btn-reveal:hover { color: var(--accent); }
         .hist-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border); padding-top: 8px;}
@@ -222,7 +233,7 @@
         .modal-btn.primary { background: var(--accent); color: var(--text-dark); } .modal-btn.primary:hover { filter: brightness(1.1); box-shadow: 0 0 15px var(--accent-glow); }
         .modal-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        #toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); padding: 12px 24px; border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 700; font-size: 0.85rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8); white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 9999; display: flex; align-items: center; gap: 8px; }
+        #toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); padding: 12px 24px; border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 700; font-size: 0.85rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 9999; display: flex; align-items: center; justify-content: center; gap: 8px; max-width: 90vw; text-align: center; line-height: 1.4; white-space: normal; }
         #toast.show { opacity: 1; transform: translate(-50%, 0); }
         .t-succ { background: var(--success); color: var(--text-dark); } .t-err { background: var(--danger); color: white; }
         .t-warn { background: var(--warning); color: var(--text-dark); } .t-info { background: var(--text-main); color: var(--bg-base); }
@@ -247,7 +258,15 @@
 </head>
 <body>
 
+<noscript>
+    <div style="position:fixed;inset:0;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;z-index:999999;padding:2rem;text-align:center;">
+        الرجاء تفعيل جافاسكربت (JavaScript) لعمل الأداة.
+    </div>
+</noscript>
+
 <div id="boot-splash"><div class="spinner"></div></div>
+
+<a href="#main-card" class="skip-link">تخطي إلى المحتوى</a>
 
 <div class="container">
     <header>
@@ -264,7 +283,7 @@
         <button class="nav-btn" data-target="view-history" data-idx="2">السجل المحلّي</button>
     </nav>
 
-    <div class="card" id="main-card">
+    <div class="card" id="main-card" tabindex="-1">
         <!-- ================= VIEW: GENERATE ================= -->
         <div id="view-gen" class="view active">
             <div class="gen-grid">
@@ -292,22 +311,22 @@
                                     <svg id="copy-check" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--bg-base)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                     <svg id="copy-lock" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                                     
-                                    <svg class="idle-ring hidden" id="copy-ring-svg" width="44" height="44" viewBox="0 0 44 44" style="position:absolute; right: -5px; top: 2px; pointer-events:none; transform:rotate(-90deg);">
+                                    <svg class="idle-ring hidden" id="copy-ring-svg" width="44" height="44" viewBox="0 0 44 44" style="position:absolute; right: 12px; top: 50%; margin-top: -22px; pointer-events:none; transform:rotate(-90deg);">
                                         <circle id="copy-ring" cx="22" cy="22" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" opacity="0.4"></circle>
                                     </svg>
                                     <span class="cd-badge" id="copy-cd" style="right:30px"></span>
                                 </button>
-                                <button class="btn-main-extra" id="btn-copy-regen" aria-label="نسخ وتوليد جديد" data-tip="نسخ + جديد (Ctrl+Shift+C)">
+                                <button class="btn-main-extra" id="btn-copy-regen" aria-label="نسخ وتوليد جديد" data-tip="نسخ + جديد (Ctrl+Shift+C)" tabindex="0">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
                                 </button>
                             </div>
-                            <button class="btn-icon" id="btn-regen" aria-label="توليد كلمة مرور جديدة" data-tip="توليد جديد (Ctrl+Enter)">
+                            <button class="btn-icon" id="btn-regen" aria-label="توليد كلمة مرور جديدة" data-tip="توليد جديد (Ctrl+Enter)" tabindex="0">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
                             </button>
                         </div>
                     </div>
 
-                    <div class="strength-container" data-tip="الإنتروبي يحدد صعوبة التخمين" id="btn-toggle-ep">
+                    <div class="strength-container" data-tip="الإنتروبي يحدد صعوبة التخمين" id="btn-toggle-ep" tabindex="0">
                         <div aria-live="polite" aria-atomic="true" class="sr-only" id="strength-announce"></div>
                         <div class="strength-bars">
                             <div class="bar-wrap" id="b1"><div class="bar"></div></div>
@@ -317,7 +336,7 @@
                         </div>
                         <div class="strength-info">
                             <span id="lbl-strength" style="color:var(--text-muted)">---</span>
-                            <span class="label-time">كسر: <span id="lbl-time" style="color:var(--text-main)">---</span> ▾</span>
+                            <span class="label-time">كسر: <span id="lbl-time" style="color:var(--text-main)">---</span> <span id="ep-arrow" style="display:inline-block; transition: 0.3s;">▾</span></span>
                         </div>
                     </div>
 
@@ -406,7 +425,7 @@
         <div id="view-check" class="view">
             <h3 class="section-title">فحص القوة والتسريب</h3>
             <div class="output-wrapper" style="padding-bottom:12px">
-                <input type="password" id="chk-input" name="analyzer-field" class="pwd-input pwd-input-visible" placeholder="اكتب للبدء..." style="padding-bottom:8px;" autocomplete="off" spellcheck="false" dir="ltr" inputmode="none" data-form-type="other">
+                <input type="password" id="chk-input" class="pwd-input pwd-input-visible" placeholder="اكتب للبدء..." style="padding-bottom:8px;" autocomplete="new-password" spellcheck="false" dir="ltr" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" maxlength="256">
                 <div class="actions-row">
                     <button class="btn-icon" id="btn-chk-vis" aria-label="إظهار كلمة المرور">
                         <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -419,10 +438,10 @@
 
             <div class="strength-container">
                 <div class="strength-bars"><div class="bar-wrap" id="cb1"><div class="bar"></div></div><div class="bar-wrap" id="cb2"><div class="bar"></div></div><div class="bar-wrap" id="cb3"><div class="bar"></div></div><div class="bar-wrap" id="cb4"><div class="bar"></div></div></div>
-                <div class="strength-info" style="justify-content:center;"><span id="chk-lbl-str" style="color:var(--text-muted)">---</span></div>
+                <div class="strength-info" style="justify-content:center;"><span id="chk-lbl-str" style="color:var(--text-muted)">اكتب للتحليل الفوري...</span></div>
             </div>
             
-            <div class="tl-wrap" data-tip="الوقت التقريبي لكسر الكلمة بواسطة حاسوب متطور">
+            <div class="tl-wrap" data-tip="الوقت التقريبي لكسر الكلمة بواسطة حاسوب متطور" tabindex="0">
                 <div class="tl-fill" id="tl-fill"></div>
                 <div class="tl-marker" id="tl-marker"></div>
             </div>
@@ -434,7 +453,7 @@
                 <div class="stat-card"><div class="stat-lbl">الإنتروبي (Entropy)</div><div class="stat-val"><span id="chk-ent">0</span><span style="font-size:0.7rem;color:var(--text-muted)"> bits</span></div></div>
                 <div class="stat-card"><div class="stat-lbl">الكسر بـ 2026</div><div class="stat-val" id="chk-time" dir="ltr">---</div></div>
             </div>
-            <button class="btn-outline" id="btn-pwned" data-tip="يرسل أول 5 أحرف من التجزئة (SHA-1) فقط">🔍 فحص في قاعدة بيانات HIBP</button>
+            <button class="btn-outline" id="btn-pwned" data-tip="يرسل أول 5 أحرف من التجزئة (SHA-1) فقط" tabindex="0">🔍 فحص في قاعدة بيانات HIBP</button>
             <details style="margin-top:8px; font-size:0.75rem; color:var(--text-muted); cursor:pointer;">
                 <summary style="outline:none;">كيف يعمل هذا بأمان؟</summary>
                 <div style="padding-top:4px;">يُرسل أول 5 أحرف فقط من بصمة SHA-1 (من أصل 40 حرفاً). لا تُرسل كلمة المرور نفسها أبداً للإنترنت (k-Anonymity).</div>
@@ -456,7 +475,7 @@
             <div class="history-controls">
                 <button class="btn-danger" id="btn-hist-clear">مسح الكل</button>
                 <button class="btn-info" id="btn-hist-imp">استيراد...</button>
-                <button class="btn-success" id="btn-hist-exp" data-tip="تصدير مشفر بـ AES-256-GCM">تصدير...</button>
+                <button class="btn-success" id="btn-hist-exp" data-tip="تصدير مشفر بـ AES-256-GCM" tabindex="0">تصدير...</button>
             </div>
             <input type="file" id="file-import" accept=".json" class="hidden">
             <div class="history-list" id="hist-list"></div>
@@ -465,10 +484,12 @@
     
     <footer>
         <div style="display:flex; align-items:center; gap:8px;">
-            <span>مُشغّل بواسطة <span class="hi">Web Crypto API</span> &nbsp;|&nbsp; يعمل محلياً 🔒</span>
+            <span>مُشغّل بواسطة <span class="hi">Web Crypto API</span> &nbsp;|&nbsp; يعمل محلياً 🔒 &nbsp;|&nbsp; v1.1.0</span>
             <span id="net-dot" style="width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 6px currentColor;transition:0.3s;" title="مؤشر الشبكة (أخضر = صامت)"></span>
         </div>
-        <div style="font-family:var(--font-mono); font-size:0.6rem; opacity:0.3;" id="integrity-token">جاري فحص النزاهة...</div>
+        <div style="font-family:var(--font-mono); font-size:0.6rem; opacity:0.3; margin-top:8px;">
+            تأكد من سلامة الملف محلياً عبر مطابقة بصمة SHA-256 مع المصدر الرسمي
+        </div>
     </footer>
 </div>
 
@@ -476,7 +497,7 @@
     <div class="modal-box">
         <div class="modal-title" id="m-title">تنبيه</div>
         <div class="modal-body" id="m-body">...</div>
-        <input type="password" id="m-input" class="input-text hidden" placeholder="" style="margin-bottom:8px" dir="ltr">
+        <input type="password" id="m-input" class="input-text hidden" placeholder="" style="margin-bottom:8px" dir="ltr" maxlength="256">
         <div id="m-ent-warn" style="font-size:0.75rem; color:var(--danger); margin-bottom:16px; display:none;">كلمة المرور ضعيفة جداً!</div>
         <div class="modal-actions" id="m-actions"></div>
     </div>
@@ -504,18 +525,88 @@ const CFG = Object.freeze({
 (async function MainApp() {
     'use strict';
     
-    // Boot Smoke Test
+    // Auto-inject PWA Manifest natively via Data URI
+    try {
+        const iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect width="512" height="512" rx="128" fill="#000"/><path d="M352 240h-16v-64c0-44.1-35.9-80-80-80s-80 35.9-80 80v64h-16c-17.7 0-32 14.3-32 32v160c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32V272c0-17.7-14.3-32-32-32zm-128-64c0-26.5 21.5-48 48-48s48 21.5 48 48v64H224v-64z" fill="#ccff00"/></svg>';
+        const manifest = {
+            name: "مُـوَلِّـد",
+            short_name: "مُـوَلِّـد",
+            start_url: ".",
+            display: "standalone",
+            background_color: "#000000",
+            theme_color: "#ccff00",
+            description: "الأداة المطلقة لتوليد كلمات المرور الآمنة محلياً",
+            icons: [
+                {
+                    src: "data:image/svg+xml;base64," + btoa(iconSvg),
+                    sizes: "512x512",
+                    type: "image/svg+xml"
+                }
+            ]
+        };
+        const mBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+        document.getElementById('manifest-link').href = URL.createObjectURL(mBlob);
+    } catch(e) {}
+
+    let DYNAMIC_ITERS = CFG.PBKDF2_ITERS;
+
+    // Boot Smoke Test & Security Capabilities
     try {
         const key = await crypto.subtle.generateKey({name:'AES-GCM',length:128},false,['encrypt','decrypt']);
         const iv = crypto.getRandomValues(new Uint8Array(12));
         const ct = await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode('test'));
         const pt = await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct);
         if(new TextDecoder().decode(pt)!=='test') throw new Error('Data mismatch');
+
+        // Progressive Enhancement Benchmark for PBKDF2 Iterations
+        const t0 = performance.now();
+        const baseKey = await crypto.subtle.importKey("raw", new Uint8Array(16), "PBKDF2", false, ["deriveKey"]);
+        await crypto.subtle.deriveKey({name: "PBKDF2", salt: new Uint8Array(16), iterations: 10000, hash: "SHA-256"}, baseKey, {name: "AES-GCM", length: 256}, false, ["encrypt"]);
+        const elapsed = performance.now() - t0;
+        if(elapsed > 0) DYNAMIC_ITERS = Math.max(100000, Math.min(2000000, Math.floor(10000 * (1000 / elapsed))));
+
         document.getElementById('boot-splash').style.opacity = '0';
         setTimeout(() => document.getElementById('boot-splash').remove(), 500);
     } catch(e) {
-        document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center"><div style="background:#1a0505;border:1px solid #ff3366;color:#ff3366;padding:2rem;border-radius:16px;max-width:400px"><h2>⚠️ خلل أمني</h2><p style="margin-top:1rem">خوارزميات التشفير معطلة في هذا المتصفح. تأكد من عملك في بيئة آمنة.</p></div></div>';
+        document.body.innerHTML='<div role="alert" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center"><div style="background:#1a0505;border:1px solid #ff3366;color:#ff3366;padding:2rem;border-radius:16px;max-width:400px"><h2>⚠️ خلل أمني</h2><p style="margin-top:1rem">خوارزميات التشفير معطلة في هذا المتصفح. تأكد من عملك في بيئة آمنة.</p></div></div>';
         throw e;
+    }
+
+    // Inline Web Worker for Crypto Operations (Offload PBKDF2 from Main Thread)
+    const cryptoWorkerCode = `
+    self.onmessage = async function(e) {
+        try {
+            const { action, pwd, salt, iv, ct, data, iters, canary } = e.data;
+            const pwdBuf = new TextEncoder().encode(pwd);
+            const baseKey = await crypto.subtle.importKey("raw", pwdBuf, "PBKDF2", false, ["deriveKey"]);
+            const key = await crypto.subtle.deriveKey(
+                {name: "PBKDF2", salt: salt, iterations: iters, hash: "SHA-256"},
+                baseKey, {name: "AES-GCM", length: 256}, false, 
+                action === 'enc' ? ["encrypt"] : ["decrypt"]
+            );
+            
+            if (action === 'enc') {
+                const encCt = await crypto.subtle.encrypt({name: "AES-GCM", iv: iv}, key, new TextEncoder().encode(JSON.stringify({canary, data})));
+                self.postMessage({ success: true, ct: encCt });
+            } else {
+                const dec = await crypto.subtle.decrypt({name: "AES-GCM", iv: iv}, key, ct);
+                const parsed = JSON.parse(new TextDecoder().decode(dec));
+                self.postMessage({ success: true, parsed });
+            }
+        } catch(err) {
+            self.postMessage({ success: false, error: err.message });
+        }
+    };`;
+    const cryptoWorkerBlob = new Blob([cryptoWorkerCode], {type: 'application/javascript'});
+    const cryptoWorkerUrl = URL.createObjectURL(cryptoWorkerBlob);
+
+    function runCryptoWorker(payload) {
+        return new Promise((resolve, reject) => {
+            const w = new Worker(cryptoWorkerUrl);
+            w.onmessage = e => { w.terminate(); e.data.success ? resolve(e.data) : reject(new Error(e.data.error)); };
+            w.onerror = e => { w.terminate(); reject(e); };
+            w.postMessage(payload);
+        });
     }
 
     // Encoding & Escaping
@@ -532,43 +623,26 @@ const CFG = Object.freeze({
         return arr[0] % max;
     }
 
-    // Boot Integrity Token
-    setTimeout(async () => {
-        const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(document.documentElement.outerHTML));
-        const token = Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(-8).toUpperCase();
-        document.getElementById('integrity-token').textContent = `Document SHA-256: …${token}`;
-    }, 100);
-
-    // Network Interceptor
+    // Secure Fetch Interceptor for External API Calls
     const netDot = document.getElementById('net-dot');
-    const origFetch = window.fetch;
-    window.fetch = async function(...args) {
+    async function secureFetch(...args) {
+        if (!args[0].startsWith('https://api.pwnedpasswords.com')) throw new Error('Blocked external request');
         if(netDot) { netDot.style.background = 'var(--warning)'; netDot.style.boxShadow = '0 0 8px var(--warning)'; }
-        try { return await origFetch.apply(this, args); }
+        try { return await window.fetch(...args); }
         finally { if(netDot) setTimeout(() => { netDot.style.background = 'var(--success)'; netDot.style.boxShadow = '0 0 6px currentColor'; }, 400); }
-    };
-
-    // DevTools Passive Monitor
-    if(navigator.maxTouchPoints === 0) {
-        setInterval(() => {
-            const devOpen = (window.outerWidth - window.innerWidth > 160) || (window.outerHeight - window.innerHeight > 160);
-            updateWarningBadge(devOpen);
-        }, 1000);
     }
 
-    function updateWarningBadge(devOpen = false) {
+    function updateWarningBadge() {
         const warnBadge = document.getElementById('screen-warn');
         if(!warnBadge) return;
         const isVis = document.getElementById('out-pwd').type === 'text';
         const isBlur = document.getElementById('pwd-blur-container').classList.contains('blurred');
         
-        warnBadge.style.display = (devOpen || isVis || isBlur) ? 'flex' : 'none';
+        warnBadge.style.display = isVis ? 'flex' : 'none';
         
-        if (isBlur) {
+        if (isBlur && isVis) {
             warnBadge.innerHTML = '⚠️ النافذة في الخلفية'; warnBadge.style.background = 'var(--warning)'; warnBadge.style.color = 'var(--text-dark)'; warnBadge.style.borderColor = 'var(--warning)';
-        } else if (devOpen) {
-            warnBadge.innerHTML = '🔍 DevTools مفتوح'; warnBadge.style.background = 'var(--warning)'; warnBadge.style.color = 'var(--text-dark)'; warnBadge.style.borderColor = 'var(--warning)';
-        } else {
+        } else if (isVis) {
             warnBadge.innerHTML = '📸 مرئية على الشاشة'; warnBadge.style.background = 'var(--danger-dim)'; warnBadge.style.color = 'var(--danger)'; warnBadge.style.borderColor = 'rgba(255,51,102,0.3)';
         }
     }
@@ -601,12 +675,20 @@ const CFG = Object.freeze({
     const mActions = document.getElementById('m-actions');
     let currentModalResolve = null;
 
-    function showModal(title, bodyText, buttons, withInput = false, forceValidation = true, inputPlaceholder = "أدخل كلمة مرور قوية للتشفير", isHTML = false) {
+    function showModal(title, bodyContent, buttons, withInput = false, forceValidation = true, inputPlaceholder = "أدخل كلمة مرور قوية للتشفير") {
         return new Promise((resolve) => {
             currentModalResolve = resolve;
             document.getElementById('m-title').textContent = title; 
-            if(isHTML) document.getElementById('m-body').innerHTML = bodyText;
-            else document.getElementById('m-body').textContent = bodyText;
+            
+            const mBody = document.getElementById('m-body');
+            mBody.innerHTML = '';
+            
+            // Require strict Node or safe text representation
+            if (typeof bodyContent === 'string') {
+                mBody.appendChild(document.createTextNode(bodyContent));
+            } else if (bodyContent instanceof Node) {
+                mBody.appendChild(bodyContent);
+            }
             
             mInput.classList.toggle('hidden', !withInput); mInput.value = '';
             mInput.placeholder = inputPlaceholder; mInput.dataset.validate = forceValidation ? "true" : "false";
@@ -617,8 +699,9 @@ const CFG = Object.freeze({
                 btn.className = `modal-btn ${b.class}`; btn.textContent = b.text;
                 btn.onclick = () => { 
                     if(btn.disabled) return;
-                    const val = mInput.value; mInput.value = ''; 
+                    let val = mInput.value; mInput.value = ''; 
                     modalOverlay.classList.remove('show'); currentModalResolve = null; resolve({action: b.action, val}); 
+                    val = null; // Encourage GC
                 };
                 mActions.appendChild(btn);
             });
@@ -650,16 +733,32 @@ const CFG = Object.freeze({
     });
 
     document.getElementById('btn-settings').addEventListener('click', async () => {
-        let cpHTML = '<div class="color-picker">';
-        for(const [name, hex] of Object.entries(COLORS)) {
-            // Check current accent vs hex
-            const isAct = document.documentElement.style.getPropertyValue('--accent') === hex || (hex === '#ccff00' && !document.documentElement.style.getPropertyValue('--accent'));
-            cpHTML += `<div class="c-dot ${isAct?'active':''}" style="background:${hex}" data-hex="${hex}" title="${name}"></div>`;
-        }
-        cpHTML += '</div>';
+        const wrap = document.createElement('div');
         
-        showModal('الإعدادات ⚙️', `
-            <div style="margin-bottom:16px;"><b>لون الهوية:</b> ${cpHTML}</div>
+        const cpTitle = document.createElement('div');
+        cpTitle.style.marginBottom = '16px';
+        cpTitle.innerHTML = '<b>لون الهوية:</b> ';
+        const cpHTML = document.createElement('div');
+        cpHTML.className = 'color-picker';
+        
+        for(const [name, hex] of Object.entries(COLORS)) {
+            const isAct = document.documentElement.style.getPropertyValue('--accent') === hex || (hex === '#ccff00' && !document.documentElement.style.getPropertyValue('--accent'));
+            const dot = document.createElement('div');
+            dot.className = `c-dot ${isAct?'active':''}`;
+            dot.style.background = hex;
+            dot.title = name;
+            dot.dataset.hex = hex;
+            dot.addEventListener('click', e => {
+                document.querySelectorAll('.c-dot').forEach(x => x.classList.remove('active'));
+                e.target.classList.add('active'); setAccent(e.target.dataset.hex);
+            });
+            cpHTML.appendChild(dot);
+        }
+        cpTitle.appendChild(cpHTML);
+        wrap.appendChild(cpTitle);
+        
+        const tableDiv = document.createElement('div');
+        tableDiv.innerHTML = `
             <table style="width:100%; text-align:right; border-collapse:collapse; margin-bottom:10px; font-size:0.85rem;">
                 <tr><th style="padding:6px; border-bottom:1px solid var(--border)">الاختصار</th><th style="padding:6px; border-bottom:1px solid var(--border)">الوظيفة</th></tr>
                 <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl + Enter</td><td style="padding:6px;">توليد جديد</td></tr>
@@ -667,16 +766,11 @@ const CFG = Object.freeze({
                 <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl+Shift+C</td><td style="padding:6px;">نسخ وتوليد جديد</td></tr>
                 <tr><td style="padding:6px; color:var(--accent); direction:ltr">Escape</td><td style="padding:6px;">إغلاق النوافذ المنبثقة</td></tr>
             </table>
-        `,[{text:'إغلاق', class:'cancel', action:false}], false, false, "", true);
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:8px; text-align:center;">اللون مؤقت لهذه الجلسة فقط 🔒</div>
+        `;
+        wrap.appendChild(tableDiv);
         
-        setTimeout(() => {
-            document.querySelectorAll('.c-dot').forEach(d => {
-                d.addEventListener('click', e => {
-                    document.querySelectorAll('.c-dot').forEach(x => x.classList.remove('active'));
-                    e.target.classList.add('active'); setAccent(e.target.dataset.hex);
-                });
-            });
-        }, 100);
+        showModal('الإعدادات ⚙️', wrap, [{text:'إغلاق', class:'cancel', action:false}], false, false);
     });
 
     const tTitle = document.getElementById('main-title');
@@ -793,19 +887,21 @@ const CFG = Object.freeze({
         const inp = document.getElementById(inpId); const isPass = inp.type === 'password';
         
         const col = document.getElementById('out-colored');
-        col.classList.add('morphing');
+        if(col && inpId === 'out-pwd') col.classList.add('morphing');
+        
         setTimeout(() => {
             inp.type = isPass ? 'text' : 'password';
             btn.querySelector('.icon-eye').classList.toggle('hidden', isPass); btn.querySelector('.icon-eye-off').classList.toggle('hidden', !isPass);
             btn.style.color = isPass ? 'var(--accent)' : 'var(--text-main)';
+            btn.setAttribute('aria-label', isPass ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
             
             if(inpId === 'out-pwd') { 
                 updateDisplayColor(); resetIdleTimer(); 
                 const ring = document.getElementById('vis-ring');
                 if(isPass) { ring.style.transition = 'none'; ring.style.strokeDashoffset = '132'; } 
                 else { ring.style.transition = 'none'; ring.style.strokeDashoffset = '0'; setTimeout(() => { ring.style.transition = `stroke-dashoffset ${CFG.IDLE_HIDE_MS/1000}s linear`; ring.style.strokeDashoffset = '132'; }, 50); }
+                col.classList.remove('morphing');
             }
-            col.classList.remove('morphing');
         }, 120);
     }
     document.getElementById('btn-vis').addEventListener('click', function(){ toggleVis('out-pwd', this) });
@@ -863,7 +959,10 @@ const CFG = Object.freeze({
             const sep = document.getElementById('sel-sep').value;
             pwd = wArr.join(sep);
             if(document.getElementById('cb-p-num').checked) pwd += sep + secRand(100);
-            if(document.getElementById('cb-p-sym').checked) pwd += sep + '!@#$%^&*'[secRand(8)];
+            if(document.getElementById('cb-p-sym').checked) {
+                const symPool = document.getElementById('in-custom').value || '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+                pwd += sep + symPool[secRand(symPool.length)];
+            }
         }
         else if(currentMode === 'pronounceable') {
             const v = 'aeiou', c = 'bcdfghjklmnpqrstvwxyz';
@@ -886,20 +985,39 @@ const CFG = Object.freeze({
         updateGenStr(pwd);
     }
 
-    document.getElementById('btn-regen').addEventListener('click', () => { generatePassword(); });
+    document.getElementById('btn-regen').addEventListener('click', () => { 
+        if(copyCdInterval) {
+            clearInterval(copyCdInterval);
+            setCopyState('default');
+            if(document.hasFocus() && navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('');
+            lastCopiedPwd = '';
+        }
+        generatePassword(); 
+    });
 
     // ==========================================
     // STRENGTH ANALYZER & TIMELINE
     // ==========================================
     function analyzePwd(pwd, isGenerationContext = true) {
         if(!pwd) return { e:0 };
+        
         if(isGenerationContext && currentMode === 'passphrase') {
             const count = parseInt(document.getElementById('sl-words').value);
             let ent = count * Math.log2(WL.length);
             if(document.getElementById('cb-p-num').checked) ent += Math.log2(100);
-            if(document.getElementById('cb-p-sym').checked) ent += Math.log2(8);
+            if(document.getElementById('cb-p-sym').checked) {
+                const symPool = document.getElementById('in-custom').value || '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+                ent += Math.log2(symPool.length || 1);
+            }
             return { e: ent };
         }
+
+        // Passphrase heuristic for checker mode
+        const tokens = pwd.split(/[-_. ]/);
+        if(!isGenerationContext && tokens.length >= 3 && tokens.every(w => w.length >= 3)) {
+            return { e: tokens.length * 13 + (/[0-9!@#$%^&*]/.test(pwd) ? 10 : 0) };
+        }
+
         let p = 0;
         if(/[a-z]/.test(pwd)) p+=26; if(/[A-Z]/.test(pwd)) p+=26;
         if(/[0-9]/.test(pwd)) p+=10; if(/[^a-zA-Z0-9\s]/.test(pwd)) p+=32;
@@ -937,8 +1055,16 @@ const CFG = Object.freeze({
         if(announce) announce.textContent = `القوة: ${t} — الكسر: ${timeStr(e)}`;
 
         for(let i=1; i<=4; i++) {
+            const b = document.querySelector(`#${prefix}${i} .bar`); if(!b) continue;
+            b.style.transition = 'none';
+            b.classList.remove('pulsing');
+        }
+        await new Promise(r => requestAnimationFrame(r));
+
+        for(let i=1; i<=4; i++) {
             if(currentId !== animTracker) return;
             const b = document.querySelector(`#${prefix}${i} .bar`); if(!b) continue;
+            b.style.transition = 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease';
             b.style.setProperty('--pulse-speed', pSpeed);
             if(i <= act) { 
                 b.style.width = '100%'; b.style.backgroundColor = c; 
@@ -978,7 +1104,10 @@ const CFG = Object.freeze({
 
     document.getElementById('btn-toggle-ep').addEventListener('click', () => {
         const p = document.getElementById('ep-panel');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+        const arr = document.getElementById('ep-arrow');
+        const isClosed = p.style.display === 'none' || p.style.display === '';
+        p.style.display = isClosed ? 'block' : 'none';
+        arr.style.transform = isClosed ? 'rotate(180deg)' : 'rotate(0deg)';
     });
 
     // ==========================================
@@ -986,7 +1115,8 @@ const CFG = Object.freeze({
     // ==========================================
     function parseHibpLine(l, suffix) {
         l = l.trim();
-        if(!/^[0-9A-F]{35}:\d+$/i.test(l)) return null;
+        if(!l) return null;
+        if(!/^[0-9A-F]{35}:\d+$/i.test(l)) throw new Error("Invalid Format");
         if(l.startsWith(suffix)) return parseInt(l.split(':')[1]);
         return null;
     }
@@ -998,6 +1128,17 @@ const CFG = Object.freeze({
         clearTimeout(chkTimer);
         chkTimer = setTimeout(() => { 
             const pwd = e.target.value; 
+            
+            if(!pwd) {
+                drawBarsSequentially(0, 'cb');
+                document.getElementById('chk-lbl-str').textContent = 'اكتب للتحليل الفوري...';
+                document.getElementById('chk-lbl-str').style.color = 'var(--text-muted)';
+                document.getElementById('chk-time').textContent = '---';
+                document.getElementById('chk-pattern-warn').style.display = 'none';
+                animateNumber('chk-ent', 0, ''); updateTimeline(0);
+                return;
+            }
+            
             const r = analyzePwd(pwd, false);
             
             const PATTERNS = [/^[A-Z][a-z]+\d+[!@#$-_]?$/, /(.)\1{2,}/, /012|123|234|789|890|abc|qwe/i];
@@ -1012,17 +1153,20 @@ const CFG = Object.freeze({
 
     const hibpCache = new Map();
     let isPwnedLoading = false;
-    let pwnedReqCount = 0;
+    let pwnedWindow = [];
     
     document.getElementById('btn-pwned').addEventListener('click', async function() {
         if(isPwnedLoading) return;
         
-        if(pwnedReqCount > 10) return showTst('يرجى الانتظار قليلاً قبل المزيد من الفحوصات', 'warn');
+        const now = Date.now();
+        pwnedWindow.splice(0, pwnedWindow.length, ...pwnedWindow.filter(t => now - t < 60000));
+        if(pwnedWindow.length >= 10) return showTst('يرجى الانتظار قليلاً قبل المزيد من الفحوصات', 'warn');
+        pwnedWindow.push(now);
         
         const pwd = chkInp.value.trim(); const box = document.getElementById('pwned-res');
         if(!pwd){ showTst('أدخل كلمة مرور أولاً', 'warn'); return; }
         
-        isPwnedLoading = true; pwnedReqCount++; this.disabled = true; this.textContent = '⏳ جاري الفحص...';
+        isPwnedLoading = true; this.disabled = true; this.textContent = '⏳ جاري الفحص...';
         box.style.display='block'; box.style.background='var(--bg-elevated)'; box.style.color='var(--text-main)'; box.style.borderColor='var(--border)'; box.textContent = 'يتم الاستعلام بشكل آمن...';
         
         try {
@@ -1035,7 +1179,7 @@ const CFG = Object.freeze({
                 const lines = hibpCache.get(prefix).data.split('\n');
                 for(let l of lines) { const match = parseHibpLine(l, suffix); if(match !== null) { cnt = match; break; } }
             } else {
-                const res = await fetch('https://api.pwnedpasswords.com/range/'+prefix, { headers:{'Add-Padding':'true'} });
+                const res = await secureFetch('https://api.pwnedpasswords.com/range/'+prefix, { headers:{'Add-Padding':'true'} });
                 if(!res.ok) throw new Error();
                 const txt = await res.text();
                 hibpCache.set(prefix, { data: txt, ts: Date.now() });
@@ -1051,9 +1195,11 @@ const CFG = Object.freeze({
                 vibrate(HAPTIC.SAFE);
                 box.style.background='var(--success-dim)'; box.style.color='var(--success)'; box.style.borderColor='rgba(0,230,118,0.3)'; box.innerHTML='✅ آمنة! لم تظهر في أي تسريب معروف.'; 
             }
-        } catch(e) { box.style.background='rgba(255,170,0,0.1)'; box.style.color='var(--warning)'; box.style.borderColor='rgba(255,170,0,0.3)'; box.textContent = 'فشل الاتصال بالخادم. تحقق من الإنترنت.'; }
-        setTimeout(() => { isPwnedLoading = false; this.disabled = false; this.textContent = '🔍 فحص في قاعدة بيانات HIBP'; }, 2500); // Strict Rate Limit
-        setTimeout(() => { pwnedReqCount = Math.max(0, pwnedReqCount - 1); }, 15000); // Cool down
+        } catch(e) { 
+            box.style.background='rgba(255,170,0,0.1)'; box.style.color='var(--warning)'; box.style.borderColor='rgba(255,170,0,0.3)'; 
+            box.textContent = e.message === 'Invalid Format' ? 'خطأ في التحقق من قاعدة بيانات HIBP — حاول مرة أخرى' : 'فشل الاتصال بالخادم. تحقق من الإنترنت.';
+        }
+        setTimeout(() => { isPwnedLoading = false; this.disabled = false; this.textContent = '🔍 فحص في قاعدة بيانات HIBP'; }, 2500);
     });
 
     // ==========================================
@@ -1063,14 +1209,14 @@ const CFG = Object.freeze({
     const cbHist = document.getElementById('cb-hist');
 
     window.addEventListener('beforeunload', () => {
-        hist.forEach(item => { item.p = Array.from(crypto.getRandomValues(new Uint8Array(item.p.length))).map(b=>b.toString(16)).join('').slice(0, item.p.length); });
-        hist =[]; document.getElementById('out-pwd').value = '';
+        hist = []; document.getElementById('out-pwd').value = '';
     });
 
     function saveHist(pwd) {
         if(!cbHist.checked) return;
         if(hist.length > 0 && hist[0].p === pwd) return;
-        const color = getStrengthColor(analyzePwd(pwd, currentMode==='passphrase').e);
+        let color = getStrengthColor(analyzePwd(pwd, false).e);
+        if(!/^#[0-9a-f]{6}$/i.test(color)) color = '#888888';
         hist.unshift({ p:pwd, d:new Date().toLocaleString('ar-SA'), c:color });
         if(hist.length > CFG.MAX_HIST) hist.pop();
         renderHist();
@@ -1091,7 +1237,7 @@ const CFG = Object.freeze({
             const d = document.createElement('div'); d.className='history-item';
             d.innerHTML = `
                 <button class="btn-del-item" aria-label="حذف" data-idx="${idx}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
-                <div class="hist-pwd"><span class="hist-dot" style="background:${i.c};box-shadow:0 0 4px ${i.c}80"></span><span class="hist-val masked" data-idx="${idx}">••••••••</span><button class="btn-reveal" aria-label="إظهار"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+                <div class="hist-pwd"><span class="hist-dot" style="background:${esc(i.c)};box-shadow:0 0 4px ${esc(i.c)}80"></span><span class="hist-val masked" data-idx="${idx}">••••••••</span><button class="btn-reveal" aria-label="إظهار"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
                 <div class="hist-meta"><span class="hist-date">${esc(i.d)}</span><button class="btn-copy-sm">نسخ</button></div>`;
             const valSpan = d.querySelector('.hist-val');
             d.querySelector('.btn-reveal').addEventListener('click', () => { const isMasked = valSpan.classList.contains('masked'); valSpan.classList.toggle('masked'); valSpan.textContent = isMasked ? hist[parseInt(valSpan.dataset.idx)].p : '••••••••'; });
@@ -1113,7 +1259,11 @@ const CFG = Object.freeze({
 
     document.getElementById('btn-hist-exp').addEventListener('click', async ()=>{
         if(!hist.length) return showTst('السجل فارغ', 'warn');
-        const res = await showModal('تصدير السجل', 'اختر طريقة التصدير. <span style="color:var(--warning)">تصدير النص العادي مكشوف!</span><br><br><div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:6px; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>AES-256-GCM • PBKDF2-SHA256 • 600K iter</span></div>',[{text:'إلغاء', class:'cancel', action:'cancel'}, {text:'TXT مكشوف ⚠️', class:'confirm', action:'txt'}, {text:'JSON مشفر 🔒', class:'primary', action:'json'}], true);
+        
+        const expBody = document.createElement('div');
+        expBody.innerHTML = `اختر طريقة التصدير. <span style="color:var(--warning)">تصدير النص العادي مكشوف!</span><br><br><div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:6px; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>AES-256-GCM • PBKDF2-SHA256 • ${Math.floor(DYNAMIC_ITERS/1000)}K iter</span></div>`;
+        
+        const res = await showModal('تصدير السجل', expBody, [{text:'إلغاء', class:'cancel', action:'cancel'}, {text:'TXT مكشوف ⚠️', class:'confirm', action:'txt'}, {text:'JSON مشفر 🔒', class:'primary', action:'json'}], true);
         
         if(res.action === 'cancel') return;
         const ts = new Date().toISOString().slice(0,16).replace('T','_').replace(':','-');
@@ -1127,27 +1277,22 @@ const CFG = Object.freeze({
         else if(res.action === 'json') {
             if(!res.val || analyzePwd(res.val, false).e < CFG.MIN_EXPORT_ENTROPY) return showTst('فشل: كلمة المرور ضعيفة', 'err');
             
-            showTst('⏳ يتم التشفير...', 'info'); 
-            
-            // Generate Random Canary Nonce
+            showTst('⏳ يتم التشفير... (الرجاء الانتظار)', 'info'); 
             const canaryNonce = b2a(crypto.getRandomValues(new Uint8Array(16)));
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
             
             setTimeout(async () => {
                 try {
-                    let pwdBuf = new TextEncoder().encode(res.val);
-                    const salt = crypto.getRandomValues(new Uint8Array(16));
-                    const baseKey = await crypto.subtle.importKey("raw", pwdBuf, "PBKDF2", false, ["deriveKey"]);
-                    const key = await crypto.subtle.deriveKey({name: "PBKDF2", salt, iterations: CFG.PBKDF2_ITERS, hash: "SHA-256"}, baseKey, {name: "AES-GCM", length: 256}, false, ["encrypt"]);
-                    const iv = crypto.getRandomValues(new Uint8Array(12));
-                    const ct = await crypto.subtle.encrypt({name: "AES-GCM", iv}, key, new TextEncoder().encode(JSON.stringify({canary: canaryNonce, data: hist})));
-                    
-                    const payload = JSON.stringify({ v:1, _info: `مُـوَلِّـد Encrypted Export - AES-256-GCM, PBKDF2-SHA256 ${CFG.PBKDF2_ITERS} iter`, canary_nonce: canaryNonce, salt:b2a(salt), iv:b2a(iv), ct:b2a(ct) });
+                    const resWorker = await runCryptoWorker({ action: 'enc', pwd: res.val, salt, iv, data: hist, iters: DYNAMIC_ITERS, canary: canaryNonce });
+                    const payload = JSON.stringify({ v:1, _info: `مُـوَلِّـد Encrypted Export - AES-256-GCM, PBKDF2-SHA256 ${DYNAMIC_ITERS} iter`, canary_nonce: canaryNonce, salt:b2a(salt), iv:b2a(iv), ct:b2a(new Uint8Array(resWorker.ct)) });
                     dlFile(payload, `mowallid_vault_${ts}.json`, 'application/json'); 
-                    vibrate(HAPTIC.EXPORT); showTst('تم التصدير المشفر', 'succ');
-                    
-                    // Zero memory
-                    crypto.getRandomValues(pwdBuf); pwdBuf = null;
-                } catch(e) { showTst('فشل التشفير', 'err'); }
+                    vibrate(HAPTIC.EXPORT); showTst('تم التصدير المشفر بنجاح', 'succ');
+                } catch(e) { 
+                    showTst('فشل التشفير', 'err'); 
+                } finally {
+                    res.val = null;
+                }
             }, 100);
         }
     });
@@ -1155,6 +1300,7 @@ const CFG = Object.freeze({
     document.getElementById('btn-hist-imp').addEventListener('click', () => { document.getElementById('file-import').click(); });
     document.getElementById('file-import').addEventListener('change', async (e) => {
         const file = e.target.files[0]; if(!file) return;
+        if(file.size > 1024 * 1024) { e.target.value = ''; return showTst('الملف كبير جداً (الحد الأقصى 1MB)', 'err'); }
         e.target.value = ''; 
         const reader = new FileReader();
         reader.onload = async (event) => {
@@ -1168,36 +1314,53 @@ const CFG = Object.freeze({
                 showTst('⏳ جاري فك التشفير...', 'info');
                 setTimeout(async () => {
                     try {
-                        let pwdBuf = new TextEncoder().encode(res.val);
-                        const baseKey = await crypto.subtle.importKey("raw", pwdBuf, "PBKDF2", false, ["deriveKey"]);
-                        const key = await crypto.subtle.deriveKey({name: "PBKDF2", salt: a2b(data.salt), iterations: CFG.PBKDF2_ITERS, hash: "SHA-256"}, baseKey, {name: "AES-GCM", length: 256}, false, ["decrypt"]);
-                        const dec = await crypto.subtle.decrypt({name: "AES-GCM", iv: a2b(data.iv)}, key, a2b(data.ct));
+                        const itersMatch = data._info && data._info.match(/(\d+)\siter/);
+                        const targetIters = itersMatch ? parseInt(itersMatch[1]) : CFG.PBKDF2_ITERS;
                         
-                        const parsed = JSON.parse(new TextDecoder().decode(dec));
+                        const resWorker = await runCryptoWorker({ action: 'dec', pwd: res.val, salt: a2b(data.salt), iv: a2b(data.iv), ct: a2b(data.ct), iters: targetIters });
+                        const parsed = resWorker.parsed;
+                        
                         if(parsed.canary !== data.canary_nonce) throw new Error("Canary Mismatch");
-                        if(!Array.isArray(parsed.data) || !parsed.data.every(i => typeof i.p === 'string' && typeof i.d === 'string')) throw new Error("Schema");
+                        if(!Array.isArray(parsed.data) || !parsed.data.every(i => typeof i.p === 'string' && i.p.length <= 1000 && typeof i.d === 'string' && i.d.length <= 50 && /^#[0-9a-fA-F]{6}$/i.test(i.c))) throw new Error("Schema Error");
+                        
+                        const toAdd = parsed.data.filter(i => !hist.find(x => x.p === i.p)).reverse();
+                        if (toAdd.length === 0) { showTst('لا توجد كلمات مرور جديدة في الملف', 'info'); return; }
+                        
+                        const spaceLeft = CFG.MAX_HIST - hist.length;
+                        if (toAdd.length > spaceLeft && hist.length > 0) {
+                            const confirmRes = await showModal('تنبيه المساحة المتبقية', `السجل يحتوي حالياً على ${hist.length} كلمة مرور. سيتم إضافة ${spaceLeft} من أصل ${toAdd.length} كلمات في الملف (حتى الحد الأقصى 50).`, [{text:'إلغاء', class:'cancel', action:false}, {text:'متابعة', class:'primary', action:true}], false, false);
+                            if (!confirmRes.action) return;
+                        }
                         
                         let added = 0;
-                        parsed.data.reverse().forEach(i => { if(!hist.find(x => x.p === i.p)) { hist.unshift(i); added++; } });
-                        if(hist.length > CFG.MAX_HIST) hist = hist.slice(0, CFG.MAX_HIST);
+                        toAdd.forEach(i => { if(hist.length < CFG.MAX_HIST) { hist.unshift(i); added++; } });
                         
                         renderHist(); if(!cbHist.checked) { cbHist.checked = true; }
                         vibrate(HAPTIC.IMPORT); showTst(`تم استيراد ${added} كلمة مرور جديدة بنجاح`, 'succ');
-                        
-                        crypto.getRandomValues(pwdBuf); pwdBuf = null;
-                    } catch(e) { showTst('كلمة المرور خاطئة أو الملف تالف', 'err'); }
+                    } catch(e) { 
+                        showTst('كلمة المرور خاطئة أو الملف تالف', 'err'); 
+                    } finally {
+                        res.val = null;
+                    }
                 }, 100);
             } catch(err) { showTst('ملف غير صالح', 'err'); }
         };
         reader.readAsText(file);
     });
 
-    function dlFile(content, name, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([content],{type})); a.download = name; a.click(); URL.revokeObjectURL(a.href); }
+    function dlFile(content, name, type) { 
+        const a = document.createElement('a'); 
+        a.href = URL.createObjectURL(new Blob([content],{type})); 
+        a.download = name; 
+        a.click(); 
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000); 
+    }
 
     // ==========================================
     // SECURE CLIPBOARD & AUTO-MASK 
     // ==========================================
     let copyEndTime = 0; let copyCdInterval;
+    let lastCopiedPwd = '';
 
     function setCopyState(state, sec = 0) {
         const icon = document.getElementById('copy-icon'); const spin = document.getElementById('copy-spin'); const check = document.getElementById('copy-check'); const lock = document.getElementById('copy-lock'); const txt = document.getElementById('copy-txt'); const badge = document.getElementById('copy-cd'); const ring = document.getElementById('copy-ring-svg'); const ringCirc = document.getElementById('copy-ring');
@@ -1223,7 +1386,11 @@ const CFG = Object.freeze({
         try {
             setCopyState('copying');
             if(!navigator.clipboard || !navigator.clipboard.writeText) throw new Error();
+            
+            if (!document.hasFocus()) showTst('⚠️ يرجى إبقاء التبويب نشطاً لتطهير الحافظة لاحقاً', 'warn');
+            
             await navigator.clipboard.writeText(txt);
+            lastCopiedPwd = txt;
             vibrate(HAPTIC.COPY);
             
             const btnMain = document.getElementById('btn-copy');
@@ -1244,13 +1411,22 @@ const CFG = Object.freeze({
                         setCopyState('expired'); vibrate(HAPTIC.EXPIRE);
                         
                         // Active Memory Scrubbing on expiration
-                        if (document.hasFocus()) { navigator.clipboard.writeText(''); } 
-                        else { document.addEventListener('focus', ()=>navigator.clipboard.writeText(''), {once:true}); }
+                        if (document.hasFocus()) { 
+                            navigator.clipboard.writeText(''); 
+                        } else { 
+                            document.addEventListener('focus', ()=>navigator.clipboard.writeText(''), {once:true}); 
+                            showTst('⚠️ التبويب غير نشط - سيتم التطهير عند العودة', 'warn');
+                        }
                         
                         const inp = document.getElementById('out-pwd');
-                        inp.value = '';
-                        document.getElementById('btn-regen').click(); 
-                        showTst('تم تطهير الحافظة أمنياً وتوليد كلمة جديدة ✓', 'info');
+                        if (inp.value === lastCopiedPwd && lastCopiedPwd !== '') {
+                            inp.value = '';
+                            document.getElementById('btn-regen').click(); 
+                            showTst('تم تطهير الحافظة وتوليد كلمة جديدة ✓', 'info');
+                        } else {
+                            showTst('تم تطهير الحافظة أمنياً ✓', 'info');
+                        }
+                        lastCopiedPwd = '';
                         
                         setTimeout(() => setCopyState('default'), 1200);
                     }
@@ -1282,15 +1458,19 @@ const CFG = Object.freeze({
         idleTimer = setTimeout(() => {
             const inp = document.getElementById('out-pwd');
             if(inp.type === 'text') { document.getElementById('btn-vis').click(); showTst('🔒 تم إخفاء الكلمة تلقائياً للخصوصية', 'info'); }
+            const chkInp = document.getElementById('chk-input');
+            if(chkInp.type === 'text') { document.getElementById('btn-chk-vis').click(); }
         }, CFG.IDLE_HIDE_MS);
     }['mousemove','keydown','touchstart','pointerdown'].forEach(e => document.addEventListener(e, resetIdleTimer));
 
     document.addEventListener('visibilitychange', () => {
         if(document.visibilityState === 'hidden') {
+            clearTimeout(idleTimer);
             const inp = document.getElementById('out-pwd');
             if(inp.type === 'text') document.getElementById('btn-vis').click();
             document.querySelectorAll('.hist-val').forEach(el => { if(!el.classList.contains('masked')) { el.classList.add('masked'); el.textContent = '••••••••'; } });
         } else {
+            resetIdleTimer();
             const left = Math.ceil((copyEndTime - Date.now()) / 1000);
             if (left > 0) showTst(`⏱️ الحافظة تحتوي على كلمة مرور — ${left}ث متبقية`, 'warn');
         }
@@ -1300,12 +1480,12 @@ const CFG = Object.freeze({
     window.addEventListener('blur', () => {
         if (document.getElementById('out-pwd').type === 'text') {
             document.getElementById('pwd-blur-container').classList.add('blurred');
-            const sw = document.getElementById('screen-warn'); sw.innerHTML = '⚠️ النافذة في الخلفية'; sw.style.display = 'flex'; sw.style.background = 'var(--warning)'; sw.style.color = 'var(--text-dark)'; sw.style.borderColor = 'var(--warning)';
+            updateWarningBadge();
         }
     });
     window.addEventListener('focus', () => {
         document.getElementById('pwd-blur-container').classList.remove('blurred');
-        updateWarningBadge(false); // Let devTools monitor take over
+        updateWarningBadge();
     });
 
     document.addEventListener('keydown', e => {
@@ -1317,6 +1497,12 @@ const CFG = Object.freeze({
             if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName) && document.activeElement.id !== 'out-pwd') return;
             e.preventDefault(); document.getElementById('btn-copy').click(); 
         }
+    });
+
+    document.querySelectorAll('[data-tip]').forEach(el => {
+        el.addEventListener('touchstart', (e) => {
+            showTst(el.getAttribute('data-tip'), 'info');
+        }, {passive: true});
     });
 
     // INIT
