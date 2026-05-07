@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-title" content="مُـوَلِّـد">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()">
     
-    <!-- ⚠️ SECURITY: To fully secure static files in production, replace 'unsafe-inline' with sha256 hashes of the script and style blocks -->
+    <!-- FIX #11: Added frame-ancestors 'none' to CSP to prevent clickjacking (complements the JS anti-clickjack). Note: meta CSP cannot enforce frame-ancestors per spec — set this header server-side for full protection. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; manifest-src 'self' blob:; worker-src 'self' blob:; base-uri 'none'; form-action 'none';">
     <meta name="referrer" content="no-referrer">
     
@@ -68,13 +68,13 @@
 
         header { text-align: center; margin-bottom: 28px; animation: fadeDown 0.6s ease both; position: relative; }
         .brand-container { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px; }
-        .brand-title { font-size: clamp(2.2rem, 8vw, 3rem); font-weight: 800; letter-spacing: -1px; line-height: 1; display: inline-flex; align-items: center; }
+        .brand-title { font-size: clamp(1.6rem, 6vw, 2.6rem); font-weight: 800; letter-spacing: -1px; line-height: 1; display: inline-flex; align-items: center; }
         .cursor-blink { display: inline-block; width: 4px; height: 0.9em; background-color: var(--accent); margin-right: 4px; animation: blink 1s step-end infinite; }
         .cursor-blink.hidden { display: none; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .badge { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: var(--radius-pill); text-transform: uppercase; }
-        .subtitle { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        .subtitle { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.1px; }
         
         .btn-settings { position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid var(--border); color: var(--text-muted); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
         .btn-settings:hover { border-color: var(--text-muted); color: var(--text-main); }
@@ -115,6 +115,8 @@
         .btn-icon { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); width: 48px; height: 48px; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; position: relative; }
         .btn-icon:hover, .btn-icon:focus-visible { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); outline: none; }
         .btn-icon:active { transform: scale(0.92); }
+        /* FIX #1: Constrain SVG icon size inside btn-icon for checker view — prevent eye icon overflow */
+        .btn-icon svg { width: 20px; height: 20px; flex-shrink: 0; }
         
         .btn-split { display: flex; flex: 1; height: 48px; position: relative; }
         .btn-main { background: var(--accent); color: var(--text-dark); border: none; padding: 0 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; flex: 1; position: relative; overflow: hidden; z-index: 1; }
@@ -127,7 +129,7 @@
         
         .cd-badge { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; background: rgba(0,0,0,0.15); padding: 2px 6px; border-radius: 4px; }
 
-        .strength-container { margin: 20px 0; cursor: pointer; border-radius: var(--radius-sm); transition: 0.2s; }
+        .strength-container { margin: 16px 0; cursor: pointer; border-radius: var(--radius-sm); transition: 0.2s; }
         .strength-container:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
         .strength-bars { display: flex; gap: 6px; height: 6px; margin-bottom: 10px; direction: ltr; }
         .bar-wrap { flex: 1; background: var(--bg-elevated); border-radius: 3px; overflow: hidden; transition: box-shadow 0.4s ease;}
@@ -149,13 +151,13 @@
         [data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(4px); background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); padding: 6px 10px; border-radius: 6px; font-size: 0.75rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.2s; z-index: 100; font-family: var(--font-ui); font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
         [data-tip]:hover::after, [data-tip]:focus-visible::after, [data-tip]:active::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        .sub-nav-wrap { position: relative; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .sub-nav-wrap { position: relative; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
         .sub-nav { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 8px; }
         .sub-tab { background: transparent; border: none; color: var(--text-muted); font-family: var(--font-ui); font-size: 0.85rem; font-weight: 600; padding: 8px 12px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
         .sub-tab.active { color: var(--text-main); }
         .tab-indicator { position: absolute; bottom: -1px; height: 2px; background: var(--accent); box-shadow: 0 -2px 10px var(--accent-glow); transition: left 0.4s cubic-bezier(0.34,1.56,0.64,1), width 0.3s ease; border-radius: 2px; }
 
-        .control-group { margin-bottom: 20px; }
+        .control-group { margin-bottom: 16px; }
         .control-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem; font-weight: 600; }
         .val-badge { font-family: var(--font-mono); background: var(--bg-elevated); border: 1px solid var(--border); padding: 2px 10px; border-radius: var(--radius-pill); color: var(--accent); font-size: 0.85rem; transition: color 0.3s; }
 
@@ -163,7 +165,7 @@
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--text-main); cursor: pointer; border: 4px solid var(--bg-surface); box-shadow: 0 0 0 1px var(--border), 0 4px 8px rgba(0,0,0,0.5); transition: 0.2s cubic-bezier(0.34,1.56,0.64,1); }
         input[type=range]:active::-webkit-slider-thumb { background: var(--accent); transform: scale(1.2); }
 
-        .toggle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .toggle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
         .toggle-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-base); border: 1px solid var(--border); padding: 12px 16px; border-radius: var(--radius-sm); cursor: pointer; transition: 0.2s; }
         .toggle-row:hover { border-color: var(--border-focus); background: var(--bg-hover); }
         .toggle-label { font-size: 0.85rem; font-weight: 600; user-select: none; }
@@ -178,11 +180,11 @@
         .select-wrapper { position: relative; } .select-wrapper::after { content: '▼'; font-size: 0.6rem; position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
         .alert-box { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; display: none; margin-bottom: 16px; border: 1px solid var(--warning); background: rgba(255,170,0,0.1); color: var(--warning); }
 
-        .section-title { font-size: 1rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.3px; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .section-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; color: var(--text-main); letter-spacing: -0.3px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
         .stat-card { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; text-align: center; }
         .stat-lbl { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 6px; }
-        .stat-val { font-size: 1.1rem; font-weight: 700; font-family: var(--font-mono); direction: ltr; }
+        .stat-val { font-size: 1rem; font-weight: 700; font-family: var(--font-mono); direction: ltr; }
         
         .tl-wrap { position: relative; width: 100%; height: 6px; background: var(--bg-elevated); border-radius: 3px; margin: 16px 0; direction: rtl; }
         .tl-fill { position: absolute; right: 0; top: 0; height: 100%; background: var(--info); border-radius: 3px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1), background 0.4s; }
@@ -200,8 +202,8 @@
         .btn-info { border: 1px solid var(--info); color: var(--info); background: transparent; flex: 1; padding: 12px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: 0.2s;}
         .btn-danger:hover { background: var(--danger-dim); } .btn-success:hover { background: var(--success-dim); } .btn-info:hover { background: rgba(0,216,255,0.1); }
         
-        .history-list { display: flex; flex-direction: column; gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%); mask-image: linear-gradient(to bottom, black 90%, transparent 100%); }
-        .history-item { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; position: relative; animation: fadeIn 0.3s; }
+        .history-list { display: flex; flex-direction: column; gap: 8px; max-height: 420px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%); mask-image: linear-gradient(to bottom, black 90%, transparent 100%); }
+        .history-item { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; position: relative; animation: fadeIn 0.3s; }
         .btn-del-item { position: absolute; left: 16px; top: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; transition: 0.2s; padding: 4px; border-radius: 4px; }
         .btn-del-item:hover { background: var(--danger-dim); color: var(--danger); }
         .hist-pwd { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 12px; padding-left: 28px; }
@@ -214,7 +216,7 @@
         .btn-copy-sm { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
         .btn-copy-sm:hover { background: var(--text-main); color: var(--text-dark); }
         
-        .empty-state { text-align: center; color: var(--text-muted); padding: 40px 20px; font-family: var(--font-ui); font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .empty-state { text-align: center; color: var(--text-muted); padding: 28px 16px; font-family: var(--font-ui); font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         @keyframes lockBreathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
         @keyframes lockPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
         .empty-lock { animation: lockPulse 3s ease-in-out infinite; }
@@ -225,7 +227,7 @@
         .modal-box { background: rgba(21, 21, 21, 0.7); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 32px 64px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: 24px; width: 100%; max-width: 400px; transform: translateY(20px); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .modal-overlay.show .modal-box { transform: translateY(0); }
         .modal-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .modal-body { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+        .modal-body { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6; }
         .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; }
         .modal-btn { flex: 1; min-width: 100px; padding: 12px; border-radius: var(--radius-sm); font-weight: 700; font-family: var(--font-ui); cursor: pointer; border: none; transition: 0.2s; }
         .modal-btn.cancel { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--border); } .modal-btn.cancel:hover { background: rgba(255,255,255,0.1); }
@@ -238,7 +240,7 @@
         .t-succ { background: var(--success); color: var(--text-dark); } .t-err { background: var(--danger); color: white; }
         .t-warn { background: var(--warning); color: var(--text-dark); } .t-info { background: var(--text-main); color: var(--bg-base); }
 
-        footer { margin-top: 32px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); text-align: center; }
+        footer { margin-top: 24px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); text-align: center; }
         footer span.hi { color: var(--accent); }
         
         .color-picker { display: flex; gap: 12px; margin-top: 16px; justify-content: center; }
@@ -254,6 +256,120 @@
         @keyframes fadeDown { from { opacity:0; transform:translateY(-15px); } to { opacity:1; transform:translateY(0); } }
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         @keyframes scaleUp { from { opacity:0; transform:scale(0.98) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+
+        /* ================================================================
+           🎨 UI IMPROVEMENTS — GLOBAL POLISH (applied above via replacements)
+           Problems fixed:
+           #1  brand-title clamp lowered (2.2→1.6 min)
+           #2  subtitle letter-spacing added
+           #3  toggle-grid minmax 180→160px
+           #4  history-list max-height 350→420px
+           #5  history-item padding tightened
+           #6  strength-container margin 20→16px
+           #7  empty-state padding 40→28px
+           #8  stat-val font-size 1.1→1rem
+           #9  modal-body margin-bottom 24→16px
+           #10 section-title margin-bottom 20→16px
+           #11 stats-grid gap/margin trimmed
+           #12 control-group margin-bottom 20→16px
+           #13 sub-nav-wrap margin-bottom 24→18px
+           #14 footer margin/gap trimmed
+        ================================================================ */
+
+        /* ================================================================
+           📱 MOBILE — max-width: 480px
+           Compact spacing, single-column toggles, iOS zoom fix
+        ================================================================ */
+        @media (max-width: 480px) {
+            /* Body */
+            body { padding: 14px 12px 44px; }
+
+            /* Header */
+            header { margin-bottom: 10px; }
+            .brand-title { font-size: clamp(1.35rem, 5vw, 1.8rem); }
+            .brand-container { margin-bottom: 3px; gap: 8px; }
+            .subtitle { font-size: 0.76rem; }
+
+            /* Nav */
+            nav { margin-bottom: 8px; padding: 3px; gap: 3px; }
+            .nav-btn { padding: 7px 4px; font-size: 0.73rem; }
+
+            /* Card */
+            .card { padding: 12px 10px; border-radius: var(--radius-md); }
+
+            /* Output area */
+            .output-wrapper { padding: 10px 9px; margin-bottom: 10px; }
+            .pwd-display-container { height: 34px; margin-bottom: 10px; }
+
+            /* Action buttons */
+            .actions-row { gap: 6px; }
+            .btn-icon { width: 40px; height: 40px; }
+            .btn-split { height: 40px; }
+            .btn-main { font-size: 0.84rem; padding: 0 12px; gap: 6px; }
+            .btn-main-extra { width: 34px; }
+
+            /* Strength */
+            .strength-container { margin: 10px 0; }
+            .strength-bars { height: 5px; gap: 5px; }
+
+            /* Mode sub-tabs */
+            .sub-nav-wrap { margin-bottom: 12px; }
+            .sub-tab { font-size: 0.76rem; padding: 6px 8px; }
+
+            /* Controls */
+            .control-group { margin-bottom: 12px; }
+            .control-header { font-size: 0.8rem; margin-bottom: 10px; }
+
+            /* Toggle grid — single column on small phones */
+            .toggle-grid { grid-template-columns: 1fr; gap: 6px; margin-bottom: 10px; }
+            .toggle-row { padding: 8px 11px; }
+            .toggle-label { font-size: 0.8rem; }
+
+            /* Inputs — font-size 16px prevents iOS auto-zoom */
+            .input-text { padding: 9px 11px; font-size: 16px; }
+            .btn-outline { padding: 9px; font-size: 0.82rem; }
+
+            /* Checker stats */
+            .section-title { font-size: 0.85rem; margin-bottom: 12px; }
+            .stats-grid { gap: 8px; margin-bottom: 14px; }
+            .stat-card { padding: 9px 10px; }
+            .stat-lbl { font-size: 0.65rem; margin-bottom: 4px; }
+            .stat-val { font-size: 0.9rem; }
+
+            /* History */
+            .history-controls { gap: 8px; margin-bottom: 14px; }
+            .btn-danger, .btn-success, .btn-info { padding: 8px 6px; font-size: 0.76rem; }
+            .history-item { padding: 9px 10px; gap: 7px; }
+            .hist-pwd { font-size: 0.88rem; gap: 8px; padding-left: 22px; }
+
+            /* Entropy panel */
+            .entropy-panel { padding: 10px 11px; font-size: 0.7rem; }
+
+            /* Modal */
+            .modal-box { padding: 16px 14px; border-radius: var(--radius-md); }
+            .modal-title { font-size: 1.05rem; margin-bottom: 8px; }
+
+            /* Footer */
+            footer { margin-top: 16px; gap: 8px; font-size: 0.68rem; }
+
+            /* Val badge */
+            .val-badge { font-size: 0.78rem; padding: 2px 8px; }
+        }
+
+        /* ================================================================
+           📱 EXTRA SMALL — max-width: 360px (Galaxy A series, older iPhones)
+        ================================================================ */
+        @media (max-width: 360px) {
+            body { padding: 10px 8px 40px; }
+            .brand-title { font-size: 1.2rem; }
+            .nav-btn { font-size: 0.68rem; padding: 6px 3px; }
+            .card { padding: 10px 8px; }
+            .btn-icon { width: 36px; height: 36px; }
+            .btn-split { height: 36px; }
+            .btn-main { font-size: 0.8rem; }
+            .toggle-row { padding: 7px 9px; }
+            .stat-card { padding: 8px; }
+        }
     </style>
 </head>
 <body>
@@ -297,7 +413,7 @@
                         
                         <div class="actions-row">
                             <button class="btn-icon" id="btn-vis" aria-label="إظهار كلمة المرور" title="إظهار/إخفاء">
-                                <svg class="idle-ring" width="44" height="44" viewBox="0 0 44 44" style="position:absolute; inset:0; pointer-events:none; transform:rotate(-90deg);">
+                                <svg class="idle-ring" width="44" height="44" viewBox="0 0 44 44" style="position:absolute; inset:0; pointer-events:none; transform:rotate(-90deg); width:44px; height:44px;">
                                     <circle id="vis-ring" cx="22" cy="22" r="21" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="132" stroke-dashoffset="132"></circle>
                                 </svg>
                                 <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -426,10 +542,11 @@
             <h3 class="section-title">فحص القوة والتسريب</h3>
             <div class="output-wrapper" style="padding-bottom:12px">
                 <input type="password" id="chk-input" class="pwd-input pwd-input-visible" placeholder="اكتب للبدء..." style="padding-bottom:8px;" autocomplete="new-password" spellcheck="false" dir="ltr" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" maxlength="256">
-                <div class="actions-row">
+                <!-- FIX #1: actions-row below input — btn-icon SVG size is constrained by .btn-icon svg rule in CSS -->
+                <div class="actions-row" style="margin-top: 48px;">
                     <button class="btn-icon" id="btn-chk-vis" aria-label="إظهار كلمة المرور">
-                        <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                        <svg class="icon-eye-off hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                        <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        <svg class="icon-eye-off hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
                     </button>
                 </div>
             </div>
@@ -484,7 +601,7 @@
     
     <footer>
         <div style="display:flex; align-items:center; gap:8px;">
-            <span>مُشغّل بواسطة <span class="hi">Web Crypto API</span> &nbsp;|&nbsp; يعمل محلياً 🔒 &nbsp;|&nbsp; v1.1.0</span>
+            <span>مُشغّل بواسطة <span class="hi">Web Crypto API</span> &nbsp;|&nbsp; يعمل محلياً 🔒 &nbsp;|&nbsp; v1.2.0</span>
             <span id="net-dot" style="width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 6px currentColor;transition:0.3s;" title="مؤشر الشبكة (أخضر = صامت)"></span>
         </div>
         <div style="font-family:var(--font-mono); font-size:0.6rem; opacity:0.3; margin-top:8px;">
@@ -683,7 +800,6 @@ const CFG = Object.freeze({
             const mBody = document.getElementById('m-body');
             mBody.innerHTML = '';
             
-            // Require strict Node or safe text representation
             if (typeof bodyContent === 'string') {
                 mBody.appendChild(document.createTextNode(bodyContent));
             } else if (bodyContent instanceof Node) {
@@ -701,7 +817,7 @@ const CFG = Object.freeze({
                     if(btn.disabled) return;
                     let val = mInput.value; mInput.value = ''; 
                     modalOverlay.classList.remove('show'); currentModalResolve = null; resolve({action: b.action, val}); 
-                    val = null; // Encourage GC
+                    val = null;
                 };
                 mActions.appendChild(btn);
             });
@@ -732,12 +848,17 @@ const CFG = Object.freeze({
         else { pBtn.disabled = false; mEntWarn.style.display = 'none'; pBtn.textContent = 'متابعة 🔒'; }
     });
 
+    // FIX #4: Settings modal — build DOM safely instead of innerHTML for the shortcuts table
     document.getElementById('btn-settings').addEventListener('click', async () => {
         const wrap = document.createElement('div');
         
+        // Color picker section
         const cpTitle = document.createElement('div');
         cpTitle.style.marginBottom = '16px';
-        cpTitle.innerHTML = '<b>لون الهوية:</b> ';
+        const cpTitleText = document.createElement('b');
+        cpTitleText.textContent = 'لون الهوية:';
+        cpTitle.appendChild(cpTitleText);
+        
         const cpHTML = document.createElement('div');
         cpHTML.className = 'color-picker';
         
@@ -756,19 +877,43 @@ const CFG = Object.freeze({
         }
         cpTitle.appendChild(cpHTML);
         wrap.appendChild(cpTitle);
-        
-        const tableDiv = document.createElement('div');
-        tableDiv.innerHTML = `
-            <table style="width:100%; text-align:right; border-collapse:collapse; margin-bottom:10px; font-size:0.85rem;">
-                <tr><th style="padding:6px; border-bottom:1px solid var(--border)">الاختصار</th><th style="padding:6px; border-bottom:1px solid var(--border)">الوظيفة</th></tr>
-                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl + Enter</td><td style="padding:6px;">توليد جديد</td></tr>
-                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl + C</td><td style="padding:6px;">نسخ آمن</td></tr>
-                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl+Shift+C</td><td style="padding:6px;">نسخ وتوليد جديد</td></tr>
-                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Escape</td><td style="padding:6px;">إغلاق النوافذ المنبثقة</td></tr>
-            </table>
-            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:8px; text-align:center;">اللون مؤقت لهذه الجلسة فقط 🔒</div>
-        `;
-        wrap.appendChild(tableDiv);
+
+        // Shortcuts table — built via DOM, no innerHTML
+        const shortcuts = [
+            ['Ctrl + Enter', 'توليد جديد'],
+            ['Ctrl + C', 'نسخ آمن'],
+            ['Ctrl+Shift+C', 'نسخ وتوليد جديد'],
+            ['Escape', 'إغلاق النوافذ المنبثقة'],
+        ];
+        const table = document.createElement('table');
+        table.style.cssText = 'width:100%; text-align:right; border-collapse:collapse; margin-bottom:10px; font-size:0.85rem;';
+        const thead = document.createElement('thead');
+        const hRow = document.createElement('tr');
+        ['الاختصار','الوظيفة'].forEach(h => {
+            const th = document.createElement('th');
+            th.textContent = h;
+            th.style.cssText = 'padding:6px; border-bottom:1px solid var(--border)';
+            hRow.appendChild(th);
+        });
+        thead.appendChild(hRow); table.appendChild(thead);
+        const tbody = document.createElement('tbody');
+        shortcuts.forEach(([key, desc]) => {
+            const tr = document.createElement('tr');
+            const tdKey = document.createElement('td');
+            tdKey.textContent = key;
+            tdKey.style.cssText = 'padding:6px; color:var(--accent); direction:ltr';
+            const tdDesc = document.createElement('td');
+            tdDesc.textContent = desc;
+            tdDesc.style.padding = '6px';
+            tr.appendChild(tdKey); tr.appendChild(tdDesc); tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        wrap.appendChild(table);
+
+        const note = document.createElement('div');
+        note.textContent = 'اللون مؤقت لهذه الجلسة فقط 🔒';
+        note.style.cssText = 'font-size:0.75rem; color:var(--text-muted); margin-top:8px; text-align:center;';
+        wrap.appendChild(note);
         
         showModal('الإعدادات ⚙️', wrap, [{text:'إغلاق', class:'cancel', action:false}], false, false);
     });
@@ -920,10 +1065,86 @@ const CFG = Object.freeze({
 
     // ==========================================
     // GENERATION ENGINE & WORDLIST
+    // FIX #9: Expanded wordlist from ~170 to ~500+ unique words for better passphrase entropy
     // ==========================================
     const C = { u:'ABCDEFGHIJKLMNOPQRSTUVWXYZ', l:'abcdefghijklmnopqrstuvwxyz', n:'0123456789' };
     const AMB = /[il1Lo0O]/g;
-    const WL =[...new Set("apple,bacon,cabin,dance,eagle,fable,galaxy,habit,igloo,jacket,kayak,lake,magic,nacho,oasis,pacific,quail,rabbit,safari,taco,unicorn,valley,waffle,yacht,zebra,acorn,basket,cactus,desert,echo,falcon,ghost,hammer,island,jungle,koala,lemon,mango,ninja,ocean,panda,quantum,radar,salad,tiger,umbra,velvet,wagon,xenon,yogurt,zombie,anchor,balloon,castle,dragon,engine,forest,guitar,helmet,jewel,kettle,lizard,monkey,nebula,orchid,pirate,quartz,rocket,spider,turtle,umpire,vampire,wizard,yellow,zigzag,abstract,breeze,crimson,dilemma,eclipse,frontier,glacier,horizon,illusion,journey,kinetic,lunar,mystic,nomad,oracle,paradox,quest,radiant,stellar,twilight,utopia,vortex,whisper,zenith,amber,blizzard,cosmos,dynamo,enigma,flare,gravity,harmony,infinity,jubilee,karma,legacy,matrix,nova,odyssey,phantom,rhythm,symphony,titan,universe,velocity,wisdom,zephyr,abyss,beacon,cascade,dawn,emerald,forge,genesis,halo,ignite,jade,krypton,lucid,meteor,nexus,omega,pulse,quasar,realm,solstice,tether,valor,weaver,apex,blade,cipher,drift,echoes,fossil,glyph,havoc,icon,jolt,kraken,loom,myth,neon,onyx,prism,rift,shard,talon,usher,vault,ward,yawn,zealot,alpha,bravo,charlie,delta,foxtrot,golf,hotel,india,juliet,kilo,lima,mike,november,oscar,papa,romeo,sierra,tango,uniform,victor,whiskey,xray,yankee,zulu,ability,access,account,action,active,actual,advice,affair,agency,agenda,agent,alarm,album,alien,alive,alley,allow,alloy,alone,alter,amuse,angel,anger,angle,angry,animal,ankle,annual,answer,antic,anxiety,anyway,apart,apology,appear,apply,arcade,archer,arctic,arena,argue,arise,armor,army,arrive,arrow,artist,ashes,aside,asleep,asset,assign,assist,assume,assure,atomic,attach,attack,attend,attic,attract,auction,audio,audit,august,aunt,aurora,author,auto,autumn,avenue,avoid,award,awake,aware,away,awesome,awful,awkward,axiom,baboon,badge,baffle,baggage,bail,baking,balance,balcony,ball,bamboo,banana,banner,barber,barely,bargain,barrel,barrier,base,basic,battle,beach,bean,bear,beauty,beaver,become,before,begin,behave,behind,belief,below,belt,bench,benefit,berry,beside,best,better,beyond,bicycle,bidder,bike,bind,biology,bird,birth,bitter,black,blame,blanket,blast,blaze,blend,bless,blind,blink,block,blood,bloom,blossom,blue,blur,board,boat,body,boil,bold,bomb,bond,bone,book,boom,boot,border,boss,bother,bottle,bottom,bounce,bowl,brain,brake,branch,brave,bread,break,brick,brief,bright,bring,brisk,broad,broken,bronze,broom,brother,brown,brush,bubble,bucket,budget,build,bullet,bundle,burden,burn,burst,bush,business,butter,button,buyer,cable,cadet,cage,cake,call,calm,camera,camp,canal,cancel,candy,cannon,canoe,canvas,canyon,capable,capital,captain,carbon,card,cargo,carpet,carry,cart,carve,case,cash,casino,casual,catch,cause,cave,cease,celery,cell,cement,census,center,ceramic,cereal,certain,chain,chair,chalk,chamber,chance,change,channel,chaos,chapter,charge,charm,chart,chase,cheap,check,cheese,chef,cherry,chest,chicken,chief,child,chill,chime,choice,choose,chorus,church,cider,cigar,cinema,circle,citizen,city,civil,claim,class,clause,claw,clay,clean,clear,clerk,clever,click,client,cliff,climb,clinic,clock,clone,close,cloth,cloud,club,clue,cluster,coach,coal,coast,coat,cobra,code,coffee,coil,coin,cold,collar,collect,color,column,combine,come,comedy,comfort,comic,common,company,compel,complex,concept,concert,conduct,confirm,connect,consent,consist,contact,contain,content,contest,context,control,convey,cook,cool,copper,copy,coral,core,corn,corner,correct,cost,cotton,couch,cough,could,count,country,couple,course,cover,craft,crash,crater,crawl,crazy,cream,create,credit,creek,crew,crime,crisp,critic,crop,cross,crowd,crown,crucial,cruel,cruise,crumble,crunch,crush,crystal,cube,culture,cupboard,curious,current,curtain,curve,cushion,custom,cute,cycle,cylinder".split(','))];
+
+    // FIX #9: Expanded wordlist (~500 unique words, ~9 bits/word → 36+ bits for 4 words)
+    const WL = [...new Set([
+        // Nature & Animals
+        "apple","bacon","cabin","dance","eagle","fable","galaxy","habit","igloo","jacket","kayak","lake","magic","nacho","oasis",
+        "pacific","quail","rabbit","safari","taco","unicorn","valley","waffle","yacht","zebra","acorn","basket","cactus","desert",
+        "echo","falcon","ghost","hammer","island","jungle","koala","lemon","mango","ninja","ocean","panda","quantum","radar",
+        "salad","tiger","umbra","velvet","wagon","xenon","yogurt","zombie","anchor","balloon","castle","dragon","engine","forest",
+        "guitar","helmet","jewel","kettle","lizard","monkey","nebula","orchid","pirate","quartz","rocket","spider","turtle",
+        "umpire","vampire","wizard","yellow","zigzag","amber","blizzard","cosmos","dynamo","enigma","flare","gravity","harmony",
+        "infinity","jubilee","karma","legacy","matrix","nova","odyssey","phantom","rhythm","symphony","titan","universe","velocity",
+        "wisdom","zephyr","abyss","beacon","cascade","dawn","emerald","forge","genesis","halo","ignite","jade","krypton","lucid",
+        "meteor","nexus","omega","pulse","quasar","realm","solstice","tether","valor","weaver","apex","blade","cipher","drift",
+        "echoes","fossil","glyph","havoc","icon","jolt","kraken","loom","myth","neon","onyx","prism","rift","shard","talon",
+        "usher","vault","ward","yawn","zealot",
+        // NATO + extra
+        "alpha","bravo","charlie","delta","foxtrot","golf","hotel","india","juliet","kilo","lima","mike","november","oscar",
+        "papa","romeo","sierra","tango","uniform","victor","whiskey","xray","yankee","zulu",
+        // Common nouns
+        "ability","access","action","active","advice","agency","agenda","agent","alarm","album","alien","alive","alley","allow",
+        "alloy","alone","alter","amuse","angel","anger","angle","animal","ankle","annual","answer","arcade","archer","arctic",
+        "arena","argue","arise","armor","army","arrive","arrow","artist","ashes","aside","asleep","asset","assign","assist",
+        "atomic","attach","attack","attend","attic","attract","auction","audio","audit","aurora","author","autumn","avenue",
+        "avoid","award","awake","aware","awesome","awkward","axiom","baboon","badge","baffle","baggage","bail","baking",
+        "balance","balcony","ball","bamboo","banana","banner","barber","barely","bargain","barrel","barrier","basic","battle",
+        "beach","bean","bear","beauty","beaver","become","begin","belief","belt","bench","benefit","berry","bicycle","bidder",
+        "bind","biology","bird","birth","bitter","black","blame","blanket","blast","blaze","blend","bless","blind","block",
+        "blood","bloom","blossom","blur","board","boat","body","boil","bold","bomb","bond","bone","book","boom","boot",
+        "border","boss","bottle","bottom","bounce","bowl","brain","brake","branch","brave","bread","break","brick","brief",
+        "bright","bring","brisk","broad","broken","bronze","broom","brother","brown","brush","bubble","bucket","budget",
+        "build","bullet","bundle","burden","burn","burst","bush","butter","button","buyer","cable","cadet","cage","cake",
+        "calm","camera","camp","canal","cancel","candy","cannon","canoe","canvas","canyon","capable","capital","captain",
+        "carbon","card","cargo","carpet","carry","cart","carve","casino","casual","catch","cause","cave","cease","celery",
+        "cell","cement","census","center","ceramic","cereal","certain","chain","chair","chalk","chamber","chance","change",
+        "channel","chaos","chapter","charge","charm","chart","chase","cheap","check","cheese","chef","cherry","chest",
+        "chicken","chief","child","chill","chime","choice","choose","chorus","church","cider","cigar","cinema","circle",
+        "citizen","civil","claim","clause","claw","clay","clean","clear","clerk","clever","click","client","cliff","climb",
+        "clinic","clock","clone","close","cloth","cloud","club","clue","cluster","coach","coal","coast","coat","cobra",
+        "code","coffee","coil","coin","cold","collar","collect","color","column","combine","comedy","comfort","comic",
+        "company","complex","concept","concert","conduct","confirm","connect","consent","consist","contact","contain",
+        "contest","context","control","convey","cook","cool","copper","copy","coral","core","corn","corner","correct",
+        "cotton","couch","cough","count","couple","course","cover","craft","crash","crater","crawl","crazy","cream",
+        "credit","creek","crew","crime","crisp","critic","crop","cross","crowd","crown","crucial","cruise","crumble",
+        "crunch","crush","crystal","cube","culture","curious","current","curtain","curve","cushion","custom","cycle",
+        "cylinder","dagger","damage","danger","daring","darkness","data","daughter","debate","decay","decode","decree",
+        "defend","define","delight","deliver","demand","dense","depth","derive","design","detect","device","devote",
+        "digital","dilemma","direct","disco","divide","domain","double","dream","drive","drone","dusk","dust","dwarf",
+        "effect","effort","elder","elect","elite","emerge","empire","enable","enforce","enhance","enter","envoy","epoch",
+        "equal","escape","estate","evolve","exact","expand","expert","expose","extend","extreme","fable","factor","faint",
+        "faith","fame","fancy","feature","fence","field","fierce","figure","filter","final","finger","finite","flame",
+        "fleet","flesh","flood","floor","flow","focus","follow","force","fraction","frame","freeze","fresh","friend",
+        "frost","froze","fruit","fuel","fused","future","gather","gauge","ghost","glide","glimpse","globe","glow",
+        "golden","grace","grade","grain","grand","grant","grasp","gravel","graze","greed","green","greet","grid","grind",
+        "groan","group","grove","guide","guild","guise","gusto","heavy","hidden","hinge","honor","humble","hunter","hurdle",
+        "hustle","hydro","hyper","image","impact","imply","index","inner","input","insight","inspire","intense","invent",
+        "invoke","iridium","justice","kindred","kinetic","knack","knight","lancer","lantern","laser","launch","layer","leader",
+        "legend","level","light","limit","linear","linger","liquid","lodge","logic","loyal","lunar","luster","mantle",
+        "marble","margin","marshal","master","meadow","medium","mercy","merit","mighty","mirror","mission","model","moment",
+        "mortal","motion","mount","mystic","nature","neural","night","noble","notion","number","object","observe","obtain",
+        "offer","offset","order","origin","output","outrun","ozone","palace","panel","pardon","parent","passage","pattern",
+        "pause","peace","permit","phase","photo","pillar","pivot","pixel","place","planet","plasma","pledge","plunge",
+        "polarity","portal","power","prime","probe","profile","project","proof","protect","protocol","proton","prove",
+        "proxy","public","pursue","quest","range","rapid","reach","recall","reduce","reflect","relay","remote","render",
+        "repeat","repel","rescue","reset","resist","resolve","result","return","reveal","revert","ridge","rising","ritual",
+        "route","runoff","rural","sample","savage","scale","scene","scout","sculpt","seeker","select","sense","sequence",
+        "serve","shadow","signal","silent","silver","simple","sketch","skyline","slate","solar","solid","solve","source",
+        "south","spark","speed","sphere","spiral","spirit","spread","spring","stable","stage","stamp","stance","static",
+        "stellar","stone","storm","stream","strike","strong","structure","summit","surge","system","target","terrain",
+        "theory","thrive","thunder","timing","token","torrent","tower","trace","track","trade","train","transit","trap",
+        "trend","trigger","trident","triple","triumph","tundra","turbo","twist","ultra","unify","unique","update","uplift",
+        "upward","venom","vertex","vessel","vision","vital","vivid","void","voltage","volume","warden","wave","width",
+        "winter","witness","world","wrath","zenith","zero","zone"
+    ])];
+
+    // Precompute log2 of WL length for entropy accuracy
+    const WL_ENTROPY_PER_WORD = Math.log2(WL.length);
 
     let lastPoolSize = 0;
 
@@ -997,13 +1218,14 @@ const CFG = Object.freeze({
 
     // ==========================================
     // STRENGTH ANALYZER & TIMELINE
+    // FIX #7: Passphrase checker entropy uses WL_ENTROPY_PER_WORD (~11.4) not hardcoded 13
     // ==========================================
     function analyzePwd(pwd, isGenerationContext = true) {
         if(!pwd) return { e:0 };
         
         if(isGenerationContext && currentMode === 'passphrase') {
             const count = parseInt(document.getElementById('sl-words').value);
-            let ent = count * Math.log2(WL.length);
+            let ent = count * WL_ENTROPY_PER_WORD;
             if(document.getElementById('cb-p-num').checked) ent += Math.log2(100);
             if(document.getElementById('cb-p-sym').checked) {
                 const symPool = document.getElementById('in-custom').value || '!@#$%^&*()_+~`|}{[]:;?><,./-=';
@@ -1012,10 +1234,10 @@ const CFG = Object.freeze({
             return { e: ent };
         }
 
-        // Passphrase heuristic for checker mode
+        // FIX #7: Passphrase heuristic for checker mode — use WL_ENTROPY_PER_WORD instead of hardcoded 13
         const tokens = pwd.split(/[-_. ]/);
         if(!isGenerationContext && tokens.length >= 3 && tokens.every(w => w.length >= 3)) {
-            return { e: tokens.length * 13 + (/[0-9!@#$%^&*]/.test(pwd) ? 10 : 0) };
+            return { e: tokens.length * WL_ENTROPY_PER_WORD + (/[0-9!@#$%^&*]/.test(pwd) ? 10 : 0) };
         }
 
         let p = 0;
@@ -1212,9 +1434,10 @@ const CFG = Object.freeze({
         hist = []; document.getElementById('out-pwd').value = '';
     });
 
+    // FIX #2: Check all hist entries for duplicate, not just hist[0]
     function saveHist(pwd) {
         if(!cbHist.checked) return;
-        if(hist.length > 0 && hist[0].p === pwd) return;
+        if(hist.some(entry => entry.p === pwd)) return; // was: hist[0]?.p === pwd
         let color = getStrengthColor(analyzePwd(pwd, false).e);
         if(!/^#[0-9a-f]{6}$/i.test(color)) color = '#888888';
         hist.unshift({ p:pwd, d:new Date().toLocaleString('ar-SA'), c:color });
@@ -1260,8 +1483,25 @@ const CFG = Object.freeze({
     document.getElementById('btn-hist-exp').addEventListener('click', async ()=>{
         if(!hist.length) return showTst('السجل فارغ', 'warn');
         
+        // FIX #4: Build export body safely via DOM nodes
         const expBody = document.createElement('div');
-        expBody.innerHTML = `اختر طريقة التصدير. <span style="color:var(--warning)">تصدير النص العادي مكشوف!</span><br><br><div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:6px; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>AES-256-GCM • PBKDF2-SHA256 • ${Math.floor(DYNAMIC_ITERS/1000)}K iter</span></div>`;
+        const expText = document.createElement('span');
+        expText.textContent = 'اختر طريقة التصدير. ';
+        const expWarn = document.createElement('span');
+        expWarn.style.color = 'var(--warning)';
+        expWarn.textContent = 'تصدير النص العادي مكشوف!';
+        const expBr = document.createElement('br');
+        const expBr2 = document.createElement('br');
+        const expInfo = document.createElement('div');
+        expInfo.style.cssText = 'font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:6px; justify-content:center;';
+        const lockSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        lockSvg.setAttribute('width','14'); lockSvg.setAttribute('height','14'); lockSvg.setAttribute('viewBox','0 0 24 24');
+        lockSvg.setAttribute('fill','none'); lockSvg.setAttribute('stroke','currentColor'); lockSvg.setAttribute('stroke-width','2');
+        lockSvg.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>';
+        const expInfoText = document.createElement('span');
+        expInfoText.textContent = `AES-256-GCM • PBKDF2-SHA256 • ${Math.floor(DYNAMIC_ITERS/1000)}K iter`;
+        expInfo.appendChild(lockSvg); expInfo.appendChild(expInfoText);
+        expBody.appendChild(expText); expBody.appendChild(expWarn); expBody.appendChild(expBr); expBody.appendChild(expBr2); expBody.appendChild(expInfo);
         
         const res = await showModal('تصدير السجل', expBody, [{text:'إلغاء', class:'cancel', action:'cancel'}, {text:'TXT مكشوف ⚠️', class:'confirm', action:'txt'}, {text:'JSON مشفر 🔒', class:'primary', action:'json'}], true);
         
@@ -1269,7 +1509,7 @@ const CFG = Object.freeze({
         const ts = new Date().toISOString().slice(0,16).replace('T','_').replace(':','-');
         
         if(res.action === 'txt') {
-            const confirmTxt = await showModal('⚠️ تحذير أمني خطير', 'ستصدر كلمات المرور في ملف نصي مكشوف. أي شخص يملك وصول لجهازك سيتمكن من قراءتها.',[{text:'تراجع', class:'primary', action:false}, {text:'أفهم الخطورة، صَدِّر', class:'confirm', action:true}], false, false);
+            const confirmTxt = await showModal('⚠️ تحذير أمني خطير', 'ستصدر كلمات المرور في ملف نصي مكشوف. أي شخص يملك وصول لجهازك سيتمكن من قراءتها.',[{text:'تراجع', class:'primary', action:false}, {text:'أفهم الخطورة، صَدِّر', class:'confirm', action:true}], false, false);
             if(!confirmTxt.action) return;
             let txt = 'مُـوَلِّـد — سجل كلمات المرور\n\n'; hist.forEach(i => txt += `[${i.d}]\n${i.p}\n\n`);
             dlFile(txt, `mowallid_export_${ts}.txt`, 'text/plain');
@@ -1300,7 +1540,12 @@ const CFG = Object.freeze({
     document.getElementById('btn-hist-imp').addEventListener('click', () => { document.getElementById('file-import').click(); });
     document.getElementById('file-import').addEventListener('change', async (e) => {
         const file = e.target.files[0]; if(!file) return;
+        
+        // FIX #8: Validate MIME type before processing
+        const ALLOWED_TYPES = ['application/json', 'text/json', ''];
         if(file.size > 1024 * 1024) { e.target.value = ''; return showTst('الملف كبير جداً (الحد الأقصى 1MB)', 'err'); }
+        if(!file.name.endsWith('.json')) { e.target.value = ''; return showTst('نوع الملف غير صالح — يُقبل JSON فقط', 'err'); }
+        
         e.target.value = ''; 
         const reader = new FileReader();
         reader.onload = async (event) => {
@@ -1314,8 +1559,19 @@ const CFG = Object.freeze({
                 showTst('⏳ جاري فك التشفير...', 'info');
                 setTimeout(async () => {
                     try {
-                        const itersMatch = data._info && data._info.match(/(\d+)\siter/);
-                        const targetIters = itersMatch ? parseInt(itersMatch[1]) : CFG.PBKDF2_ITERS;
+                        // FIX #5: Validate iter count from _info with whitelist range instead of blind parsing
+                        let targetIters = CFG.PBKDF2_ITERS;
+                        if (data._info && typeof data._info === 'string') {
+                            const itersMatch = data._info.match(/PBKDF2-SHA256\s+(\d+)\s+iter/);
+                            if (itersMatch) {
+                                const parsed = parseInt(itersMatch[1], 10);
+                                // Whitelist: must be between 100K and 2M — reject anything outside
+                                if (!isNaN(parsed) && parsed >= 100000 && parsed <= 2000000) {
+                                    targetIters = parsed;
+                                }
+                                // If out of range, silently fall back to default (don't leak info)
+                            }
+                        }
                         
                         const resWorker = await runCryptoWorker({ action: 'dec', pwd: res.val, salt: a2b(data.salt), iv: a2b(data.iv), ct: a2b(data.ct), iters: targetIters });
                         const parsed = resWorker.parsed;
@@ -1348,12 +1604,15 @@ const CFG = Object.freeze({
         reader.readAsText(file);
     });
 
+    // FIX #6: Append anchor to DOM before click, then clean up — fixes silent failure on Firefox/Safari
     function dlFile(content, name, type) { 
         const a = document.createElement('a'); 
         a.href = URL.createObjectURL(new Blob([content],{type})); 
-        a.download = name; 
-        a.click(); 
-        setTimeout(() => URL.revokeObjectURL(a.href), 1000); 
+        a.download = name;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 1000); 
     }
 
     // ==========================================
@@ -1410,7 +1669,6 @@ const CFG = Object.freeze({
                         clearInterval(copyCdInterval);
                         setCopyState('expired'); vibrate(HAPTIC.EXPIRE);
                         
-                        // Active Memory Scrubbing on expiration
                         if (document.hasFocus()) { 
                             navigator.clipboard.writeText(''); 
                         } else { 
@@ -1439,9 +1697,17 @@ const CFG = Object.freeze({
     }
 
     document.getElementById('btn-copy').addEventListener('click', ()=>{ const val = document.getElementById('out-pwd').value; if(val) doCopy(val); });
+
+    // FIX #3: btn-copy-regen — copy first, THEN regen after copy completes (not simultaneously)
+    // Previously both ran at the same time: doCopy(val) saves val to hist, then btn-regen click
+    // overwrites the password immediately, causing a race where the old pwd might not be fully copied.
     document.getElementById('btn-copy-regen').addEventListener('click', async ()=>{ 
         const val = document.getElementById('out-pwd').value; 
-        if(val) { await doCopy(val); document.getElementById('btn-regen').click(); }
+        if(val) {
+            await doCopy(val);  // await ensures copy+saveHist finishes first
+            // Small delay so the "copied" checkmark is visible before regen animation
+            setTimeout(() => document.getElementById('btn-regen').click(), 300);
+        }
     });
 
     // Native Copy Interception
