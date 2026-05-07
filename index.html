@@ -2,33 +2,24 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="مُـوَلِّـد - الأداة المطلقة لتوليد كلمات المرور الآمنة محلياً">
-    <meta name="theme-color" content="#ccff00">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+    <meta name="description" content="مُـوَلِّـد - الأداة المطلقة لتوليد كلمات المرور الآمنة محلياً (إصدار 2026)">
+    <meta name="theme-color" content="#ccff00" id="meta-theme-color">
     
-    <!-- iOS PWA Meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="مُـوَلِّـد">
-    
-    <!-- Privacy/Security Directives -->
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()">
-    <!-- Note: 'unsafe-inline' is used solely to allow this to run as a double-clickable local file. Replace with nonces if hosted. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; base-uri 'none'; form-action 'none';">
+    <!-- ⚠️ SECURITY: Any external resource added here MUST include integrity="" and crossorigin="anonymous" -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; base-uri 'none'; form-action 'none';">
     <meta name="referrer" content="no-referrer">
     
     <link rel="manifest" id="manifest-link">
-    
     <title>مُـوَلِّـد | الأداة المطلقة لكلمات المرور</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-    <link id="font-link" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
 
     <style id="antiClickjack">body{display:none!important}</style>
     <script>
-        try { if (self === top) { var a = document.getElementById("antiClickjack"); if (a && a.parentNode) a.parentNode.removeChild(a); } else { top.location = self.location; } } 
-        catch (e) { var a = document.getElementById("antiClickjack"); if (a && a.parentNode) a.parentNode.removeChild(a); }
+        try{if(self===top){var a=document.getElementById("antiClickjack");if(a&&a.parentNode)a.parentNode.removeChild(a);}else{top.location=self.location;}}catch(e){var a=document.getElementById("antiClickjack");if(a&&a.parentNode)a.parentNode.removeChild(a);}
     </script>
 
     <style>
@@ -39,118 +30,121 @@
             --bg-hover: #1e1e1e;
             --border: #2a2a2a;
             --border-focus: #555555;
-            
             --text-main: #ffffff;
             --text-muted: #888888;
             --text-dark: #000000;
-            
             --accent: #ccff00;
             --accent-dim: rgba(204, 255, 0, 0.1);
             --accent-glow: rgba(204, 255, 0, 0.3);
-            
-            --danger: #ff3366;
-            --danger-dim: rgba(255, 51, 102, 0.1);
+            --danger: #ff3366; --danger-dim: rgba(255, 51, 102, 0.1);
             --warning: #ffaa00;
-            --success: #00e676;
-            --success-dim: rgba(0, 230, 118, 0.1);
+            --success: #00e676; --success-dim: rgba(0, 230, 118, 0.1);
             --info: #00d8ff;
-            
-            --radius-sm: 10px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --radius-pill: 99px;
-            
-            --font-ui: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-            --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
-        }
-
-        body.privacy-font {
+            --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px; --radius-pill: 99px;
             --font-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --slide-dir: 1;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-        }
-
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
         body { background-color: var(--bg-base); color: var(--text-main); font-family: var(--font-ui); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 24px 16px 80px; overflow-x: hidden; line-height: 1.5; }
         body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; z-index: 0; }
-        .container { width: 100%; max-width: 560px; position: relative; z-index: 1; }
+        body::after { content: ''; position: fixed; inset: 0; background: radial-gradient(circle 600px at var(--gx, 50%) var(--gy, 30%), var(--accent-glow) 0%, transparent 70%); opacity: 0.4; pointer-events: none; z-index: -1; transition: background 0.1s ease; }
+
+        .container { width: 100%; max-width: 560px; position: relative; z-index: 1; transition: max-width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @media (min-width: 900px) { .container { max-width: 880px; } .gen-grid { display: grid; grid-template-columns: 360px 1fr; gap: 32px; align-items: start; } .gen-out-col { position: sticky; top: 24px; } }
+
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
         header { text-align: center; margin-bottom: 28px; animation: fadeDown 0.6s ease both; position: relative; }
         .brand-container { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px; }
-        .brand-title { font-size: clamp(2rem, 8vw, 2.8rem); font-weight: 800; letter-spacing: -1px; line-height: 1; }
-        .badge { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(204, 255, 0, 0.2); padding: 4px 10px; border-radius: var(--radius-pill); text-transform: uppercase; }
+        .brand-title { font-size: clamp(2.2rem, 8vw, 3rem); font-weight: 800; letter-spacing: -1px; line-height: 1; display: inline-flex; align-items: center; }
+        .cursor-blink { display: inline-block; width: 4px; height: 0.9em; background-color: var(--accent); margin-right: 4px; animation: blink 1s step-end infinite; }
+        .cursor-blink.hidden { display: none; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .badge { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: var(--radius-pill); text-transform: uppercase; }
         .subtitle { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
         
-        .btn-shortcut { position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid var(--border); color: var(--text-muted); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-        .btn-shortcut:hover { border-color: var(--text-muted); color: var(--text-main); }
+        .btn-settings { position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid var(--border); color: var(--text-muted); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .btn-settings:hover { border-color: var(--text-muted); color: var(--text-main); }
 
         nav { display: flex; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 4px; margin-bottom: 24px; gap: 4px; animation: fadeIn 0.6s 0.1s ease both; }
         .nav-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); font-family: var(--font-ui); font-size: 0.85rem; font-weight: 600; padding: 12px 8px; border-radius: var(--radius-pill); cursor: pointer; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .nav-btn.active { background: var(--bg-elevated); color: var(--text-main); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
 
-        .card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); animation: fadeIn 0.6s 0.2s ease both; position: relative; }
-        .view { display: none; } .view.active { display: block; animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); position: relative; overflow: hidden; animation: scaleUp 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.15s both; }
+        .view { display: none; } .view.active { display: block; animation: slideTab 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+        @keyframes slideTab { from { opacity: 0; transform: translateX(calc(var(--slide-dir) * 40px)); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleUp { from { opacity:0; transform:scale(0.98) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
         
-        /* ── OUTPUT & COLORIZATION ── */
-        .output-wrapper { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 16px; margin-bottom: 16px; transition: 0.3s; position: relative; user-select: none; }
+        .output-wrapper { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 16px; margin-bottom: 16px; transition: 0.3s; position: relative; }
         .output-wrapper:focus-within { border-color: var(--border-focus); box-shadow: 0 0 0 1px var(--border-focus); }
-        .pwd-display-container { position: relative; width: 100%; height: 40px; margin-bottom: 16px; overflow-x: auto; scrollbar-width: none; text-align: center; direction: ltr; }
+        .pwd-display-container { position: relative; width: 100%; height: 40px; margin-bottom: 16px; overflow-x: auto; scrollbar-width: none; text-align: center; direction: ltr; transition: filter 0.15s ease, opacity 0.15s ease; cursor: default; }
         .pwd-display-container::-webkit-scrollbar { display: none; }
+        .pwd-display-container.blurred { filter: blur(8px); opacity: 0.7; }
         
-        .pwd-input, .pwd-colored { position: absolute; inset: 0; width: 100%; height: 100%; font-family: var(--font-mono); font-size: clamp(1.3rem, 5vw, 1.7rem); font-weight: 600; letter-spacing: 3px; white-space: nowrap; text-align: center; border: none; outline: none; background: transparent; }
-        .pwd-input { color: var(--text-main); opacity: 0; pointer-events: auto; caret-color: transparent; } /* Hidden but selectable */
-        .pwd-input:not([type="password"]) { opacity: 0; }
+        .pwd-input, .pwd-colored { position: absolute; inset: 0; width: 100%; height: 100%; font-family: var(--font-mono); font-weight: 600; letter-spacing: 3px; white-space: nowrap; text-align: center; border: none; outline: none; background: transparent; transition: font-size 0.2s; }
+        .pwd-input { color: var(--text-main); opacity: 0; pointer-events: auto; caret-color: transparent; } 
+        .pwd-input-visible { opacity: 1 !important; pointer-events: auto !important; caret-color: var(--accent) !important; }
+        .pwd-input:not([type="password"]):not(.pwd-input-visible) { opacity: 0; }
         
         .pwd-colored { pointer-events: none; display: flex; align-items: center; justify-content: center; }
-        .pwd-colored span { transition: color 0.2s; }
-        .c-up { color: var(--accent); text-shadow: 0 0 8px rgba(204,255,0,0.3); }
-        .c-num { color: var(--info); }
-        .c-sym { color: var(--danger); }
-        .c-low { color: var(--text-main); }
-        .c-masked { -webkit-text-security: disc; color: var(--text-main); }
+        .pwd-colored.morphing { filter: blur(6px); opacity: 0; transform: scale(0.98); }
+        .pwd-colored span { border-radius: 4px; display: inline-block; }
+        
+        @keyframes charDrop { 0% { opacity: 0; transform: translateY(-8px) scale(0.8); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+        
+        .c-up { color: var(--accent); text-shadow: 0 0 8px var(--accent-glow); } .c-num { color: var(--info); } .c-sym { color: var(--danger); } .c-low { color: var(--text-main); }
+        .c-space { width: 10px; display: inline-block; } .c-masked { -webkit-text-security: disc; color: var(--text-main); font-family: sans-serif; letter-spacing: 4px; }
+        .diff-hl { background: var(--accent-glow); color: var(--accent) !important; transition: background 0.6s ease; }
 
-        .screen-warning { position: absolute; top: 8px; left: 8px; font-size: 0.65rem; background: var(--danger-dim); color: var(--danger); padding: 2px 8px; border-radius: var(--radius-pill); font-family: var(--font-mono); display: none; align-items: center; gap: 4px; border: 1px solid rgba(255,51,102,0.3); animation: fadeIn 0.3s ease; }
+        .screen-warning { position: absolute; top: 8px; left: 8px; font-size: 0.65rem; background: var(--danger-dim); color: var(--danger); padding: 2px 8px; border-radius: var(--radius-pill); font-family: var(--font-mono); display: none; align-items: center; gap: 4px; border: 1px solid rgba(255,51,102,0.3); animation: fadeIn 0.3s ease; z-index: 2; }
 
         .actions-row { display: flex; gap: 8px; justify-content: center; }
         .btn-icon { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); width: 48px; height: 48px; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; position: relative; }
         .btn-icon:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
         .btn-icon:active { transform: scale(0.92); }
         
-        .btn-split { display: flex; flex: 1; height: 48px; }
-        .btn-main { background: var(--accent); color: var(--text-dark); border: none; padding: 0 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; flex: 1; position: relative; overflow: hidden; }
+        .btn-split { display: flex; flex: 1; height: 48px; position: relative; }
+        .btn-main { background: var(--accent); color: var(--text-dark); border: none; padding: 0 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; flex: 1; position: relative; overflow: hidden; z-index: 1; }
+        .btn-main::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.4); border-radius: inherit; transform: scale(2.5); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; z-index: -1; pointer-events: none; }
+        .btn-main:active::after { transform: scale(0); opacity: 1; transition: 0s; }
         .btn-main:hover { filter: brightness(1.1); box-shadow: 0 0 15px var(--accent-glow); }
         .btn-main:active { transform: scale(0.98); }
-        .btn-main-extra { background: #b3e600; color: var(--text-dark); border: none; border-right: 1px solid rgba(0,0,0,0.1); width: 40px; border-radius: var(--radius-sm) 0 0 var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .btn-main-extra { background: var(--accent); filter: brightness(0.9); color: var(--text-dark); border: none; border-right: 1px solid rgba(0,0,0,0.15); width: 40px; border-radius: var(--radius-sm) 0 0 var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; z-index: 1; }
         .btn-main-extra:hover { filter: brightness(1.1); }
         
-        .cd-badge { position: absolute; right: 8px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; background: rgba(0,0,0,0.15); padding: 2px 6px; border-radius: 4px; display: none; }
+        .cd-badge { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; background: rgba(0,0,0,0.15); padding: 2px 6px; border-radius: 4px; }
 
-        /* ── LIQUID STRENGTH ── */
         .strength-container { margin: 20px 0; }
         .strength-bars { display: flex; gap: 6px; height: 6px; margin-bottom: 10px; direction: ltr; }
-        .bar-wrap { flex: 1; background: var(--bg-elevated); border-radius: 3px; overflow: hidden; }
-        .bar { height: 100%; width: 0%; background: var(--bg-elevated); border-radius: 3px; transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease; }
-        #b1 .bar { transition-delay: 0ms; } #b2 .bar { transition-delay: 50ms; } #b3 .bar { transition-delay: 100ms; } #b4 .bar { transition-delay: 150ms; }
+        .bar-wrap { flex: 1; background: var(--bg-elevated); border-radius: 3px; overflow: hidden; transition: box-shadow 0.4s ease;}
+        
+        @keyframes barPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+        .bar { height: 100%; width: 0%; background: var(--bg-elevated); border-radius: 3px; transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease; }
+        .bar.pulsing { animation: barPulse var(--pulse-speed, 1.5s) ease-in-out infinite; }
+        
         .strength-info { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; cursor: pointer; }
-        .label-time { color: var(--text-muted); }
+        .label-time { color: var(--text-muted); transition: 0.2s; } .label-time:hover { color: var(--text-main); }
 
-        /* ── ENTROPY PANEL ── */
         .entropy-panel { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-top: 12px; font-size: 0.75rem; font-family: var(--font-mono); display: none; animation: fadeIn 0.3s; }
-        .ep-row { display: flex; justify-content: space-between; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed var(--border); }
+        .ep-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed var(--border); }
         .ep-row:last-child { margin: 0; padding: 0; border: none; }
-        .ep-val { color: var(--accent); font-weight: 700; direction: ltr; }
+        .ep-val { color: var(--text-main); font-weight: 700; direction: ltr; display: flex; align-items: center; gap: 6px; }
+        .ep-bar-mini { width: 16px; height: 4px; border-radius: 2px; }
 
-        /* ── SUB NAV & SLIDING INDICATOR ── */
+        [data-tip] { position: relative; cursor: help; }[data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(4px); background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); padding: 6px 10px; border-radius: 6px; font-size: 0.75rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.2s; z-index: 100; font-family: var(--font-ui); font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        [data-tip]:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
         .sub-nav-wrap { position: relative; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
         .sub-nav { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 8px; }
         .sub-tab { background: transparent; border: none; color: var(--text-muted); font-family: var(--font-ui); font-size: 0.85rem; font-weight: 600; padding: 8px 12px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
         .sub-tab.active { color: var(--text-main); }
         .tab-indicator { position: absolute; bottom: -1px; height: 2px; background: var(--accent); box-shadow: 0 -2px 10px var(--accent-glow); transition: left 0.4s cubic-bezier(0.34,1.56,0.64,1), width 0.3s ease; border-radius: 2px; }
 
-        /* ── CONTROLS ── */
         .control-group { margin-bottom: 20px; }
         .control-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem; font-weight: 600; }
         .val-badge { font-family: var(--font-mono); background: var(--bg-elevated); border: 1px solid var(--border); padding: 2px 10px; border-radius: var(--radius-pill); color: var(--accent); font-size: 0.85rem; transition: color 0.3s; }
@@ -159,7 +153,7 @@
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--text-main); cursor: pointer; border: 4px solid var(--bg-surface); box-shadow: 0 0 0 1px var(--border), 0 4px 8px rgba(0,0,0,0.5); transition: 0.2s cubic-bezier(0.34,1.56,0.64,1); }
         input[type=range]:active::-webkit-slider-thumb { background: var(--accent); transform: scale(1.2); }
 
-        .toggle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .toggle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
         .toggle-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-base); border: 1px solid var(--border); padding: 12px 16px; border-radius: var(--radius-sm); cursor: pointer; transition: 0.2s; }
         .toggle-row:hover { border-color: var(--border-focus); background: var(--bg-hover); }
         .toggle-label { font-size: 0.85rem; font-weight: 600; user-select: none; }
@@ -174,64 +168,76 @@
         .select-wrapper { position: relative; } .select-wrapper::after { content: '▼'; font-size: 0.6rem; position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
         .alert-box { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; display: none; margin-bottom: 16px; border: 1px solid var(--warning); background: rgba(255,170,0,0.1); color: var(--warning); }
 
-        /* ── SECTIONS (Check & History) ── */
-        .section-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; font-family: var(--font-mono); }
+        .section-title { font-size: 1rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.3px; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-        .stat-card { background: var(--bg-base); border: 1px solid var(--border); padding: 16px; border-radius: var(--radius-sm); text-align: center; }
-        .stat-lbl { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 4px; }
+        .stat-card { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; text-align: center; }
+        .stat-lbl { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 6px; }
         .stat-val { font-size: 1.1rem; font-weight: 700; font-family: var(--font-mono); direction: ltr; }
-        .btn-outline { width: 100%; background: transparent; border: 1px solid var(--info); color: var(--info); padding: 14px; border-radius: var(--radius-sm); font-family: var(--font-ui); font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
-        .btn-outline:hover { background: rgba(0, 216, 255, 0.1); } .btn-outline:disabled { opacity: 0.5; cursor: not-allowed; }
-        .info-panel { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-top: 24px; display: flex; gap: 12px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
-        .info-panel svg { flex-shrink: 0; color: var(--info); }
+        
+        .tl-wrap { position: relative; width: 100%; height: 6px; background: var(--bg-elevated); border-radius: 3px; margin: 16px 0; direction: rtl; }
+        .tl-fill { position: absolute; right: 0; top: 0; height: 100%; background: var(--info); border-radius: 3px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1), background 0.4s; }
+        .tl-marker { position: absolute; top: -4px; width: 14px; height: 14px; background: var(--text-main); border-radius: 50%; border: 2px solid var(--bg-surface); box-shadow: 0 0 6px rgba(0,0,0,0.5); transition: right 0.6s cubic-bezier(0.34,1.56,0.64,1); transform: translateX(50%); z-index: 2; }
+        .tl-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono); }
+        .tl-labels span { flex: 1; text-align: center; }
 
-        /* ── HISTORY ── */
+        .btn-outline { border: 1px solid var(--border); background: transparent; color: var(--text-main); padding: 14px; border-radius: var(--radius-sm); width: 100%; cursor: pointer; font-weight: 600; font-family: var(--font-ui); transition: 0.2s; }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); } .btn-outline:disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--border); color: var(--text-muted); background: transparent; }
+
         .history-controls { display: flex; gap: 12px; margin-bottom: 20px; }
         .btn-danger { border: 1px solid var(--danger); color: var(--danger); background: transparent; flex: 1; padding: 12px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: 0.2s;}
         .btn-success { border: 1px solid var(--success); color: var(--success); background: transparent; flex: 1; padding: 12px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: 0.2s;}
-        .btn-danger:hover { background: var(--danger-dim); } .btn-success:hover { background: var(--success-dim); }
+        .btn-info { border: 1px solid var(--info); color: var(--info); background: transparent; flex: 1; padding: 12px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: 0.2s;}
+        .btn-danger:hover { background: var(--danger-dim); } .btn-success:hover { background: var(--success-dim); } .btn-info:hover { background: rgba(0,216,255,0.1); }
+        
         .history-list { display: flex; flex-direction: column; gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
         .history-item { background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; position: relative; animation: fadeIn 0.3s; }
         .btn-del-item { position: absolute; left: 16px; top: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; transition: 0.2s; padding: 4px; border-radius: 4px; }
         .btn-del-item:hover { background: var(--danger-dim); color: var(--danger); }
         .hist-pwd { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 12px; padding-left: 28px; }
+        .hist-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; box-shadow: 0 0 6px currentColor; flex-shrink: 0; }
         .hist-val { letter-spacing: 2px; direction: ltr; overflow: hidden; text-overflow: ellipsis; }
         .hist-val.masked { font-family: sans-serif; letter-spacing: 4px; color: var(--text-muted); font-size: 1.2rem; line-height: 1; transform: translateY(4px); }
         .btn-reveal { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; transition: 0.2s; display: flex; } .btn-reveal:hover { color: var(--accent); }
         .hist-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border); padding-top: 8px;}
         .hist-date { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); }
-        .btn-copy-sm { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-copy-sm { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-main); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
         .btn-copy-sm:hover { background: var(--text-main); color: var(--text-dark); }
+        
         .empty-state { text-align: center; color: var(--text-muted); padding: 40px 20px; font-family: var(--font-ui); font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        @keyframes lockBreathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        @keyframes lockPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+        .empty-lock { animation: lockPulse 3s ease-in-out infinite; }
+        .lock-shackle { animation: lockBreathe 3s ease-in-out infinite; transform-origin: center; }
 
-        /* ── MODAL ── */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; padding: 16px; }
-        .modal-overlay.show { display: flex; opacity: 1; }
-        .modal-box { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.9); transform: translateY(20px); transition: 0.3s; }
+        .modal-overlay { visibility: hidden; pointer-events: none; opacity: 0; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: 0.3s; padding: 16px; }
+        .modal-overlay.show { visibility: visible; pointer-events: auto; opacity: 1; }
+        .modal-box { background: rgba(21, 21, 21, 0.7); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 32px 64px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: 24px; width: 100%; max-width: 400px; transform: translateY(20px); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .modal-overlay.show .modal-box { transform: translateY(0); }
         .modal-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .modal-body { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
-        .modal-actions { display: flex; gap: 12px; }
-        .modal-btn { flex: 1; padding: 12px; border-radius: var(--radius-sm); font-weight: 700; font-family: var(--font-ui); cursor: pointer; border: none; transition: 0.2s; }
-        .modal-btn.cancel { background: var(--bg-elevated); color: var(--text-main); border: 1px solid var(--border); } .modal-btn.cancel:hover { background: var(--bg-hover); }
-        .modal-btn.confirm { background: var(--danger); color: white; } .modal-btn.confirm:hover { filter: brightness(1.1); }
-        .modal-btn.primary { background: var(--accent); color: var(--text-dark); }
+        .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .modal-btn { flex: 1; min-width: 100px; padding: 12px; border-radius: var(--radius-sm); font-weight: 700; font-family: var(--font-ui); cursor: pointer; border: none; transition: 0.2s; }
+        .modal-btn.cancel { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--border); } .modal-btn.cancel:hover { background: rgba(255,255,255,0.1); }
+        .modal-btn.confirm { background: var(--danger); color: white; } .modal-btn.confirm:hover { filter: brightness(1.1); box-shadow: 0 0 15px rgba(255,51,102,0.4); }
+        .modal-btn.primary { background: var(--accent); color: var(--text-dark); } .modal-btn.primary:hover { filter: brightness(1.1); box-shadow: 0 0 15px var(--accent-glow); }
         .modal-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* ── TOAST & FOOTER ── */
-        #toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); padding: 12px 24px; border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 700; font-size: 0.85rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 9999; display: flex; align-items: center; gap: 8px; }
+        #toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); padding: 12px 24px; border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 700; font-size: 0.85rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8); white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 9999; display: flex; align-items: center; gap: 8px; }
         #toast.show { opacity: 1; transform: translate(-50%, 0); }
         .t-succ { background: var(--success); color: var(--text-dark); } .t-err { background: var(--danger); color: white; }
         .t-warn { background: var(--warning); color: var(--text-dark); } .t-info { background: var(--text-main); color: var(--bg-base); }
 
         footer { margin-top: 32px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); text-align: center; }
-        footer span { color: var(--accent); }
+        footer span.hi { color: var(--accent); }
         
-        .privacy-box { width: 100%; max-width: 400px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; }
-        .privacy-box summary { font-family: var(--font-ui); font-weight: 600; cursor: pointer; outline: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        .privacy-box table { width: 100%; margin-top: 12px; border-collapse: collapse; text-align: right; }
-        .privacy-box th, .privacy-box td { padding: 6px; border-bottom: 1px solid var(--border); }
-        .privacy-box th { color: var(--text-main); font-weight: 600; }
+        .color-picker { display: flex; gap: 12px; margin-top: 16px; justify-content: center; }
+        .c-dot { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: 0.2s; box-shadow: 0 0 10px currentColor; opacity: 0.6; }
+        .c-dot:hover { opacity: 1; transform: scale(1.1); }
+        .c-dot.active { border-color: white; opacity: 1; transform: scale(1.2); }
+
+        #boot-splash { position:fixed; inset:0; background:#000; display:flex; align-items:center; justify-content:center; z-index:99999; transition:opacity 0.5s; }
+        .spinner { width:40px; height:40px; border:2px solid var(--accent); border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .hidden { display: none !important; }
         @keyframes fadeDown { from { opacity:0; transform:translateY(-15px); } to { opacity:1; transform:translateY(0); } }
@@ -241,144 +247,157 @@
 </head>
 <body>
 
+<div id="boot-splash"><div class="spinner"></div></div>
+
 <div class="container">
     <header>
-        <button class="btn-shortcut" id="btn-shortcuts" aria-label="اختصارات لوحة المفاتيح">⌨️</button>
+        <button class="btn-settings" id="btn-settings" aria-label="الإعدادات والاختصارات">⚙️</button>
         <div class="brand-container">
-            <h1 class="brand-title">مُـوَلِّـد</h1>
-            <span class="badge">محلي 100%</span>
+            <h1 class="brand-title" id="main-title"></h1>
         </div>
         <p class="subtitle">الأداة العصرية لكلمات المرور الآمنة والمشفرة</p>
     </header>
 
     <nav>
-        <button class="nav-btn active" data-target="view-gen">توليد كلمة مرور</button>
-        <button class="nav-btn" data-target="view-check">فحص التسريب</button>
-        <button class="nav-btn" data-target="view-history">السجل المحلّي</button>
+        <button class="nav-btn active" data-target="view-gen" data-idx="0">توليد كلمة مرور</button>
+        <button class="nav-btn" data-target="view-check" data-idx="1">فحص التسريب</button>
+        <button class="nav-btn" data-target="view-history" data-idx="2">السجل المحلّي</button>
     </nav>
 
-    <div class="card">
+    <div class="card" id="main-card">
         <!-- ================= VIEW: GENERATE ================= -->
         <div id="view-gen" class="view active">
-            
-            <div class="output-wrapper">
-                <div class="screen-warning" id="screen-warn">📸 مرئية على الشاشة</div>
-                <div class="pwd-display-container">
-                    <!-- Invisible input handles actual copy & autocomplete blocking -->
-                    <input type="password" id="out-pwd" class="pwd-input" readonly autocomplete="new-password" spellcheck="false" aria-label="كلمة المرور المولدة">
-                    <!-- Div handles colorful display -->
-                    <div id="out-colored" class="pwd-colored"><span class="c-masked">••••••••••••••••</span></div>
-                </div>
-                
-                <div class="actions-row">
-                    <button class="btn-icon" id="btn-vis" aria-label="إظهار كلمة المرور" title="إظهار/إخفاء">
-                        <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                        <svg class="icon-eye-off hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
-                    </button>
-                    <div class="btn-split">
-                        <button class="btn-main" id="btn-copy" aria-label="نسخ كلمة المرور">
-                            <span id="copy-txt">نسخ</span>
-                            <svg id="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                            <span class="cd-badge" id="copy-cd">45</span>
-                        </button>
-                        <button class="btn-main-extra" id="btn-copy-regen" aria-label="نسخ وتوليد جديد" title="نسخ وتوليد جديد">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-                        </button>
-                    </div>
-                    <button class="btn-icon" id="btn-regen" aria-label="توليد كلمة مرور جديدة" title="توليد جديد">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-                    </button>
-                </div>
-            </div>
-
-            <div class="strength-container">
-                <div class="strength-bars">
-                    <div class="bar-wrap" id="b1"><div class="bar"></div></div>
-                    <div class="bar-wrap" id="b2"><div class="bar"></div></div>
-                    <div class="bar-wrap" id="b3"><div class="bar"></div></div>
-                    <div class="bar-wrap" id="b4"><div class="bar"></div></div>
-                </div>
-                <div class="strength-info" id="btn-toggle-ep">
-                    <span id="lbl-strength" style="color:var(--text-muted)">---</span>
-                    <span class="label-time">كسر: <span id="lbl-time" style="color:var(--text-main)">---</span> ▾</span>
-                </div>
-            </div>
-
-            <div class="entropy-panel" id="ep-panel">
-                <div class="ep-row"><span>مجموعة الرموز (Pool):</span><span class="ep-val" id="ep-pool">0</span></div>
-                <div class="ep-row"><span>طول الكلمة:</span><span class="ep-val" id="ep-len">0</span></div>
-                <div class="ep-row"><span>الإنتروبي الإجمالي:</span><span class="ep-val" id="ep-bits">0 bits</span></div>
-                <div class="ep-row"><span>سرعة الكسر (RTX 4090):</span><span class="ep-val" id="ep-crack" style="color:var(--info)">---</span></div>
-            </div>
-
-            <div class="sub-nav-wrap">
-                <div class="sub-nav" id="sub-nav">
-                    <button class="sub-tab active" data-mode="random">عشوائي</button>
-                    <button class="sub-tab" data-mode="passphrase">عبارة (Passphrase)</button>
-                    <button class="sub-tab" data-mode="pronounceable">منطوق</button>
-                    <button class="sub-tab" data-mode="pin">رقم PIN</button>
-                </div>
-                <div class="tab-indicator" id="tab-indicator"></div>
-            </div>
-
-            <div id="mode-random" class="mode-panel active">
-                <div class="control-group">
-                    <div class="control-header"><span>طول الكلمة</span><span class="val-badge" id="val-len">16</span></div>
-                    <input type="range" id="sl-len" min="6" max="128" value="16">
-                </div>
-                <div class="toggle-grid">
-                    <label class="toggle-row"><span class="toggle-label">A–Z كبيرة</span><input type="checkbox" id="cb-up" checked><div class="switch"></div></label>
-                    <label class="toggle-row"><span class="toggle-label">a–z صغيرة</span><input type="checkbox" id="cb-low" checked><div class="switch"></div></label>
-                    <label class="toggle-row"><span class="toggle-label">0–9 أرقام</span><input type="checkbox" id="cb-num" checked><div class="switch"></div></label>
-                    <label class="toggle-row"><span class="toggle-label">!@#$ رموز</span><input type="checkbox" id="cb-sym" checked><div class="switch"></div></label>
-                </div>
-                <div class="control-group">
-                    <label class="toggle-row" style="margin-bottom:12px"><span class="toggle-label">استبعاد (i, l, 1, L, o, 0, O)</span><input type="checkbox" id="cb-exc"><div class="switch"></div></label>
-                    <div class="control-header" style="margin-top:16px"><span>الرموز المخصصة</span></div>
-                    <input type="text" id="in-custom" class="input-text" value="!@#$%^&*()_+~`|}{[]:;?><,./-=" autocomplete="off" spellcheck="false" dir="ltr">
-                    <div id="sym-warn" class="alert-box">⚠️ مجموعة الرموز صغيرة جداً — الكلمة أقل أماناً</div>
-                </div>
-            </div>
-
-            <div id="mode-passphrase" class="mode-panel hidden">
-                <div class="control-group">
-                    <div class="control-header"><span>عدد الكلمات</span><span class="val-badge" id="val-words">4</span></div>
-                    <input type="range" id="sl-words" min="3" max="12" value="4">
-                </div>
-                <div class="toggle-grid">
-                    <div class="control-group" style="margin:0">
-                        <div class="control-header"><span>الفاصل</span></div>
-                        <div class="select-wrapper">
-                            <select id="sel-sep" class="input-text" dir="rtl">
-                                <option value="-">شرطة (-)</option><option value="_">شرطة سفلية (_)</option>
-                                <option value=" ">مسافة ( )</option><option value=".">نقطة (.)</option><option value="">بدون فاصل</option>
-                            </select>
+            <div class="gen-grid">
+                <div class="gen-out-col">
+                    <div class="output-wrapper">
+                        <div class="screen-warning" id="screen-warn">📸 مرئية على الشاشة</div>
+                        <div class="pwd-display-container" id="pwd-blur-container" data-tip="انقر على العين للإظهار (Ctrl+C للنسخ)">
+                            <input type="password" id="out-pwd" class="pwd-input" readonly autocomplete="new-password" spellcheck="false" aria-label="كلمة المرور المولدة">
+                            <div id="out-colored" class="pwd-colored"><span class="c-masked">••••••••••••••••</span></div>
+                        </div>
+                        
+                        <div class="actions-row">
+                            <button class="btn-icon" id="btn-vis" aria-label="إظهار كلمة المرور" title="إظهار/إخفاء">
+                                <svg class="idle-ring" width="44" height="44" viewBox="0 0 44 44" style="position:absolute; inset:0; pointer-events:none; transform:rotate(-90deg);">
+                                    <circle id="vis-ring" cx="22" cy="22" r="21" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="132" stroke-dashoffset="132"></circle>
+                                </svg>
+                                <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                <svg class="icon-eye-off hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            </button>
+                            <div class="btn-split">
+                                <button class="btn-main" id="btn-copy" aria-label="نسخ كلمة المرور">
+                                    <span id="copy-txt">نسخ</span>
+                                    <svg id="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    <svg id="copy-spin" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    <svg id="copy-check" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--bg-base)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <svg id="copy-lock" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    
+                                    <svg class="idle-ring hidden" id="copy-ring-svg" width="44" height="44" viewBox="0 0 44 44" style="position:absolute; right: -5px; top: 2px; pointer-events:none; transform:rotate(-90deg);">
+                                        <circle id="copy-ring" cx="22" cy="22" r="16" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" opacity="0.4"></circle>
+                                    </svg>
+                                    <span class="cd-badge" id="copy-cd" style="right:30px"></span>
+                                </button>
+                                <button class="btn-main-extra" id="btn-copy-regen" aria-label="نسخ وتوليد جديد" data-tip="نسخ + جديد (Ctrl+Shift+C)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                                </button>
+                            </div>
+                            <button class="btn-icon" id="btn-regen" aria-label="توليد كلمة مرور جديدة" data-tip="توليد جديد (Ctrl+Enter)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                            </button>
                         </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:12px;">
-                        <label class="toggle-row"><span class="toggle-label">تكبير الحرف الأول</span><input type="checkbox" id="cb-p-cap" checked><div class="switch"></div></label>
-                        <label class="toggle-row"><span class="toggle-label">إضافة رقم عشوائي</span><input type="checkbox" id="cb-p-num"><div class="switch"></div></label>
-                        <label class="toggle-row"><span class="toggle-label">إضافة رمز عشوائي</span><input type="checkbox" id="cb-p-sym"><div class="switch"></div></label>
+
+                    <div class="strength-container" data-tip="الإنتروبي يحدد صعوبة التخمين" id="btn-toggle-ep">
+                        <div aria-live="polite" aria-atomic="true" class="sr-only" id="strength-announce"></div>
+                        <div class="strength-bars">
+                            <div class="bar-wrap" id="b1"><div class="bar"></div></div>
+                            <div class="bar-wrap" id="b2"><div class="bar"></div></div>
+                            <div class="bar-wrap" id="b3"><div class="bar"></div></div>
+                            <div class="bar-wrap" id="b4"><div class="bar"></div></div>
+                        </div>
+                        <div class="strength-info">
+                            <span id="lbl-strength" style="color:var(--text-muted)">---</span>
+                            <span class="label-time">كسر: <span id="lbl-time" style="color:var(--text-main)">---</span> ▾</span>
+                        </div>
+                    </div>
+
+                    <div class="entropy-panel" id="ep-panel">
+                        <div class="ep-row"><span>الرموز المستخدمة (Pool):</span><span class="ep-val"><span id="ep-pool">0</span> <span id="ep-pool-ctx" style="font-size:0.65rem;font-weight:normal;color:var(--text-muted)"></span></span></div>
+                        <div class="ep-row"><span>طول الكلمة:</span><span class="ep-val" id="ep-len">0</span></div>
+                        <div class="ep-row"><span>الإنتروبي الإجمالي:</span><div style="display:flex;align-items:center;gap:6px;"><div id="ep-bar" class="ep-bar-mini"></div><span class="ep-val" id="ep-bits">0</span> <span class="ep-val" style="color:var(--text-muted)">bits</span></div></div>
+                        <div class="ep-row"><span>الكسر بـ (حاسوب متطور 2026):</span><span class="ep-val" id="ep-crack" style="color:var(--info)">---</span></div>
                     </div>
                 </div>
-            </div>
 
-            <div id="mode-pronounceable" class="mode-panel hidden">
-                <div class="control-group">
-                    <div class="control-header"><span>الطول</span><span class="val-badge" id="val-pron">10</span></div>
-                    <input type="range" id="sl-pron" min="4" max="30" value="10">
-                </div>
-                <div class="toggle-grid">
-                    <label class="toggle-row"><span class="toggle-label">تكبير الحرف الأول</span><input type="checkbox" id="cb-pr-cap" checked><div class="switch"></div></label>
-                    <label class="toggle-row"><span class="toggle-label">أضف رقماً عشوائياً</span><input type="checkbox" id="cb-pr-num" checked><div class="switch"></div></label>
-                    <label class="toggle-row" style="grid-column: 1 / -1;"><span class="toggle-label">أضف رمزاً عشوائياً</span><input type="checkbox" id="cb-pr-sym"><div class="switch"></div></label>
-                </div>
-            </div>
+                <div class="gen-set-col">
+                    <div class="sub-nav-wrap">
+                        <div class="sub-nav" id="sub-nav">
+                            <button class="sub-tab active" data-mode="random">عشوائي</button>
+                            <button class="sub-tab" data-mode="passphrase">عبارة (Passphrase)</button>
+                            <button class="sub-tab" data-mode="pronounceable">منطوق</button>
+                            <button class="sub-tab" data-mode="pin">رقم PIN</button>
+                        </div>
+                        <div class="tab-indicator" id="tab-indicator"></div>
+                    </div>
 
-            <div id="mode-pin" class="mode-panel hidden">
-                <div class="control-group">
-                    <div class="control-header"><span>طول الرقم</span><span class="val-badge" id="val-pin">6</span></div>
-                    <input type="range" id="sl-pin" min="4" max="12" value="6">
+                    <div id="mode-random" class="mode-panel active">
+                        <div class="control-group">
+                            <div class="control-header"><span>طول الكلمة</span><span class="val-badge" id="val-len">16</span></div>
+                            <input type="range" id="sl-len" min="6" max="128" value="16">
+                        </div>
+                        <div class="toggle-grid">
+                            <label class="toggle-row"><span class="toggle-label">A–Z كبيرة</span><input type="checkbox" id="cb-up" checked><div class="switch"></div></label>
+                            <label class="toggle-row"><span class="toggle-label">a–z صغيرة</span><input type="checkbox" id="cb-low" checked><div class="switch"></div></label>
+                            <label class="toggle-row"><span class="toggle-label">0–9 أرقام</span><input type="checkbox" id="cb-num" checked><div class="switch"></div></label>
+                            <label class="toggle-row"><span class="toggle-label">!@#$ رموز</span><input type="checkbox" id="cb-sym" checked><div class="switch"></div></label>
+                        </div>
+                        <div class="control-group">
+                            <label class="toggle-row" style="margin-bottom:12px"><span class="toggle-label">استبعاد (i, l, 1, L, o, 0, O)</span><input type="checkbox" id="cb-exc"><div class="switch"></div></label>
+                            <div class="control-header" style="margin-top:16px"><span>الرموز المخصصة</span></div>
+                            <input type="text" id="in-custom" class="input-text" value="!@#$%^&*()_+~`|}{[]:;?><,./-=" autocomplete="off" spellcheck="false" dir="ltr">
+                            <div id="sym-warn" class="alert-box">⚠️ مجموعة الرموز صغيرة جداً — الكلمة أقل أماناً</div>
+                        </div>
+                    </div>
+
+                    <div id="mode-passphrase" class="mode-panel hidden">
+                        <div class="control-group">
+                            <div class="control-header"><span>عدد الكلمات</span><span class="val-badge" id="val-words">4</span></div>
+                            <input type="range" id="sl-words" min="3" max="12" value="4">
+                        </div>
+                        <div class="toggle-grid">
+                            <div class="control-group" style="margin:0; grid-column: 1 / -1;">
+                                <div class="control-header"><span>الفاصل</span></div>
+                                <div class="select-wrapper">
+                                    <select id="sel-sep" class="input-text" dir="rtl">
+                                        <option value="-">شرطة (-)</option><option value="_">شرطة سفلية (_)</option>
+                                        <option value=" ">مسافة ( )</option><option value=".">نقطة (.)</option><option value="">بدون فاصل</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label class="toggle-row" style="grid-column: 1 / -1;"><span class="toggle-label">تكبير الحرف الأول</span><input type="checkbox" id="cb-p-cap" checked><div class="switch"></div></label>
+                            <label class="toggle-row"><span class="toggle-label">إضافة رقم عشوائي</span><input type="checkbox" id="cb-p-num"><div class="switch"></div></label>
+                            <label class="toggle-row"><span class="toggle-label">إضافة رمز عشوائي</span><input type="checkbox" id="cb-p-sym"><div class="switch"></div></label>
+                        </div>
+                    </div>
+
+                    <div id="mode-pronounceable" class="mode-panel hidden">
+                        <div class="control-group">
+                            <div class="control-header"><span>الطول</span><span class="val-badge" id="val-pron">10</span></div>
+                            <input type="range" id="sl-pron" min="4" max="30" value="10">
+                        </div>
+                        <div class="toggle-grid">
+                            <label class="toggle-row" style="grid-column: 1 / -1;"><span class="toggle-label">تكبير الحرف الأول</span><input type="checkbox" id="cb-pr-cap" checked><div class="switch"></div></label>
+                            <label class="toggle-row"><span class="toggle-label">أضف رقماً عشوائياً</span><input type="checkbox" id="cb-pr-num" checked><div class="switch"></div></label>
+                            <label class="toggle-row" style="grid-column: 1 / -1;"><span class="toggle-label">أضف رمزاً عشوائياً</span><input type="checkbox" id="cb-pr-sym"><div class="switch"></div></label>
+                        </div>
+                    </div>
+
+                    <div id="mode-pin" class="mode-panel hidden">
+                        <div class="control-group">
+                            <div class="control-header"><span>طول الرقم</span><span class="val-badge" id="val-pin">6</span></div>
+                            <input type="range" id="sl-pin" min="4" max="12" value="6">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -387,7 +406,7 @@
         <div id="view-check" class="view">
             <h3 class="section-title">فحص القوة والتسريب</h3>
             <div class="output-wrapper" style="padding-bottom:12px">
-                <input type="password" id="chk-input" class="pwd-input" placeholder="اكتب للبدء..." style="padding-bottom:8px; opacity:1;" autocomplete="off" spellcheck="false" dir="ltr">
+                <input type="password" id="chk-input" name="analyzer-field" class="pwd-input pwd-input-visible" placeholder="اكتب للبدء..." style="padding-bottom:8px;" autocomplete="off" spellcheck="false" dir="ltr" inputmode="none" data-form-type="other">
                 <div class="actions-row">
                     <button class="btn-icon" id="btn-chk-vis" aria-label="إظهار كلمة المرور">
                         <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -395,66 +414,69 @@
                     </button>
                 </div>
             </div>
+            
+            <div id="chk-pattern-warn" class="alert-box" style="display:none; margin-bottom:16px;">⚠️ نمط متوقع — هذا النوع يُخمَّن بسهولة بواسطة القواميس</div>
+
             <div class="strength-container">
                 <div class="strength-bars"><div class="bar-wrap" id="cb1"><div class="bar"></div></div><div class="bar-wrap" id="cb2"><div class="bar"></div></div><div class="bar-wrap" id="cb3"><div class="bar"></div></div><div class="bar-wrap" id="cb4"><div class="bar"></div></div></div>
-                <div class="strength-info" style="justify-content:center; margin-bottom:16px;"><span id="chk-lbl-str" style="color:var(--text-muted)">---</span></div>
+                <div class="strength-info" style="justify-content:center;"><span id="chk-lbl-str" style="color:var(--text-muted)">---</span></div>
             </div>
-            <div class="stats-grid">
-                <div class="stat-card"><div class="stat-lbl">الإنتروبي (Entropy)</div><div class="stat-val" id="chk-ent" dir="ltr">0 bits</div></div>
-                <div class="stat-card"><div class="stat-lbl">وقت الكسر التقريبي</div><div class="stat-val" id="chk-time" dir="ltr">---</div></div>
+            
+            <div class="tl-wrap" data-tip="الوقت التقريبي لكسر الكلمة بواسطة حاسوب متطور">
+                <div class="tl-fill" id="tl-fill"></div>
+                <div class="tl-marker" id="tl-marker"></div>
             </div>
-            <button class="btn-outline" id="btn-pwned">🔍 فحص في قاعدة بيانات HIBP</button>
+            <div class="tl-labels">
+                <span>فوراً</span><span>ثوانٍ</span><span>ساعات</span><span>سنوات</span><span>قرون</span>
+            </div>
+
+            <div class="stats-grid" style="margin-top:24px;">
+                <div class="stat-card"><div class="stat-lbl">الإنتروبي (Entropy)</div><div class="stat-val"><span id="chk-ent">0</span><span style="font-size:0.7rem;color:var(--text-muted)"> bits</span></div></div>
+                <div class="stat-card"><div class="stat-lbl">الكسر بـ 2026</div><div class="stat-val" id="chk-time" dir="ltr">---</div></div>
+            </div>
+            <button class="btn-outline" id="btn-pwned" data-tip="يرسل أول 5 أحرف من التجزئة (SHA-1) فقط">🔍 فحص في قاعدة بيانات HIBP</button>
+            <details style="margin-top:8px; font-size:0.75rem; color:var(--text-muted); cursor:pointer;">
+                <summary style="outline:none;">كيف يعمل هذا بأمان؟</summary>
+                <div style="padding-top:4px;">يُرسل أول 5 أحرف فقط من بصمة SHA-1 (من أصل 40 حرفاً). لا تُرسل كلمة المرور نفسها أبداً للإنترنت (k-Anonymity).</div>
+            </details>
             <div id="pwned-res" class="alert-box" style="margin-top:16px;"></div>
-            <div class="info-panel">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                <div><strong style="color:var(--text-main);display:block;margin-bottom:4px;">الخصوصية مضمونة (k-Anonymity)</strong> يتم تشفير الكلمة محلياً بخوارزمية SHA-1 وإرسال أول 5 رموز فقط. يتم التخزين المؤقت للطلبات محلياً.</div>
-            </div>
         </div>
 
         <!-- ================= VIEW: HISTORY ================= -->
         <div id="view-history" class="view">
-            <h3 class="section-title">السجل المحلي (ذاكرة مؤقتة)</h3>
+            <h3 class="section-title">السجل المحلي (ذاكرة التبويب)</h3>
             <label class="toggle-row" style="margin-bottom: 20px;">
                 <div>
-                    <div class="toggle-label" style="color:var(--accent)">حفظ كلمات المرور في الجلسة الحالية</div>
-                    <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">تضيع البيانات تماماً عند إغلاق التبويب أو التحديث</div>
+                    <div class="toggle-label" style="color:var(--accent)">تفعيل حفظ كلمات المرور في الجلسة</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">تُطهر البيانات فوراً عند إغلاق التبويب للأمان</div>
                 </div>
                 <input type="checkbox" id="cb-hist">
                 <div class="switch"></div>
             </label>
             <div class="history-controls">
                 <button class="btn-danger" id="btn-hist-clear">مسح الكل</button>
-                <button class="btn-success" id="btn-hist-exp">تصدير...</button>
+                <button class="btn-info" id="btn-hist-imp">استيراد...</button>
+                <button class="btn-success" id="btn-hist-exp" data-tip="تصدير مشفر بـ AES-256-GCM">تصدير...</button>
             </div>
+            <input type="file" id="file-import" accept=".json" class="hidden">
             <div class="history-list" id="hist-list"></div>
         </div>
     </div>
     
     <footer>
-        <div>مُشغّل بواسطة <span>Web Crypto API</span> &nbsp;|&nbsp; يعمل محلياً 🔒</div>
-        
-        <details class="privacy-box">
-            <summary>🌐 تقرير الشفافية والخصوصية</summary>
-            <table>
-                <tr><th>الطلب</th><th>السبب</th></tr>
-                <tr><td>fonts.google.com</td><td>الخطوط الجمالية</td></tr>
-                <tr><td>api.pwnedpasswords.com</td><td>فقط عند ضغط الفحص</td></tr>
-            </table>
-            <label class="toggle-row" style="margin-top:12px; padding:8px 12px; background:var(--bg-elevated);">
-                <span class="toggle-label" style="font-size:0.75rem;">وضع الخصوصية (إيقاف خطوط جوجل)</span>
-                <input type="checkbox" id="cb-privacy-font">
-                <div class="switch" style="transform:scale(0.8)"></div>
-            </label>
-        </details>
+        <div style="display:flex; align-items:center; gap:8px;">
+            <span>مُشغّل بواسطة <span class="hi">Web Crypto API</span> &nbsp;|&nbsp; يعمل محلياً 🔒</span>
+            <span id="net-dot" style="width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 6px currentColor;transition:0.3s;" title="مؤشر الشبكة (أخضر = صامت)"></span>
+        </div>
+        <div style="font-family:var(--font-mono); font-size:0.6rem; opacity:0.3;" id="integrity-token">جاري فحص النزاهة...</div>
     </footer>
 </div>
 
-<!-- Accessible Modal -->
 <div class="modal-overlay" id="custom-modal" role="dialog" aria-modal="true" tabindex="-1">
     <div class="modal-box">
         <div class="modal-title" id="m-title">تنبيه</div>
         <div class="modal-body" id="m-body">...</div>
-        <input type="password" id="m-input" class="input-text hidden" placeholder="أدخل كلمة مرور قوية للتشفير" style="margin-bottom:8px" dir="ltr">
+        <input type="password" id="m-input" class="input-text hidden" placeholder="" style="margin-bottom:8px" dir="ltr">
         <div id="m-ent-warn" style="font-size:0.75rem; color:var(--danger); margin-bottom:16px; display:none;">كلمة المرور ضعيفة جداً!</div>
         <div class="modal-actions" id="m-actions"></div>
     </div>
@@ -464,624 +486,846 @@
 
 <script>
 // ==========================================
-// SECURITY CORE (API Checks)
+// CONFIGURATION (Frozen constants)
 // ==========================================
-if(!window.crypto || !window.crypto.subtle || !window.crypto.getRandomValues){
-    document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center"><div style="background:#1a0505;border:1px solid #ff3366;color:#ff3366;padding:2rem;border-radius:16px;max-width:400px"><h2>⚠️ المتصفح غير مدعوم</h2><p style="margin-top:1rem">متصفحك لا يدعم التشفير الآمن. يرجى التحديث.</p></div></div>';
-    throw new Error("Missing Crypto API.");
-}
-
-const b2a = b => btoa(String.fromCharCode(...new Uint8Array(b)));
-
-// ==========================================
-// UI / MODAL / TOAST CONTROLLER
-// ==========================================
-const tst = document.getElementById('toast');
-let tTimer;
-function showTst(msg, type='info'){
-    tst.className = `t-${type}`;
-    tst.innerHTML = `${type==='succ'?'✅':type==='err'?'❌':type==='warn'?'⚠️':'ℹ️'} ${msg}`;
-    tst.classList.add('show');
-    clearTimeout(tTimer); tTimer = setTimeout(()=>tst.classList.remove('show'), 3000);
-}
-
-const modalOverlay = document.getElementById('custom-modal');
-const mTitle = document.getElementById('m-title');
-const mBody = document.getElementById('m-body');
-const mInput = document.getElementById('m-input');
-const mEntWarn = document.getElementById('m-ent-warn');
-const mActions = document.getElementById('m-actions');
-let currentModalResolve = null;
-
-function showModal(title, bodyHtml, buttons, withInput = false) {
-    return new Promise((resolve) => {
-        currentModalResolve = resolve;
-        mTitle.innerHTML = title; mBody.innerHTML = bodyHtml;
-        mInput.classList.toggle('hidden', !withInput); mInput.value = '';
-        mEntWarn.style.display = 'none';
-        mActions.innerHTML = '';
-        buttons.forEach(b => {
-            const btn = document.createElement('button');
-            btn.className = `modal-btn ${b.class}`; btn.textContent = b.text;
-            btn.dataset.action = b.action;
-            btn.onclick = () => { 
-                if(btn.disabled) return;
-                modalOverlay.classList.remove('show'); 
-                currentModalResolve = null;
-                resolve({action: b.action, val: mInput.value}); 
-            };
-            mActions.appendChild(btn);
-        });
-        modalOverlay.classList.add('show');
-        if(withInput) setTimeout(()=>mInput.focus(), 100);
-        else mActions.querySelector('.modal-btn').focus();
-    });
-}
-
-// Close Modal on Background Click & Esc
-modalOverlay.addEventListener('click', e => {
-    if(e.target === modalOverlay && currentModalResolve) {
-        modalOverlay.classList.remove('show');
-        currentModalResolve({action: 'cancel'});
-        currentModalResolve = null;
-    }
-});
-modalOverlay.addEventListener('keydown', e => {
-    if(!modalOverlay.classList.contains('show')) return;
-    if(e.key === 'Escape' && currentModalResolve) {
-        modalOverlay.classList.remove('show'); currentModalResolve({action: 'cancel'}); currentModalResolve = null;
-    }
-    if(e.key === 'Tab') {
-        const focusables = Array.from(modalOverlay.querySelectorAll('button:not([disabled]), input:not(.hidden)'));
-        if(!focusables.length) return;
-        const first = focusables[0]; const last = focusables[focusables.length - 1];
-        if(e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } 
-        else if(!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-});
-
-mInput.addEventListener('input', e => {
-    const pBtn = mActions.querySelector('.primary'); if(!pBtn) return;
-    const ent = analyzePwd(e.target.value, false).e; // Strict entropy check
-    if(ent < 35) { pBtn.disabled = true; mEntWarn.style.display = 'block'; pBtn.textContent = 'كلمة السر ضعيفة'; } 
-    else { pBtn.disabled = false; mEntWarn.style.display = 'none'; pBtn.textContent = 'JSON مشفر 🔒'; }
+const CFG = Object.freeze({
+    CLIP_TTL_MS: 45000,
+    IDLE_HIDE_MS: 60000,
+    PBKDF2_ITERS: 600000,
+    MAX_HIST: 50,
+    HIBP_TTL_MS: 300000,
+    MIN_EXPORT_ENTROPY: 30,
+    MIN_POOL_SIZE: 10
 });
 
 // ==========================================
-// ANIMATIONS & EFFECTS
+// IIFE ISOLATION & SECURITY CORE
 // ==========================================
-function animateNumber(elId, to, suffix, duration=500) {
-    const el = document.getElementById(elId);
-    if(!el) return;
-    const start = performance.now();
-    const from = parseFloat(el.dataset.val) || 0;
-    el.dataset.val = to;
-    requestAnimationFrame(function step(now) {
-        const t = Math.min((now - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - t, 3);
-        el.textContent = Math.round(from + (to - from) * ease) + suffix;
-        if(t < 1) requestAnimationFrame(step);
-    });
-}
-
-// Sliding Indicator
-const tabInd = document.getElementById('tab-indicator');
-const subNav = document.getElementById('sub-nav');
-function updateTabIndicator(btn) {
-    tabInd.style.left = btn.offsetLeft + 'px';
-    tabInd.style.width = btn.offsetWidth + 'px';
-}
-
-// Colorizer
-function getCharClass(c) {
-    if(/[A-Z]/.test(c)) return 'c-up';
-    if(/[0-9]/.test(c)) return 'c-num';
-    if(/[^a-zA-Z0-9]/.test(c)) return 'c-sym';
-    return 'c-low';
-}
-function updateDisplayColor() {
-    const inp = document.getElementById('out-pwd');
-    const col = document.getElementById('out-colored');
-    const isVis = inp.type === 'text';
+(async function MainApp() {
+    'use strict';
     
-    document.getElementById('screen-warn').style.display = isVis ? 'flex' : 'none';
-    
-    if(!isVis) {
-        col.innerHTML = '<span class="c-masked">' + '•'.repeat(Math.min(inp.value.length, 32)) + '</span>';
-        return;
-    }
-    
-    let html = '';
-    for(let i=0; i<inp.value.length; i++) {
-        html += `<span class="${getCharClass(inp.value[i])}">${esc(inp.value[i])}</span>`;
-    }
-    col.innerHTML = html;
-}
-
-// Typewriter Effect
-const prefNoMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-async function typePassword(pwd) {
-    const inp = document.getElementById('out-pwd');
-    if(prefNoMotion) {
-        inp.value = pwd; updateDisplayColor(); return;
-    }
-    
-    // Disable inputs during type
-    document.getElementById('btn-regen').disabled = true;
-    inp.value = ''; updateDisplayColor();
-    
-    for(let i = 0; i < pwd.length; i++) {
-        inp.value += pwd[i];
-        updateDisplayColor();
-        await new Promise(r => setTimeout(r, Math.min(150 / pwd.length, 10)));
-    }
-    document.getElementById('btn-regen').disabled = false;
-}
-
-// ==========================================
-// NAVIGATION & CONTROLS BINDING
-// ==========================================
-const views = document.querySelectorAll('.view');
-const navBtns = document.querySelectorAll('.nav-btn');
-navBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        navBtns.forEach(b => b.classList.remove('active')); views.forEach(v => v.classList.remove('active'));
-        btn.classList.add('active'); document.getElementById(btn.dataset.target).classList.add('active');
-        if(btn.dataset.target === 'view-gen') setTimeout(() => updateTabIndicator(document.querySelector('.sub-tab.active')), 50);
-    });
-});
-
-const subTabs = document.querySelectorAll('.sub-tab');
-const modePanels = document.querySelectorAll('.mode-panel');
-let currentMode = 'random';
-subTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        subTabs.forEach(t => t.classList.remove('active')); modePanels.forEach(m => m.classList.add('hidden'));
-        tab.classList.add('active'); currentMode = tab.dataset.mode;
-        document.getElementById('mode-' + currentMode).classList.remove('hidden'); 
-        updateTabIndicator(tab);
-        generatePassword();
-    });
-});
-
-function toggleVis(inpId, btn) {
-    const inp = document.getElementById(inpId); const isPass = inp.type === 'password';
-    inp.type = isPass ? 'text' : 'password';
-    btn.querySelector('.icon-eye').classList.toggle('hidden', isPass);
-    btn.querySelector('.icon-eye-off').classList.toggle('hidden', !isPass);
-    btn.style.color = isPass ? 'var(--accent)' : 'var(--text-main)';
-    if(inpId === 'out-pwd') {
-        updateDisplayColor();
-        resetIdleTimer(); // Delay auto-hide when user clicks it
-    }
-}
-document.getElementById('btn-vis').addEventListener('click', function(){ toggleVis('out-pwd', this) });
-document.getElementById('btn-chk-vis').addEventListener('click', function(){ toggleVis('chk-input', this) });
-
-function updateSliderFill(e) {
-    const pct = ((e.target.value - e.target.min) / (e.target.max - e.target.min)) * 100;
-    e.target.style.setProperty('--slider-fill', `${pct}%`);
-}
-['sl-len','sl-words','sl-pron','sl-pin'].forEach(id => {
-    const sl = document.getElementById(id);
-    sl.addEventListener('input', e => { 
-        document.getElementById(id.replace('sl-','val-')).textContent = e.target.value; 
-        updateSliderFill(e); generatePassword(); 
-    });
-});
-
-const cbUp = document.getElementById('cb-up'), cbLow = document.getElementById('cb-low');
-const cbNum = document.getElementById('cb-num'), cbSym = document.getElementById('cb-sym');
-const inCus = document.getElementById('in-custom'), symWarn = document.getElementById('sym-warn');
-[cbUp, cbLow, cbNum, cbSym].forEach(cb => { cb.addEventListener('change', () => { if(![cbUp, cbLow, cbNum, cbSym].some(c => c.checked)) cbLow.checked = true; generatePassword(); }); });
-[document.getElementById('cb-exc'), document.getElementById('sel-sep'), document.getElementById('cb-p-cap'), document.getElementById('cb-p-num'), document.getElementById('cb-p-sym'), document.getElementById('cb-pr-cap'), document.getElementById('cb-pr-num'), document.getElementById('cb-pr-sym')].forEach(el => el.addEventListener('change', generatePassword));
-inCus.addEventListener('input', generatePassword);
-
-// ==========================================
-// GENERATION ENGINE & WORDLIST
-// ==========================================
-const C = { u:'ABCDEFGHIJKLMNOPQRSTUVWXYZ', l:'abcdefghijklmnopqrstuvwxyz', n:'0123456789' };
-const AMB = /[il1Lo0O]/g;
-
-// High-entropy compact wordlist (~530 distinct safe English words) -> Yields ~36-40 bits for 4 words.
-const WL = "apple,bacon,cabin,dance,eagle,fable,galaxy,habit,igloo,jacket,kayak,lake,magic,nacho,oasis,pacific,quail,rabbit,safari,taco,unicorn,valley,waffle,yacht,zebra,acorn,basket,cactus,desert,echo,falcon,ghost,hammer,island,jungle,koala,lemon,mango,ninja,ocean,panda,quantum,radar,salad,tiger,umbra,velvet,wagon,xenon,yogurt,zombie,anchor,balloon,castle,dragon,engine,forest,guitar,helmet,jewel,kettle,lizard,monkey,nebula,orchid,pirate,quartz,rocket,spider,turtle,umpire,vampire,wizard,yellow,zigzag,abstract,breeze,crimson,dilemma,eclipse,frontier,glacier,horizon,illusion,journey,kinetic,lunar,mystic,nomad,oracle,paradox,quest,radiant,stellar,twilight,utopia,vortex,whisper,zenith,amber,blizzard,cosmos,dynamo,enigma,flare,gravity,harmony,infinity,jubilee,karma,legacy,matrix,nova,odyssey,phantom,rhythm,symphony,titan,universe,velocity,wisdom,zephyr,abyss,beacon,cascade,dawn,emerald,forge,genesis,halo,ignite,jade,krypton,lucid,meteor,nexus,omega,pulse,quasar,realm,solstice,tether,valor,weaver,apex,blade,cipher,drift,echoes,fossil,glyph,havoc,icon,jolt,kraken,loom,myth,neon,onyx,prism,rift,shard,talon,usher,vault,ward,yawn,zealot,alpha,bravo,charlie,delta,foxtrot,golf,hotel,india,juliet,kilo,lima,mike,november,oscar,papa,romeo,sierra,tango,uniform,victor,whiskey,xray,yankee,zulu,ability,access,account,action,active,actual,advice,affair,agency,agenda,agent,alarm,album,alien,alive,alley,allow,alloy,alone,alter,amuse,angel,anger,angle,angry,animal,ankle,annual,answer,antic,anxiety,anyway,apart,apology,appear,apply,arcade,archer,arctic,arena,argue,arise,armor,army,arrive,arrow,artist,ashes,aside,asleep,asset,assign,assist,assume,assure,atomic,attach,attack,attend,attic,attract,auction,audio,audit,august,aunt,aurora,author,auto,autumn,avenue,avoid,award,awake,aware,away,awesome,awful,awkward,axiom,baboon,badge,baffle,baggage,bail,baking,balance,balcony,ball,bamboo,banana,banner,barber,barely,bargain,barrel,barrier,base,basic,battle,beach,bean,bear,beauty,beaver,become,before,begin,behave,behind,belief,below,belt,bench,benefit,berry,beside,best,better,beyond,bicycle,bidder,bike,bind,biology,bird,birth,bitter,black,blame,blanket,blast,blaze,blend,bless,blind,blink,block,blood,bloom,blossom,blue,blur,board,boat,body,boil,bold,bomb,bond,bone,book,boom,boot,border,boss,bother,bottle,bottom,bounce,bowl,brain,brake,branch,brave,bread,break,brick,brief,bright,bring,brisk,broad,broken,bronze,broom,brother,brown,brush,bubble,bucket,budget,build,bullet,bundle,burden,burn,burst,bush,business,butter,button,buyer,cable,cadet,cage,cake,call,calm,camera,camp,canal,cancel,candy,cannon,canoe,canvas,canyon,capable,capital,captain,carbon,card,cargo,carpet,carry,cart,carve,case,cash,casino,casual,catch,cause,cave,cease,celery,cell,cement,census,center,ceramic,cereal,certain,chain,chair,chalk,chamber,chance,change,channel,chaos,chapter,charge,charm,chart,chase,cheap,check,cheese,chef,cherry,chest,chicken,chief,child,chill,chime,choice,choose,chorus,church,cider,cigar,cinema,circle,citizen,city,civil,claim,class,clause,claw,clay,clean,clear,clerk,clever,click,client,cliff,climb,clinic,clock,clone,close,cloth,cloud,club,clue,cluster,coach,coal,coast,coat,cobra,code,coffee,coil,coin,cold,collar,collect,color,column,combine,come,comedy,comfort,comic,common,company,compel,complex,concept,concert,conduct,confirm,connect,consent,consist,contact,contain,content,contest,context,control,convey,cook,cool,copper,copy,coral,core,corn,corner,correct,cost,cotton,couch,cough,could,count,country,couple,course,cover,craft,crash,crater,crawl,crazy,cream,create,credit,creek,crew,crime,crisp,critic,crop,cross,crowd,crown,crucial,cruel,cruise,crumble,crunch,crush,crystal,cube,culture,cupboard,curious,current,curtain,curve,cushion,custom,cute,cycle,cylinder".split(',');
-
-function secRand(max) {
-    const arr = new Uint32Array(1);
-    const limit = 4294967296 - (4294967296 % max);
-    do { crypto.getRandomValues(arr); } while (arr[0] >= limit);
-    return arr[0] % max;
-}
-
-let lastPoolSize = 0; // For entropy panel
-
-async function generatePassword() {
-    let pwd = '';
-    
-    if(currentMode === 'random') {
-        let pools = [], full = '';
-        let u = C.u, l = C.l, n = C.n, s = inCus.value || '!@#$%^&*';
-        if(document.getElementById('cb-exc').checked){ u=u.replace(AMB,''); l=l.replace(AMB,''); n=n.replace(AMB,''); s=s.replace(AMB,''); }
-        if(cbUp.checked && u) pools.push(u); if(cbLow.checked && l) pools.push(l);
-        if(cbNum.checked && n) pools.push(n); if(cbSym.checked && s) pools.push(s);
-        pools.forEach(p => full += p);
-        
-        lastPoolSize = full.length;
-        symWarn.style.display = (full.length > 0 && full.length < 10) ? 'block' : 'none';
-        if(!full.length) return;
-        
-        const len = parseInt(document.getElementById('sl-len').value);
-        let req = pools.map(p => p[secRand(p.length)]);
-        let extra = ''; for(let i=req.length; i<len; i++) extra += full[secRand(full.length)];
-        let arr = [...extra]; req.forEach(c => { arr.splice(secRand(arr.length+1), 0, c); });
-        pwd = arr.join('');
-    } 
-    else if(currentMode === 'passphrase') {
-        const count = parseInt(document.getElementById('sl-words').value);
-        lastPoolSize = WL.length;
-        let wArr = [];
-        for(let i=0; i<count; i++){
-            let w = WL[secRand(WL.length)];
-            if(document.getElementById('cb-p-cap').checked) w = w[0].toUpperCase() + w.slice(1);
-            wArr.push(w);
-        }
-        const sep = document.getElementById('sel-sep').value;
-        pwd = wArr.join(sep);
-        if(document.getElementById('cb-p-num').checked) pwd += sep + secRand(100);
-        if(document.getElementById('cb-p-sym').checked) pwd += sep + '!@#$%^&*' [secRand(8)];
-    }
-    else if(currentMode === 'pronounceable') {
-        const v = 'aeiou', c = 'bcdfghjklmnpqrstvwxyz';
-        lastPoolSize = 26;
-        const len = parseInt(document.getElementById('sl-pron').value);
-        let isVow = secRand(2) === 0; let arr = [];
-        for(let i=0; i<len; i++){ arr.push((isVow?v:c)[secRand(isVow?5:21)]); isVow = !isVow; }
-        if(document.getElementById('cb-pr-num').checked) { arr.splice(secRand(arr.length), 0, C.n[secRand(10)]); lastPoolSize += 10; }
-        if(document.getElementById('cb-pr-sym').checked) { arr.splice(secRand(arr.length), 0, '!@#$-'[secRand(5)]); lastPoolSize += 5; }
-        pwd = arr.join('');
-        if(document.getElementById('cb-pr-cap').checked) pwd = pwd[0].toUpperCase() + pwd.slice(1);
-    }
-    else if(currentMode === 'pin') {
-        lastPoolSize = 10;
-        for(let i=0; i<parseInt(document.getElementById('sl-pin').value); i++) pwd += C.n[secRand(10)];
-    }
-
-    await typePassword(pwd);
-    updateGenStr(pwd);
-}
-
-document.getElementById('btn-regen').addEventListener('click', () => {
-    generatePassword();
-});
-
-// ==========================================
-// STRENGTH ANALYZER & ENTROPY PANEL
-// ==========================================
-function analyzePwd(pwd, isGenerationContext = true) {
-    if(!pwd) return { e:0 };
-    
-    // Strict Passphrase Formula
-    if(isGenerationContext && currentMode === 'passphrase') {
-        const count = parseInt(document.getElementById('sl-words').value);
-        let ent = count * Math.log2(WL.length);
-        if(document.getElementById('cb-p-num').checked) ent += Math.log2(100);
-        if(document.getElementById('cb-p-sym').checked) ent += Math.log2(8);
-        return { e: ent };
-    }
-    
-    // Strict Random Formula
-    let p = 0;
-    if(/[a-z]/.test(pwd)) p+=26; if(/[A-Z]/.test(pwd)) p+=26;
-    if(/[0-9]/.test(pwd)) p+=10; if(/[^a-zA-Z0-9]/.test(pwd)) p+=32;
-    if(p===0) p=1;
-    return { e: pwd.length * Math.log2(p) };
-}
-
-function timeStr(e) {
-    const s = Math.pow(2, e) / 1e11; // 100 Billion hashes/sec
-    if(s<1) return 'فوراً ❌'; if(s<60) return 'ثوانٍ ⚠️';
-    if(s<3600) return Math.floor(s/60)+' دقيقة ⚠️';
-    if(s<86400) return Math.floor(s/3600)+' ساعة';
-    if(s<31536e3) return Math.floor(s/86400)+' يوم';
-    if(s<31536e6) return Math.floor(s/31536e3)+' سنة ✓';
-    return 'قرون 🛡️';
-}
-
-function drawBars(e, prefix, lblId) {
-    let act=0, c, t;
-    if(e===0){ c='var(--bg-elevated)'; t='---'; }
-    else if(e<=35){ c='var(--danger)'; t='ضعيفة'; act=1; }
-    else if(e<=59){ c='var(--warning)'; t='مقبولة'; act=2; }
-    else if(e<=85){ c='var(--info)'; t='قوية'; act=3; }
-    else{ c='var(--success)'; t='ممتازة 🛡️'; act=4; }
-
-    for(let i=1; i<=4; i++) {
-        const b = document.querySelector(`#${prefix}${i} .bar`);
-        if(!b) continue;
-        if(i <= act) { b.style.width = '100%'; b.style.backgroundColor = c; b.parentElement.style.boxShadow = `0 0 8px ${c}66`; } 
-        else { b.style.width = '0%'; b.style.backgroundColor = 'var(--bg-elevated)'; b.parentElement.style.boxShadow = 'none'; }
-    }
-    if(lblId){ const el=document.getElementById(lblId); el.textContent=t; el.style.color = act?c:'var(--text-muted)'; }
-}
-
-function updateGenStr(pwd) {
-    const r = analyzePwd(pwd, true);
-    drawBars(r.e, 'b', 'lbl-strength');
-    document.getElementById('lbl-time').textContent = timeStr(r.e);
-    
-    // Update Panel
-    document.getElementById('ep-pool').textContent = lastPoolSize;
-    document.getElementById('ep-len').textContent = pwd.length;
-    animateNumber('ep-bits', r.e, ' bits');
-    document.getElementById('ep-crack').textContent = timeStr(r.e).replace(' ⚠️','').replace(' ❌','').replace(' ✓','');
-}
-
-// Toggle Entropy Panel
-document.getElementById('btn-toggle-ep').addEventListener('click', () => {
-    const p = document.getElementById('ep-panel');
-    p.style.display = p.style.display === 'block' ? 'none' : 'block';
-});
-
-// ==========================================
-// PWNED CHECKER (With Cache)
-// ==========================================
-let chkTimer;
-const chkInp = document.getElementById('chk-input');
-chkInp.addEventListener('input', e => {
-    document.getElementById('pwned-res').style.display='none';
-    clearTimeout(chkTimer);
-    chkTimer = setTimeout(() => { 
-        const pwd = e.target.value; const r = analyzePwd(pwd, false);
-        document.getElementById('chk-time').textContent = pwd ? timeStr(r.e) : '---';
-        animateNumber('chk-ent', r.e, ' bits');
-        drawBars(r.e, 'cb', 'chk-lbl-str');
-    }, 300);
-});
-
-const hibpCache = new Map(); // In-Memory TTL Cache
-let isPwnedLoading = false;
-document.getElementById('btn-pwned').addEventListener('click', async function() {
-    if(isPwnedLoading) return;
-    const pwd = chkInp.value.trim(); const box = document.getElementById('pwned-res');
-    if(!pwd){ showTst('أدخل كلمة مرور أولاً', 'warn'); return; }
-    
-    isPwnedLoading = true; this.disabled = true; this.textContent = '⏳ جاري الفحص...';
-    box.style.display='block'; box.style.background='var(--bg-elevated)'; box.style.color='var(--text-main)'; box.style.borderColor='var(--border)'; box.textContent = 'يتم الاستعلام بشكل آمن...';
-    
+    // Boot Smoke Test
     try {
-        const buf = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(pwd));
-        const hex = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
-        const prefix = hex.substring(0,5);
-        
-        let cnt = 0;
-        // Check Cache (5 min TTL)
-        if(hibpCache.has(prefix) && Date.now() - hibpCache.get(prefix).ts < 300000) {
-            const lines = hibpCache.get(prefix).data.split('\n');
-            for(let l of lines) { l = l.trim(); if(l.startsWith(hex.substring(5))){ cnt = parseInt(l.split(':')[1]); break; } }
-        } else {
-            const res = await fetch('https://api.pwnedpasswords.com/range/'+prefix, { headers:{'Add-Padding':'true'} });
-            if(!res.ok) throw new Error();
-            const txt = await res.text();
-            hibpCache.set(prefix, { data: txt, ts: Date.now() }); // Save to cache
-            
-            const lines = txt.split('\n');
-            for(let l of lines) {
-                l = l.trim(); if(!/^[0-9A-F]{35}:\d+$/i.test(l)) continue; 
-                if(l.startsWith(hex.substring(5))){ cnt = parseInt(l.split(':')[1]); break; }
-            }
-        }
-        
-        if(cnt>0){ box.style.background='var(--danger-dim)'; box.style.color='var(--danger)'; box.style.borderColor='rgba(255,51,102,0.3)'; box.innerHTML=`⚠️ تم تسريبها <strong>${cnt.toLocaleString('ar')}</strong> مرة. تجنب استخدامها!`; } 
-        else { box.style.background='var(--success-dim)'; box.style.color='var(--success)'; box.style.borderColor='rgba(0,230,118,0.3)'; box.innerHTML='✅ آمنة! لم تظهر في أي تسريب معروف.'; }
-    } catch(e) {
-        box.style.background='rgba(255,170,0,0.1)'; box.style.color='var(--warning)'; box.style.borderColor='rgba(255,170,0,0.3)'; box.textContent = 'فشل الاتصال بالخادم. تحقق من الإنترنت.';
-    }
-    setTimeout(() => { isPwnedLoading = false; this.disabled = false; this.textContent = '🔍 فحص في قاعدة بيانات HIBP'; }, 1000);
-});
-
-// ==========================================
-// SECURE HISTORY MANAGER (RAM Only)
-// ==========================================
-let hist = []; 
-const cbHist = document.getElementById('cb-hist');
-
-function saveHist(pwd) {
-    if(!cbHist.checked) return;
-    if(hist.length > 0 && hist[0].p === pwd) return;
-    hist.unshift({ p:pwd, d:new Date().toLocaleString('ar-SA') });
-    if(hist.length > 50) hist.pop();
-    renderHist();
-}
-
-cbHist.addEventListener('change', async e => {
-    if(!e.target.checked && hist.length>0) {
-        const res = await showModal('إيقاف الحفظ', 'سيتم مسح جميع كلمات المرور الحالية من الذاكرة العشوائية. هل أنت متأكد؟', 
-            [{text:'إلغاء', class:'cancel', action:false}, {text:'نعم، امسح السجل', class:'confirm', action:true}]);
-        if(res.action) { hist=[]; renderHist(); } 
-        else { e.target.checked = true; }
-    } else if(e.target.checked) { showTst('تم تفعيل الحفظ في الجلسة', 'succ'); }
-});
-
-function esc(str){ return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function renderHist(){
-    const list = document.getElementById('hist-list'); list.innerHTML='';
-    if(!hist.length){ 
-        list.innerHTML=`<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>السجل فارغ<br><small style="color:var(--text-muted)">سيتم حفظ كلمات المرور هنا عند النسخ</small></span></div>`; 
-        return; 
-    }
-    
-    hist.forEach((i, idx) => {
-        const d = document.createElement('div'); d.className='history-item';
-        d.innerHTML = `
-            <button class="btn-del-item" aria-label="حذف" data-idx="${idx}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
-            <div class="hist-pwd">
-                <span class="hist-val masked" data-idx="${idx}">••••••••</span>
-                <button class="btn-reveal" aria-label="إظهار"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
-            </div>
-            <div class="hist-meta"><span class="hist-date">${esc(i.d)}</span><button class="btn-copy-sm">نسخ</button></div>`;
-        
-        // Reveal
-        const valSpan = d.querySelector('.hist-val');
-        d.querySelector('.btn-reveal').addEventListener('click', () => {
-            const isMasked = valSpan.classList.contains('masked');
-            valSpan.classList.toggle('masked');
-            valSpan.textContent = isMasked ? hist[parseInt(valSpan.dataset.idx)].p : '••••••••';
-        });
-        
-        // Copy & Delete
-        d.querySelector('.btn-copy-sm').addEventListener('click', ()=>doCopy(hist[parseInt(valSpan.dataset.idx)].p));
-        d.querySelector('.btn-del-item').addEventListener('click', (e) => {
-            hist.splice(parseInt(e.currentTarget.dataset.idx), 1);
-            renderHist();
-        });
-        list.appendChild(d);
-    });
-}
-
-document.getElementById('btn-hist-clear').addEventListener('click', async ()=>{
-    if(!hist.length) return;
-    const res = await showModal('مسح السجل', 'هل أنت متأكد من مسح جميع كلمات المرور من ذاكرة الجلسة؟', 
-        [{text:'إلغاء', class:'cancel', action:false}, {text:'مسح نهائي', class:'confirm', action:true}]);
-    if(res.action) { hist=[]; renderHist(); showTst('تم المسح', 'succ'); }
-});
-
-document.getElementById('btn-hist-exp').addEventListener('click', async ()=>{
-    if(!hist.length) return showTst('السجل فارغ', 'warn');
-    const res = await showModal('تصدير السجل', 'اختر طريقة التصدير. <span style="color:var(--warning)">تصدير النص العادي مكشوف!</span>', 
-        [{text:'إلغاء', class:'cancel', action:'cancel'}, {text:'TXT مكشوف ⚠️', class:'confirm', action:'txt'}, {text:'JSON مشفر 🔒', class:'primary', action:'json'}], true);
-    
-    if(res.action === 'cancel') return;
-    
-    const ts = new Date().toISOString().slice(0,16).replace('T','_').replace(':','-');
-    
-    if(res.action === 'txt') {
-        const confirmTxt = await showModal('⚠️ تحذير أمني خطير', 'ستصدر كلمات المرور في ملف نصي مكشوف. أي شخص يملك وصول لجهازك سيتمكن من قراءتها.',
-            [{text:'تراجع', class:'primary', action:false}, {text:'أفهم الخطورة، صَدِّر', class:'confirm', action:true}]);
-        if(!confirmTxt.action) return;
-        let txt = 'مُـوَلِّـد — سجل كلمات المرور\n\n'; hist.forEach(i => txt += `[${i.d}]\n${i.p}\n\n`);
-        dlFile(txt, `mowallid_export_${ts}.txt`, 'text/plain');
-    } 
-    else if(res.action === 'json') {
-        if(!res.val || analyzePwd(res.val, false).e < 35) return showTst('فشل: كلمة المرور ضعيفة', 'err');
-        const enc = new TextEncoder(); const salt = crypto.getRandomValues(new Uint8Array(16));
-        const baseKey = await crypto.subtle.importKey("raw", enc.encode(res.val), "PBKDF2", false, ["deriveKey"]);
-        const key = await crypto.subtle.deriveKey({name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256"}, baseKey, {name: "AES-GCM", length: 256}, false, ["encrypt"]);
+        const key = await crypto.subtle.generateKey({name:'AES-GCM',length:128},false,['encrypt','decrypt']);
         const iv = crypto.getRandomValues(new Uint8Array(12));
-        const ct = await crypto.subtle.encrypt({name: "AES-GCM", iv}, key, enc.encode(JSON.stringify(hist)));
-        
-        const payload = JSON.stringify({ v:1, salt:b2a(salt), iv:b2a(iv), ct:b2a(ct) });
-        dlFile(payload, `mowallid_export_${ts}.json`, 'application/json'); showTst('تم التصدير المشفر', 'succ');
+        const ct = await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode('test'));
+        const pt = await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct);
+        if(new TextDecoder().decode(pt)!=='test') throw new Error('Data mismatch');
+        document.getElementById('boot-splash').style.opacity = '0';
+        setTimeout(() => document.getElementById('boot-splash').remove(), 500);
+    } catch(e) {
+        document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center"><div style="background:#1a0505;border:1px solid #ff3366;color:#ff3366;padding:2rem;border-radius:16px;max-width:400px"><h2>⚠️ خلل أمني</h2><p style="margin-top:1rem">خوارزميات التشفير معطلة في هذا المتصفح. تأكد من عملك في بيئة آمنة.</p></div></div>';
+        throw e;
     }
-});
 
-function dlFile(content, name, type) {
-    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([content],{type}));
-    a.download = name; a.click(); URL.revokeObjectURL(a.href);
-}
+    // Encoding & Escaping
+    const b2a = b => btoa(Array.from(new Uint8Array(b)).reduce((s, byte) => s + String.fromCharCode(byte), ''));
+    const a2b = a => Uint8Array.from(atob(a), c => c.charCodeAt(0));
+    const esc = str => str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/\//g,'&#47;').replace(/`/g,'&#96;');
 
-// ==========================================
-// SECURE CLIPBOARD & AUTO-MASK
-// ==========================================
-let cTimer, copyCdInterval;
-async function doCopy(txt){
-    try {
-        if(!navigator.clipboard || !navigator.clipboard.writeText) throw new Error();
-        await navigator.clipboard.writeText(txt);
-        
-        // Micro-animation for main copy button
-        const btnMain = document.getElementById('btn-copy');
-        btnMain.style.transform = 'scale(0.92)'; setTimeout(()=>btnMain.style.transform = 'none', 150);
-        btnMain.style.boxShadow = '0 0 30px var(--accent-glow)'; setTimeout(()=>btnMain.style.boxShadow = '', 400);
-        
-        // Countdown Logic
-        const badge = document.getElementById('copy-cd');
-        const icon = document.getElementById('copy-icon');
-        const txtSpan = document.getElementById('copy-txt');
-        
-        icon.style.display = 'none'; txtSpan.style.display = 'none';
-        badge.style.display = 'inline-block';
-        
-        let sec = 45; badge.textContent = sec + 's';
-        clearInterval(copyCdInterval);
-        copyCdInterval = setInterval(() => {
-            sec--; badge.textContent = sec + 's';
-            if(sec <= 0) {
-                clearInterval(copyCdInterval);
-                badge.style.display = 'none'; icon.style.display = 'inline-block'; txtSpan.style.display = 'inline-block';
-            }
+    // Secure Random
+    function secRand(max) {
+        if (max <= 1) return 0;
+        const arr = new Uint32Array(1);
+        const limit = 4294967296 - (4294967296 % max);
+        do { crypto.getRandomValues(arr); } while (arr[0] >= limit);
+        return arr[0] % max;
+    }
+
+    // Boot Integrity Token
+    setTimeout(async () => {
+        const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(document.documentElement.outerHTML));
+        const token = Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(-8).toUpperCase();
+        document.getElementById('integrity-token').textContent = `Document SHA-256: …${token}`;
+    }, 100);
+
+    // Network Interceptor
+    const netDot = document.getElementById('net-dot');
+    const origFetch = window.fetch;
+    window.fetch = async function(...args) {
+        if(netDot) { netDot.style.background = 'var(--warning)'; netDot.style.boxShadow = '0 0 8px var(--warning)'; }
+        try { return await origFetch.apply(this, args); }
+        finally { if(netDot) setTimeout(() => { netDot.style.background = 'var(--success)'; netDot.style.boxShadow = '0 0 6px currentColor'; }, 400); }
+    };
+
+    // DevTools Passive Monitor
+    if(navigator.maxTouchPoints === 0) {
+        setInterval(() => {
+            const devOpen = (window.outerWidth - window.innerWidth > 160) || (window.outerHeight - window.innerHeight > 160);
+            updateWarningBadge(devOpen);
         }, 1000);
-
-        clearTimeout(cTimer);
-        cTimer = setTimeout(async ()=>{
-            try { await navigator.clipboard.writeText(''); showTst('تم تطهير الحافظة أمنياً ✓', 'info'); } catch(e){}
-        }, 45000);
-        
-        if(document.getElementById('view-gen').classList.contains('active')) saveHist(txt);
-    } catch(e){ showTst('متصفحك يمنع النسخ الآمن.', 'err'); }
-}
-
-document.getElementById('btn-copy').addEventListener('click', ()=>{ const val = document.getElementById('out-pwd').value; if(val) doCopy(val); });
-document.getElementById('btn-copy-regen').addEventListener('click', ()=>{ const val = document.getElementById('out-pwd').value; if(val) doCopy(val); document.getElementById('btn-regen').click(); });
-
-// Shoulder-Surfing Protection
-let idleTimer;
-function resetIdleTimer() {
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-        const inp = document.getElementById('out-pwd');
-        if(inp.type === 'text') {
-            document.getElementById('btn-vis').click(); // trigger toggle vis to hide
-            showTst('🔒 تم إخفاء الكلمة تلقائياً', 'info');
-        }
-    }, 180000);
-}
-document.addEventListener('mousemove', resetIdleTimer);
-document.addEventListener('keydown', resetIdleTimer);
-
-document.addEventListener('visibilitychange', () => {
-    if(document.visibilityState === 'hidden') {
-        const inp = document.getElementById('out-pwd');
-        if(inp.type === 'text') document.getElementById('btn-vis').click();
     }
-});
 
-// Shortcuts
-document.addEventListener('keydown', e => {
-    if(!document.getElementById('view-gen').classList.contains('active')) return;
-    if((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); document.getElementById('btn-regen').click(); }
-    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c' && (document.activeElement.id === 'out-pwd' || document.activeElement.id === 'out-colored')) { e.preventDefault(); document.getElementById('btn-copy').click(); }
-});
+    function updateWarningBadge(devOpen = false) {
+        const warnBadge = document.getElementById('screen-warn');
+        if(!warnBadge) return;
+        const isVis = document.getElementById('out-pwd').type === 'text';
+        const isBlur = document.getElementById('pwd-blur-container').classList.contains('blurred');
+        
+        warnBadge.style.display = (devOpen || isVis || isBlur) ? 'flex' : 'none';
+        
+        if (isBlur) {
+            warnBadge.innerHTML = '⚠️ النافذة في الخلفية'; warnBadge.style.background = 'var(--warning)'; warnBadge.style.color = 'var(--text-dark)'; warnBadge.style.borderColor = 'var(--warning)';
+        } else if (devOpen) {
+            warnBadge.innerHTML = '🔍 DevTools مفتوح'; warnBadge.style.background = 'var(--warning)'; warnBadge.style.color = 'var(--text-dark)'; warnBadge.style.borderColor = 'var(--warning)';
+        } else {
+            warnBadge.innerHTML = '📸 مرئية على الشاشة'; warnBadge.style.background = 'var(--danger-dim)'; warnBadge.style.color = 'var(--danger)'; warnBadge.style.borderColor = 'rgba(255,51,102,0.3)';
+        }
+    }
 
-document.getElementById('btn-shortcuts').addEventListener('click', () => {
-    showModal('⌨️ اختصارات لوحة المفاتيح', `
-        <table style="width:100%; text-align:right; border-collapse:collapse; margin-bottom:10px;">
-            <tr><th style="padding:6px; border-bottom:1px solid var(--border)">الاختصار</th><th style="padding:6px; border-bottom:1px solid var(--border)">الوظيفة</th></tr>
-            <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl + Enter</td><td style="padding:6px;">توليد جديد</td></tr>
-            <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl + C</td><td style="padding:6px;">نسخ آمن</td></tr>
-            <tr><td style="padding:6px; color:var(--accent); direction:ltr">Escape</td><td style="padding:6px;">إغلاق النوافذ</td></tr>
-        </table>
-    `, [{text:'حسناً', class:'cancel', action:false}]);
-});
+    // ==========================================
+    // THEME & HAPTICS
+    // ==========================================
+    const COLORS = { 'الأخضر الحمضي (الافتراضي)': '#ccff00', 'الأزرق الكهربائي': '#00d8ff', 'البنفسجي': '#b06dff', 'البرتقالي': '#ffaa00', 'الأبيض': '#ffffff' };
+    function setAccent(hex) { document.documentElement.style.setProperty('--accent', hex); document.getElementById('meta-theme-color').content = hex; }
+    setAccent('#ccff00'); // No storage session leak by design
 
-// Privacy Font Toggle
-document.getElementById('cb-privacy-font').addEventListener('change', e => {
-    if(e.target.checked) { document.body.classList.add('privacy-font'); document.getElementById('font-link').disabled = true; } 
-    else { document.body.classList.remove('privacy-font'); document.getElementById('font-link').disabled = false; }
-});
+    const HAPTIC = { COPY:[20, 10, 20], EXPIRE:[10, 5, 10, 5, 10], SAFE:[50], LEAK:[100, 50, 100], REGEN:[15], EXPORT:[30,15,30,15,30], IMPORT:[20,10,50], CLEAR:[100,50,100,50,100] };
+    const vibrate = (p) => { if(navigator.vibrate) navigator.vibrate(p); };
 
-// INIT
-setTimeout(() => {
-    ['sl-len','sl-words','sl-pron','sl-pin'].forEach(id => { const sl = document.getElementById(id); sl.dispatchEvent(new Event('input')); });
-    updateTabIndicator(document.querySelector('.sub-tab.active'));
-    renderHist();
-}, 50);
+    // ==========================================
+    // UI / MODAL / TOAST CONTROLLER
+    // ==========================================
+    const tst = document.getElementById('toast');
+    let tTimer;
+    function showTst(msg, type='info'){
+        tst.className = `t-${type}`;
+        tst.innerHTML = `${type==='succ'?'✅':type==='err'?'❌':type==='warn'?'⚠️':'ℹ️'} ${msg}`;
+        tst.classList.add('show');
+        clearTimeout(tTimer); tTimer = setTimeout(()=>tst.classList.remove('show'), 3000);
+    }
 
-// PWA Manifest Definition (Inline SVG)
-const svgIcon = 'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzAwMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNzAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjY2NmZjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+UzwvdGV4dD48L3N2Zz4=';
-const manifest = { "name": "مُـوَلِّـد Password Gen", "short_name": "مُـوَلِّـد", "start_url": ".", "scope": "/", "display": "standalone", "background_color": "#000000", "theme_color": "#ccff00", "icons": [ { "src": "data:image/svg+xml;base64," + svgIcon, "sizes": "192x192", "type": "image/svg+xml" }, { "src": "data:image/svg+xml;base64," + svgIcon, "sizes": "512x512", "type": "image/svg+xml" } ] };
-document.getElementById('manifest-link').href = 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifest));
+    const modalOverlay = document.getElementById('custom-modal');
+    const mInput = document.getElementById('m-input');
+    const mEntWarn = document.getElementById('m-ent-warn');
+    const mActions = document.getElementById('m-actions');
+    let currentModalResolve = null;
 
+    function showModal(title, bodyText, buttons, withInput = false, forceValidation = true, inputPlaceholder = "أدخل كلمة مرور قوية للتشفير", isHTML = false) {
+        return new Promise((resolve) => {
+            currentModalResolve = resolve;
+            document.getElementById('m-title').textContent = title; 
+            if(isHTML) document.getElementById('m-body').innerHTML = bodyText;
+            else document.getElementById('m-body').textContent = bodyText;
+            
+            mInput.classList.toggle('hidden', !withInput); mInput.value = '';
+            mInput.placeholder = inputPlaceholder; mInput.dataset.validate = forceValidation ? "true" : "false";
+            mEntWarn.style.display = 'none'; mActions.innerHTML = '';
+            
+            buttons.forEach(b => {
+                const btn = document.createElement('button');
+                btn.className = `modal-btn ${b.class}`; btn.textContent = b.text;
+                btn.onclick = () => { 
+                    if(btn.disabled) return;
+                    const val = mInput.value; mInput.value = ''; 
+                    modalOverlay.classList.remove('show'); currentModalResolve = null; resolve({action: b.action, val}); 
+                };
+                mActions.appendChild(btn);
+            });
+            modalOverlay.classList.add('show');
+            if(withInput) setTimeout(()=>mInput.focus(), 100); else mActions.querySelector('.modal-btn').focus();
+        });
+    }
+
+    const dismissModal = () => { if(currentModalResolve) { mInput.value = ''; modalOverlay.classList.remove('show'); currentModalResolve({action: 'cancel'}); currentModalResolve = null; } };
+    modalOverlay.addEventListener('click', e => { if(e.target === modalOverlay) dismissModal(); });
+    modalOverlay.addEventListener('keydown', e => {
+        if(!modalOverlay.classList.contains('show')) return;
+        if(e.key === 'Escape') dismissModal();
+        if(e.key === 'Tab') {
+            const focusables = Array.from(modalOverlay.querySelectorAll('button:not([disabled]), input:not(.hidden)'));
+            if(!focusables.length) return;
+            const first = focusables[0]; const last = focusables[focusables.length - 1];
+            if(e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } 
+            else if(!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
+
+    mInput.addEventListener('input', e => {
+        if(mInput.dataset.validate !== "true") return;
+        const pBtn = mActions.querySelector('.primary'); if(!pBtn) return;
+        const ent = analyzePwd(e.target.value, false).e; 
+        if(ent < CFG.MIN_EXPORT_ENTROPY) { pBtn.disabled = true; mEntWarn.style.display = 'block'; pBtn.textContent = 'كلمة السر ضعيفة'; } 
+        else { pBtn.disabled = false; mEntWarn.style.display = 'none'; pBtn.textContent = 'متابعة 🔒'; }
+    });
+
+    document.getElementById('btn-settings').addEventListener('click', async () => {
+        let cpHTML = '<div class="color-picker">';
+        for(const [name, hex] of Object.entries(COLORS)) {
+            // Check current accent vs hex
+            const isAct = document.documentElement.style.getPropertyValue('--accent') === hex || (hex === '#ccff00' && !document.documentElement.style.getPropertyValue('--accent'));
+            cpHTML += `<div class="c-dot ${isAct?'active':''}" style="background:${hex}" data-hex="${hex}" title="${name}"></div>`;
+        }
+        cpHTML += '</div>';
+        
+        showModal('الإعدادات ⚙️', `
+            <div style="margin-bottom:16px;"><b>لون الهوية:</b> ${cpHTML}</div>
+            <table style="width:100%; text-align:right; border-collapse:collapse; margin-bottom:10px; font-size:0.85rem;">
+                <tr><th style="padding:6px; border-bottom:1px solid var(--border)">الاختصار</th><th style="padding:6px; border-bottom:1px solid var(--border)">الوظيفة</th></tr>
+                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl + Enter</td><td style="padding:6px;">توليد جديد</td></tr>
+                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl + C</td><td style="padding:6px;">نسخ آمن</td></tr>
+                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Ctrl+Shift+C</td><td style="padding:6px;">نسخ وتوليد جديد</td></tr>
+                <tr><td style="padding:6px; color:var(--accent); direction:ltr">Escape</td><td style="padding:6px;">إغلاق النوافذ المنبثقة</td></tr>
+            </table>
+        `,[{text:'إغلاق', class:'cancel', action:false}], false, false, "", true);
+        
+        setTimeout(() => {
+            document.querySelectorAll('.c-dot').forEach(d => {
+                d.addEventListener('click', e => {
+                    document.querySelectorAll('.c-dot').forEach(x => x.classList.remove('active'));
+                    e.target.classList.add('active'); setAccent(e.target.dataset.hex);
+                });
+            });
+        }, 100);
+    });
+
+    const tTitle = document.getElementById('main-title');
+    tTitle.innerHTML = '<span id="t-text"></span><span class="cursor-blink" id="t-cursor"></span>';
+    const txt = "مُـوَلِّـد"; let ti = 0;
+    const tInt = setInterval(() => {
+        document.getElementById('t-text').textContent += txt[ti++];
+        if(ti >= txt.length) { clearInterval(tInt); setTimeout(() => document.getElementById('t-cursor').classList.add('hidden'), 2000); }
+    }, 150);
+
+    // ==========================================
+    // ANIMATIONS & EFFECTS
+    // ==========================================
+    function animateNumber(elId, to, suffix, duration=500) {
+        const el = document.getElementById(elId); if(!el) return;
+        const start = performance.now(); const from = parseFloat(el.dataset.val) || 0; el.dataset.val = to;
+        requestAnimationFrame(function step(now) {
+            const t = Math.min((now - start) / duration, 1); const ease = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(from + (to - from) * ease) + suffix;
+            if(t < 1) requestAnimationFrame(step);
+        });
+    }
+
+    const tabInd = document.getElementById('tab-indicator');
+    function updateTabIndicator(btn) { if(btn) { tabInd.style.left = btn.offsetLeft + 'px'; tabInd.style.width = btn.offsetWidth + 'px'; } }
+
+    function getCharClass(c) {
+        if(/[A-Z]/.test(c)) return 'c-up'; if(/[0-9]/.test(c)) return 'c-num';
+        if(/[^a-zA-Z0-9\s]/.test(c)) return 'c-sym'; return 'c-low';
+    }
+
+    function fitPwdFont(len) {
+        const size = len > 40 ? '0.85rem' : len > 25 ? '1rem' : len > 16 ? '1.3rem' : '1.7rem';
+        document.querySelectorAll('.pwd-input, .pwd-colored').forEach(el => el.style.fontSize = size);
+    }
+
+    function updateDisplayColor(showDiff = false) {
+        const inp = document.getElementById('out-pwd'); const col = document.getElementById('out-colored');
+        const isVis = inp.type === 'text'; const val = inp.value;
+        
+        updateWarningBadge();
+        
+        if(!isVis) { col.innerHTML = '<span class="c-masked">' + '•'.repeat(Math.min(val.length, 32)) + '</span>'; return; }
+        
+        let html = ''; let visualCounter = 0;
+        for(let i=0; i<val.length; i++) {
+            const char = val[i]; let cClass = getCharClass(char);
+            if(showDiff && prevPwd && (i >= prevPwd.length || prevPwd[i] !== char)) cClass += ' diff-hl';
+            let displayChar = esc(char); if(char === ' ') displayChar = '&nbsp;';
+            
+            let delay = showDiff ? 0 : visualCounter * 12;
+            html += `<span class="${cClass}" style="animation: charDrop 0.3s cubic-bezier(0.34,1.56,0.64,1) ${delay}ms both;">${displayChar}</span>`;
+            visualCounter++;
+            
+            if (currentMode === 'pin' && val.length >= 4) {
+                let groupSize = val.length % 3 === 0 ? 3 : (val.length % 4 === 0 ? 4 : 2);
+                if (visualCounter % groupSize === 0 && i !== val.length - 1) { html += `<span class="c-space">&nbsp;</span>`; }
+            }
+        }
+        col.innerHTML = html;
+        if(showDiff) { setTimeout(() => { col.querySelectorAll('.diff-hl').forEach(el => el.classList.remove('diff-hl')); }, 600); }
+    }
+
+    const prefNoMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let prevPwd = '';
+
+    async function typePassword(pwd) {
+        const inp = document.getElementById('out-pwd'); const col = document.getElementById('out-colored');
+        prevPwd = inp.value;
+        fitPwdFont(pwd.length);
+        
+        if(prefNoMotion) { inp.value = pwd; updateDisplayColor(true); return; }
+        
+        document.getElementById('btn-regen').disabled = true;
+        col.classList.add('morphing'); await new Promise(r => setTimeout(r, 150));
+        inp.value = ''; updateDisplayColor(false); col.classList.remove('morphing');
+        
+        for(let i = 0; i < pwd.length; i++) {
+            inp.value += pwd[i]; updateDisplayColor(false);
+            await new Promise(r => setTimeout(r, Math.min(150 / pwd.length, 8)));
+        }
+        updateDisplayColor(true); 
+        document.getElementById('btn-regen').disabled = false;
+    }
+
+    // ==========================================
+    // NAVIGATION & CONTROLS BINDING
+    // ==========================================
+    const views = document.querySelectorAll('.view'); const navBtns = document.querySelectorAll('.nav-btn');
+    navBtns.forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+            const currentIdx = Array.from(navBtns).findIndex(b => b.classList.contains('active'));
+            if (currentIdx === idx) return;
+            document.documentElement.style.setProperty('--slide-dir', idx > currentIdx ? '-1' : '1');
+            
+            navBtns.forEach(b => b.classList.remove('active')); views.forEach(v => v.classList.remove('active'));
+            btn.classList.add('active'); document.getElementById(btn.dataset.target).classList.add('active');
+            if(btn.dataset.target === 'view-gen') setTimeout(() => updateTabIndicator(document.querySelector('.sub-tab.active')), 50);
+        });
+    });
+
+    const subTabs = document.querySelectorAll('.sub-tab'); const modePanels = document.querySelectorAll('.mode-panel');
+    let currentMode = 'random';
+    subTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            subTabs.forEach(t => t.classList.remove('active')); modePanels.forEach(m => m.classList.add('hidden'));
+            tab.classList.add('active'); currentMode = tab.dataset.mode;
+            document.getElementById('mode-' + currentMode).classList.remove('hidden'); 
+            updateTabIndicator(tab); generatePassword();
+        });
+    });
+
+    function toggleVis(inpId, btn) {
+        const inp = document.getElementById(inpId); const isPass = inp.type === 'password';
+        
+        const col = document.getElementById('out-colored');
+        col.classList.add('morphing');
+        setTimeout(() => {
+            inp.type = isPass ? 'text' : 'password';
+            btn.querySelector('.icon-eye').classList.toggle('hidden', isPass); btn.querySelector('.icon-eye-off').classList.toggle('hidden', !isPass);
+            btn.style.color = isPass ? 'var(--accent)' : 'var(--text-main)';
+            
+            if(inpId === 'out-pwd') { 
+                updateDisplayColor(); resetIdleTimer(); 
+                const ring = document.getElementById('vis-ring');
+                if(isPass) { ring.style.transition = 'none'; ring.style.strokeDashoffset = '132'; } 
+                else { ring.style.transition = 'none'; ring.style.strokeDashoffset = '0'; setTimeout(() => { ring.style.transition = `stroke-dashoffset ${CFG.IDLE_HIDE_MS/1000}s linear`; ring.style.strokeDashoffset = '132'; }, 50); }
+            }
+            col.classList.remove('morphing');
+        }, 120);
+    }
+    document.getElementById('btn-vis').addEventListener('click', function(){ toggleVis('out-pwd', this) });
+    document.getElementById('btn-chk-vis').addEventListener('click', function(){ toggleVis('chk-input', this) });
+
+    function updateSliderFill(e) { e.target.style.setProperty('--slider-fill', `${((e.target.value - e.target.min) / (e.target.max - e.target.min)) * 100}%`); }['sl-len','sl-words','sl-pron','sl-pin'].forEach(id => {
+        const sl = document.getElementById(id);
+        sl.addEventListener('input', e => { document.getElementById(id.replace('sl-','val-')).textContent = e.target.value; updateSliderFill(e); generatePassword(); });
+    });
+
+    const cbUp = document.getElementById('cb-up'), cbLow = document.getElementById('cb-low');
+    const cbNum = document.getElementById('cb-num'), cbSym = document.getElementById('cb-sym');
+    const inCus = document.getElementById('in-custom'), symWarn = document.getElementById('sym-warn');
+    [cbUp, cbLow, cbNum, cbSym].forEach(cb => { cb.addEventListener('change', () => { if(![cbUp, cbLow, cbNum, cbSym].some(c => c.checked)) cbLow.checked = true; generatePassword(); }); });[document.getElementById('cb-exc'), document.getElementById('sel-sep'), document.getElementById('cb-p-cap'), document.getElementById('cb-p-num'), document.getElementById('cb-p-sym'), document.getElementById('cb-pr-cap'), document.getElementById('cb-pr-num'), document.getElementById('cb-pr-sym')].forEach(el => el.addEventListener('change', generatePassword));
+    inCus.addEventListener('input', generatePassword);
+
+    // ==========================================
+    // GENERATION ENGINE & WORDLIST
+    // ==========================================
+    const C = { u:'ABCDEFGHIJKLMNOPQRSTUVWXYZ', l:'abcdefghijklmnopqrstuvwxyz', n:'0123456789' };
+    const AMB = /[il1Lo0O]/g;
+    const WL =[...new Set("apple,bacon,cabin,dance,eagle,fable,galaxy,habit,igloo,jacket,kayak,lake,magic,nacho,oasis,pacific,quail,rabbit,safari,taco,unicorn,valley,waffle,yacht,zebra,acorn,basket,cactus,desert,echo,falcon,ghost,hammer,island,jungle,koala,lemon,mango,ninja,ocean,panda,quantum,radar,salad,tiger,umbra,velvet,wagon,xenon,yogurt,zombie,anchor,balloon,castle,dragon,engine,forest,guitar,helmet,jewel,kettle,lizard,monkey,nebula,orchid,pirate,quartz,rocket,spider,turtle,umpire,vampire,wizard,yellow,zigzag,abstract,breeze,crimson,dilemma,eclipse,frontier,glacier,horizon,illusion,journey,kinetic,lunar,mystic,nomad,oracle,paradox,quest,radiant,stellar,twilight,utopia,vortex,whisper,zenith,amber,blizzard,cosmos,dynamo,enigma,flare,gravity,harmony,infinity,jubilee,karma,legacy,matrix,nova,odyssey,phantom,rhythm,symphony,titan,universe,velocity,wisdom,zephyr,abyss,beacon,cascade,dawn,emerald,forge,genesis,halo,ignite,jade,krypton,lucid,meteor,nexus,omega,pulse,quasar,realm,solstice,tether,valor,weaver,apex,blade,cipher,drift,echoes,fossil,glyph,havoc,icon,jolt,kraken,loom,myth,neon,onyx,prism,rift,shard,talon,usher,vault,ward,yawn,zealot,alpha,bravo,charlie,delta,foxtrot,golf,hotel,india,juliet,kilo,lima,mike,november,oscar,papa,romeo,sierra,tango,uniform,victor,whiskey,xray,yankee,zulu,ability,access,account,action,active,actual,advice,affair,agency,agenda,agent,alarm,album,alien,alive,alley,allow,alloy,alone,alter,amuse,angel,anger,angle,angry,animal,ankle,annual,answer,antic,anxiety,anyway,apart,apology,appear,apply,arcade,archer,arctic,arena,argue,arise,armor,army,arrive,arrow,artist,ashes,aside,asleep,asset,assign,assist,assume,assure,atomic,attach,attack,attend,attic,attract,auction,audio,audit,august,aunt,aurora,author,auto,autumn,avenue,avoid,award,awake,aware,away,awesome,awful,awkward,axiom,baboon,badge,baffle,baggage,bail,baking,balance,balcony,ball,bamboo,banana,banner,barber,barely,bargain,barrel,barrier,base,basic,battle,beach,bean,bear,beauty,beaver,become,before,begin,behave,behind,belief,below,belt,bench,benefit,berry,beside,best,better,beyond,bicycle,bidder,bike,bind,biology,bird,birth,bitter,black,blame,blanket,blast,blaze,blend,bless,blind,blink,block,blood,bloom,blossom,blue,blur,board,boat,body,boil,bold,bomb,bond,bone,book,boom,boot,border,boss,bother,bottle,bottom,bounce,bowl,brain,brake,branch,brave,bread,break,brick,brief,bright,bring,brisk,broad,broken,bronze,broom,brother,brown,brush,bubble,bucket,budget,build,bullet,bundle,burden,burn,burst,bush,business,butter,button,buyer,cable,cadet,cage,cake,call,calm,camera,camp,canal,cancel,candy,cannon,canoe,canvas,canyon,capable,capital,captain,carbon,card,cargo,carpet,carry,cart,carve,case,cash,casino,casual,catch,cause,cave,cease,celery,cell,cement,census,center,ceramic,cereal,certain,chain,chair,chalk,chamber,chance,change,channel,chaos,chapter,charge,charm,chart,chase,cheap,check,cheese,chef,cherry,chest,chicken,chief,child,chill,chime,choice,choose,chorus,church,cider,cigar,cinema,circle,citizen,city,civil,claim,class,clause,claw,clay,clean,clear,clerk,clever,click,client,cliff,climb,clinic,clock,clone,close,cloth,cloud,club,clue,cluster,coach,coal,coast,coat,cobra,code,coffee,coil,coin,cold,collar,collect,color,column,combine,come,comedy,comfort,comic,common,company,compel,complex,concept,concert,conduct,confirm,connect,consent,consist,contact,contain,content,contest,context,control,convey,cook,cool,copper,copy,coral,core,corn,corner,correct,cost,cotton,couch,cough,could,count,country,couple,course,cover,craft,crash,crater,crawl,crazy,cream,create,credit,creek,crew,crime,crisp,critic,crop,cross,crowd,crown,crucial,cruel,cruise,crumble,crunch,crush,crystal,cube,culture,cupboard,curious,current,curtain,curve,cushion,custom,cute,cycle,cylinder".split(','))];
+
+    let lastPoolSize = 0;
+
+    async function generatePassword() {
+        let pwd = '';
+        if(currentMode === 'random') {
+            let pools =[], full = '';
+            let u = C.u, l = C.l, n = C.n, s = inCus.value || '!@#$%^&*';
+            if(document.getElementById('cb-exc').checked){ u=u.replace(AMB,''); l=l.replace(AMB,''); n=n.replace(AMB,''); s=s.replace(AMB,''); }
+            if(cbUp.checked && u) pools.push(u); if(cbLow.checked && l) pools.push(l);
+            if(cbNum.checked && n) pools.push(n); if(cbSym.checked && s) pools.push(s);
+            pools.forEach(p => full += p);
+            
+            lastPoolSize = full.length;
+            symWarn.style.display = (full.length > 0 && full.length < CFG.MIN_POOL_SIZE) ? 'block' : 'none';
+            if(!full.length) return;
+            
+            const len = parseInt(document.getElementById('sl-len').value);
+            let req = pools.map(p => p[secRand(p.length)]);
+            let extra = ''; for(let i=req.length; i<len; i++) extra += full[secRand(full.length)];
+            let arr =[...extra]; req.forEach(c => { arr.splice(secRand(arr.length+1), 0, c); });
+            pwd = arr.join('');
+        } 
+        else if(currentMode === 'passphrase') {
+            const count = parseInt(document.getElementById('sl-words').value);
+            lastPoolSize = WL.length;
+            let wArr =[];
+            for(let i=0; i<count; i++){
+                let w = WL[secRand(WL.length)];
+                if(document.getElementById('cb-p-cap').checked) w = w[0].toUpperCase() + w.slice(1);
+                wArr.push(w);
+            }
+            const sep = document.getElementById('sel-sep').value;
+            pwd = wArr.join(sep);
+            if(document.getElementById('cb-p-num').checked) pwd += sep + secRand(100);
+            if(document.getElementById('cb-p-sym').checked) pwd += sep + '!@#$%^&*'[secRand(8)];
+        }
+        else if(currentMode === 'pronounceable') {
+            const v = 'aeiou', c = 'bcdfghjklmnpqrstvwxyz';
+            lastPoolSize = 26;
+            const len = parseInt(document.getElementById('sl-pron').value);
+            let isVow = secRand(2) === 0; let arr =[];
+            for(let i=0; i<len; i++){ arr.push((isVow?v:c)[secRand(isVow?5:21)]); isVow = !isVow; }
+            if(document.getElementById('cb-pr-num').checked) { arr.splice(secRand(arr.length), 0, C.n[secRand(10)]); lastPoolSize += 10; }
+            if(document.getElementById('cb-pr-sym').checked) { arr.splice(secRand(arr.length), 0, '!@#$-'[secRand(5)]); lastPoolSize += 5; }
+            pwd = arr.join('');
+            if(document.getElementById('cb-pr-cap').checked) pwd = pwd[0].toUpperCase() + pwd.slice(1);
+        }
+        else if(currentMode === 'pin') {
+            lastPoolSize = 10;
+            for(let i=0; i<parseInt(document.getElementById('sl-pin').value); i++) pwd += C.n[secRand(10)];
+        }
+
+        vibrate(HAPTIC.REGEN);
+        await typePassword(pwd);
+        updateGenStr(pwd);
+    }
+
+    document.getElementById('btn-regen').addEventListener('click', () => { generatePassword(); });
+
+    // ==========================================
+    // STRENGTH ANALYZER & TIMELINE
+    // ==========================================
+    function analyzePwd(pwd, isGenerationContext = true) {
+        if(!pwd) return { e:0 };
+        if(isGenerationContext && currentMode === 'passphrase') {
+            const count = parseInt(document.getElementById('sl-words').value);
+            let ent = count * Math.log2(WL.length);
+            if(document.getElementById('cb-p-num').checked) ent += Math.log2(100);
+            if(document.getElementById('cb-p-sym').checked) ent += Math.log2(8);
+            return { e: ent };
+        }
+        let p = 0;
+        if(/[a-z]/.test(pwd)) p+=26; if(/[A-Z]/.test(pwd)) p+=26;
+        if(/[0-9]/.test(pwd)) p+=10; if(/[^a-zA-Z0-9\s]/.test(pwd)) p+=32;
+        if(p===0) p=1;
+        return { e: pwd.length * Math.log2(p) };
+    }
+
+    function timeStr(e) {
+        const s = Math.pow(2, e) / 1e11; 
+        if(s<1) return 'فوراً ❌'; if(s<60) return 'ثوانٍ ⚠️';
+        if(s<3600) return Math.floor(s/60)+' دقيقة ⚠️';
+        if(s<86400) return Math.floor(s/3600)+' ساعة';
+        if(s<31536e3) return Math.floor(s/86400)+' يوم';
+        if(s<31536e6) return Math.floor(s/31536e3)+' سنة ✓';
+        return 'قرون 🛡️';
+    }
+
+    function getStrengthColor(e) {
+        if(e<=35) return 'var(--danger)'; if(e<=59) return 'var(--warning)';
+        if(e<=85) return 'var(--info)'; return 'var(--success)';
+    }
+
+    let animTracker = 0;
+    async function drawBarsSequentially(e, prefix, lblId) {
+        let act=0, c, t, pSpeed;
+        if(e<=35){ c='var(--danger)'; t='ضعيفة'; act=1; pSpeed='0.8s'; }
+        else if(e<=59){ c='var(--warning)'; t='مقبولة'; act=2; pSpeed='1.2s'; }
+        else if(e<=85){ c='var(--info)'; t='قوية'; act=3; pSpeed='2s'; }
+        else{ c='var(--success)'; t='ممتازة 🛡️'; act=4; pSpeed='3s'; }
+
+        const currentId = ++animTracker;
+        if(lblId){ const el=document.getElementById(lblId); el.textContent=t; el.style.color = act?c:'var(--text-muted)'; }
+        
+        const announce = document.getElementById('strength-announce');
+        if(announce) announce.textContent = `القوة: ${t} — الكسر: ${timeStr(e)}`;
+
+        for(let i=1; i<=4; i++) {
+            if(currentId !== animTracker) return;
+            const b = document.querySelector(`#${prefix}${i} .bar`); if(!b) continue;
+            b.style.setProperty('--pulse-speed', pSpeed);
+            if(i <= act) { 
+                b.style.width = '100%'; b.style.backgroundColor = c; 
+                b.parentElement.style.boxShadow = `0 0 12px ${c}40`; b.classList.add('pulsing');
+            } else { 
+                b.style.width = '0%'; b.style.backgroundColor = 'var(--bg-elevated)'; 
+                b.parentElement.style.boxShadow = 'none'; b.classList.remove('pulsing');
+            }
+            if(!prefNoMotion) await new Promise(r => setTimeout(r, 60));
+        }
+    }
+
+    function updateTimeline(e) {
+        const fill = document.getElementById('tl-fill'); const marker = document.getElementById('tl-marker');
+        if(!fill || !marker) return;
+        const pct = Math.min((e / 100) * 100, 100);
+        fill.style.width = `${pct}%`; marker.style.right = `${pct}%`;
+        fill.style.background = getStrengthColor(e);
+    }
+
+    function updateGenStr(pwd) {
+        const r = analyzePwd(pwd, true);
+        drawBarsSequentially(r.e, 'b', 'lbl-strength');
+        document.getElementById('lbl-time').textContent = timeStr(r.e);
+        
+        let poolCtx = '';
+        if(lastPoolSize < 20) poolCtx = '(ضعيف ⚠️)'; else if(lastPoolSize > 70) poolCtx = '(ممتاز ✓)'; else poolCtx = '(جيد)';
+        document.getElementById('ep-pool-ctx').textContent = poolCtx;
+        document.getElementById('ep-pool').textContent = lastPoolSize;
+        document.getElementById('ep-len').textContent = pwd.length;
+        animateNumber('ep-bits', r.e, '');
+        document.getElementById('ep-crack').textContent = timeStr(r.e).replace(' ⚠️','').replace(' ❌','').replace(' ✓','');
+        
+        const epBar = document.getElementById('ep-bar');
+        epBar.style.background = getStrengthColor(r.e);
+    }
+
+    document.getElementById('btn-toggle-ep').addEventListener('click', () => {
+        const p = document.getElementById('ep-panel');
+        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // ==========================================
+    // PWNED CHECKER
+    // ==========================================
+    function parseHibpLine(l, suffix) {
+        l = l.trim();
+        if(!/^[0-9A-F]{35}:\d+$/i.test(l)) return null;
+        if(l.startsWith(suffix)) return parseInt(l.split(':')[1]);
+        return null;
+    }
+
+    let chkTimer;
+    const chkInp = document.getElementById('chk-input');
+    chkInp.addEventListener('input', e => {
+        document.getElementById('pwned-res').style.display='none';
+        clearTimeout(chkTimer);
+        chkTimer = setTimeout(() => { 
+            const pwd = e.target.value; 
+            const r = analyzePwd(pwd, false);
+            
+            const PATTERNS = [/^[A-Z][a-z]+\d+[!@#$-_]?$/, /(.)\1{2,}/, /012|123|234|789|890|abc|qwe/i];
+            const patternWarn = PATTERNS.some(p => p.test(pwd));
+            const warnBox = document.getElementById('chk-pattern-warn');
+            if(patternWarn && pwd.length > 0) { warnBox.style.display = 'block'; } else { warnBox.style.display = 'none'; }
+            
+            document.getElementById('chk-time').textContent = pwd ? timeStr(r.e) : '---';
+            animateNumber('chk-ent', r.e, ''); drawBarsSequentially(r.e, 'cb', 'chk-lbl-str'); updateTimeline(r.e);
+        }, 300);
+    });
+
+    const hibpCache = new Map();
+    let isPwnedLoading = false;
+    let pwnedReqCount = 0;
+    
+    document.getElementById('btn-pwned').addEventListener('click', async function() {
+        if(isPwnedLoading) return;
+        
+        if(pwnedReqCount > 10) return showTst('يرجى الانتظار قليلاً قبل المزيد من الفحوصات', 'warn');
+        
+        const pwd = chkInp.value.trim(); const box = document.getElementById('pwned-res');
+        if(!pwd){ showTst('أدخل كلمة مرور أولاً', 'warn'); return; }
+        
+        isPwnedLoading = true; pwnedReqCount++; this.disabled = true; this.textContent = '⏳ جاري الفحص...';
+        box.style.display='block'; box.style.background='var(--bg-elevated)'; box.style.color='var(--text-main)'; box.style.borderColor='var(--border)'; box.textContent = 'يتم الاستعلام بشكل آمن...';
+        
+        try {
+            const buf = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(pwd));
+            const hex = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+            const prefix = hex.substring(0,5); const suffix = hex.substring(5);
+            
+            let cnt = 0;
+            if(hibpCache.has(prefix) && Date.now() - hibpCache.get(prefix).ts < CFG.HIBP_TTL_MS) {
+                const lines = hibpCache.get(prefix).data.split('\n');
+                for(let l of lines) { const match = parseHibpLine(l, suffix); if(match !== null) { cnt = match; break; } }
+            } else {
+                const res = await fetch('https://api.pwnedpasswords.com/range/'+prefix, { headers:{'Add-Padding':'true'} });
+                if(!res.ok) throw new Error();
+                const txt = await res.text();
+                hibpCache.set(prefix, { data: txt, ts: Date.now() });
+                const lines = txt.split('\n');
+                for(let l of lines) { const match = parseHibpLine(l, suffix); if(match !== null) { cnt = match; break; } }
+            }
+            
+            if(cnt>0){ 
+                vibrate(HAPTIC.LEAK);
+                box.style.background='var(--danger-dim)'; box.style.color='var(--danger)'; box.style.borderColor='rgba(255,51,102,0.3)'; box.innerHTML=`⚠️ تم تسريبها <strong>${cnt.toLocaleString('ar')}</strong> مرة. تجنب استخدامها!`; 
+            } 
+            else { 
+                vibrate(HAPTIC.SAFE);
+                box.style.background='var(--success-dim)'; box.style.color='var(--success)'; box.style.borderColor='rgba(0,230,118,0.3)'; box.innerHTML='✅ آمنة! لم تظهر في أي تسريب معروف.'; 
+            }
+        } catch(e) { box.style.background='rgba(255,170,0,0.1)'; box.style.color='var(--warning)'; box.style.borderColor='rgba(255,170,0,0.3)'; box.textContent = 'فشل الاتصال بالخادم. تحقق من الإنترنت.'; }
+        setTimeout(() => { isPwnedLoading = false; this.disabled = false; this.textContent = '🔍 فحص في قاعدة بيانات HIBP'; }, 2500); // Strict Rate Limit
+        setTimeout(() => { pwnedReqCount = Math.max(0, pwnedReqCount - 1); }, 15000); // Cool down
+    });
+
+    // ==========================================
+    // SECURE HISTORY MANAGER (RAM Only + Import/Export)
+    // ==========================================
+    let hist =[]; 
+    const cbHist = document.getElementById('cb-hist');
+
+    window.addEventListener('beforeunload', () => {
+        hist.forEach(item => { item.p = Array.from(crypto.getRandomValues(new Uint8Array(item.p.length))).map(b=>b.toString(16)).join('').slice(0, item.p.length); });
+        hist =[]; document.getElementById('out-pwd').value = '';
+    });
+
+    function saveHist(pwd) {
+        if(!cbHist.checked) return;
+        if(hist.length > 0 && hist[0].p === pwd) return;
+        const color = getStrengthColor(analyzePwd(pwd, currentMode==='passphrase').e);
+        hist.unshift({ p:pwd, d:new Date().toLocaleString('ar-SA'), c:color });
+        if(hist.length > CFG.MAX_HIST) hist.pop();
+        renderHist();
+    }
+
+    cbHist.addEventListener('change', async e => {
+        if(!e.target.checked && hist.length>0) {
+            const res = await showModal('إيقاف الحفظ', 'سيتم مسح جميع كلمات المرور الحالية من الذاكرة العشوائية. هل أنت متأكد؟',[{text:'إلغاء', class:'cancel', action:false}, {text:'نعم، امسح السجل', class:'confirm', action:true}], false, false);
+            if(res.action) { hist=[]; renderHist(); } else { e.target.checked = true; }
+        } else if(e.target.checked) { showTst('تم تفعيل الحفظ في الجلسة', 'succ'); }
+    });
+
+    function renderHist(){
+        const list = document.getElementById('hist-list'); list.innerHTML='';
+        if(!hist.length){ list.innerHTML=`<div class="empty-state"><svg class="empty-lock" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path id="lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>السجل فارغ<br><small style="color:var(--text-muted)">سيتم حفظ كلمات المرور هنا عند النسخ</small></span></div>`; return; }
+        
+        hist.forEach((i, idx) => {
+            const d = document.createElement('div'); d.className='history-item';
+            d.innerHTML = `
+                <button class="btn-del-item" aria-label="حذف" data-idx="${idx}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                <div class="hist-pwd"><span class="hist-dot" style="background:${i.c};box-shadow:0 0 4px ${i.c}80"></span><span class="hist-val masked" data-idx="${idx}">••••••••</span><button class="btn-reveal" aria-label="إظهار"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+                <div class="hist-meta"><span class="hist-date">${esc(i.d)}</span><button class="btn-copy-sm">نسخ</button></div>`;
+            const valSpan = d.querySelector('.hist-val');
+            d.querySelector('.btn-reveal').addEventListener('click', () => { const isMasked = valSpan.classList.contains('masked'); valSpan.classList.toggle('masked'); valSpan.textContent = isMasked ? hist[parseInt(valSpan.dataset.idx)].p : '••••••••'; });
+            d.querySelector('.btn-copy-sm').addEventListener('click', (e) => { 
+                const btn = e.currentTarget; doCopy(hist[parseInt(valSpan.dataset.idx)].p);
+                btn.textContent = '✓ تم'; btn.style.background = 'var(--success-dim)'; btn.style.borderColor = 'var(--success)'; btn.style.color = 'var(--success)';
+                setTimeout(() => { btn.textContent = 'نسخ'; btn.style = ''; }, 1500);
+            });
+            d.querySelector('.btn-del-item').addEventListener('click', (e) => { hist.splice(parseInt(e.currentTarget.dataset.idx), 1); renderHist(); });
+            list.appendChild(d);
+        });
+    }
+
+    document.getElementById('btn-hist-clear').addEventListener('click', async ()=>{
+        if(!hist.length) return;
+        const res = await showModal('مسح السجل', 'هل أنت متأكد من مسح جميع كلمات المرور من ذاكرة الجلسة؟',[{text:'إلغاء', class:'cancel', action:false}, {text:'مسح نهائي', class:'confirm', action:true}], false, false);
+        if(res.action) { hist=[]; renderHist(); vibrate(HAPTIC.CLEAR); showTst('تم المسح', 'succ'); }
+    });
+
+    document.getElementById('btn-hist-exp').addEventListener('click', async ()=>{
+        if(!hist.length) return showTst('السجل فارغ', 'warn');
+        const res = await showModal('تصدير السجل', 'اختر طريقة التصدير. <span style="color:var(--warning)">تصدير النص العادي مكشوف!</span><br><br><div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:6px; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>AES-256-GCM • PBKDF2-SHA256 • 600K iter</span></div>',[{text:'إلغاء', class:'cancel', action:'cancel'}, {text:'TXT مكشوف ⚠️', class:'confirm', action:'txt'}, {text:'JSON مشفر 🔒', class:'primary', action:'json'}], true);
+        
+        if(res.action === 'cancel') return;
+        const ts = new Date().toISOString().slice(0,16).replace('T','_').replace(':','-');
+        
+        if(res.action === 'txt') {
+            const confirmTxt = await showModal('⚠️ تحذير أمني خطير', 'ستصدر كلمات المرور في ملف نصي مكشوف. أي شخص يملك وصول لجهازك سيتمكن من قراءتها.',[{text:'تراجع', class:'primary', action:false}, {text:'أفهم الخطورة، صَدِّر', class:'confirm', action:true}], false, false);
+            if(!confirmTxt.action) return;
+            let txt = 'مُـوَلِّـد — سجل كلمات المرور\n\n'; hist.forEach(i => txt += `[${i.d}]\n${i.p}\n\n`);
+            dlFile(txt, `mowallid_export_${ts}.txt`, 'text/plain');
+        } 
+        else if(res.action === 'json') {
+            if(!res.val || analyzePwd(res.val, false).e < CFG.MIN_EXPORT_ENTROPY) return showTst('فشل: كلمة المرور ضعيفة', 'err');
+            
+            showTst('⏳ يتم التشفير...', 'info'); 
+            
+            // Generate Random Canary Nonce
+            const canaryNonce = b2a(crypto.getRandomValues(new Uint8Array(16)));
+            
+            setTimeout(async () => {
+                try {
+                    let pwdBuf = new TextEncoder().encode(res.val);
+                    const salt = crypto.getRandomValues(new Uint8Array(16));
+                    const baseKey = await crypto.subtle.importKey("raw", pwdBuf, "PBKDF2", false, ["deriveKey"]);
+                    const key = await crypto.subtle.deriveKey({name: "PBKDF2", salt, iterations: CFG.PBKDF2_ITERS, hash: "SHA-256"}, baseKey, {name: "AES-GCM", length: 256}, false, ["encrypt"]);
+                    const iv = crypto.getRandomValues(new Uint8Array(12));
+                    const ct = await crypto.subtle.encrypt({name: "AES-GCM", iv}, key, new TextEncoder().encode(JSON.stringify({canary: canaryNonce, data: hist})));
+                    
+                    const payload = JSON.stringify({ v:1, _info: `مُـوَلِّـد Encrypted Export - AES-256-GCM, PBKDF2-SHA256 ${CFG.PBKDF2_ITERS} iter`, canary_nonce: canaryNonce, salt:b2a(salt), iv:b2a(iv), ct:b2a(ct) });
+                    dlFile(payload, `mowallid_vault_${ts}.json`, 'application/json'); 
+                    vibrate(HAPTIC.EXPORT); showTst('تم التصدير المشفر', 'succ');
+                    
+                    // Zero memory
+                    crypto.getRandomValues(pwdBuf); pwdBuf = null;
+                } catch(e) { showTst('فشل التشفير', 'err'); }
+            }, 100);
+        }
+    });
+
+    document.getElementById('btn-hist-imp').addEventListener('click', () => { document.getElementById('file-import').click(); });
+    document.getElementById('file-import').addEventListener('change', async (e) => {
+        const file = e.target.files[0]; if(!file) return;
+        e.target.value = ''; 
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            try {
+                const data = JSON.parse(event.target.result);
+                if(data.v !== 1 || !data.salt || !data.iv || !data.ct || !data.canary_nonce) throw new Error("Format");
+                
+                const res = await showModal('فك التشفير', 'الرجاء إدخال كلمة المرور لفك تشفير ملف السجل:',[{text:'إلغاء', class:'cancel', action:false}, {text:'استيراد 🔓', class:'primary', action:true}], true, false);
+                if(!res.action || !res.val) return;
+                
+                showTst('⏳ جاري فك التشفير...', 'info');
+                setTimeout(async () => {
+                    try {
+                        let pwdBuf = new TextEncoder().encode(res.val);
+                        const baseKey = await crypto.subtle.importKey("raw", pwdBuf, "PBKDF2", false, ["deriveKey"]);
+                        const key = await crypto.subtle.deriveKey({name: "PBKDF2", salt: a2b(data.salt), iterations: CFG.PBKDF2_ITERS, hash: "SHA-256"}, baseKey, {name: "AES-GCM", length: 256}, false, ["decrypt"]);
+                        const dec = await crypto.subtle.decrypt({name: "AES-GCM", iv: a2b(data.iv)}, key, a2b(data.ct));
+                        
+                        const parsed = JSON.parse(new TextDecoder().decode(dec));
+                        if(parsed.canary !== data.canary_nonce) throw new Error("Canary Mismatch");
+                        if(!Array.isArray(parsed.data) || !parsed.data.every(i => typeof i.p === 'string' && typeof i.d === 'string')) throw new Error("Schema");
+                        
+                        let added = 0;
+                        parsed.data.reverse().forEach(i => { if(!hist.find(x => x.p === i.p)) { hist.unshift(i); added++; } });
+                        if(hist.length > CFG.MAX_HIST) hist = hist.slice(0, CFG.MAX_HIST);
+                        
+                        renderHist(); if(!cbHist.checked) { cbHist.checked = true; }
+                        vibrate(HAPTIC.IMPORT); showTst(`تم استيراد ${added} كلمة مرور جديدة بنجاح`, 'succ');
+                        
+                        crypto.getRandomValues(pwdBuf); pwdBuf = null;
+                    } catch(e) { showTst('كلمة المرور خاطئة أو الملف تالف', 'err'); }
+                }, 100);
+            } catch(err) { showTst('ملف غير صالح', 'err'); }
+        };
+        reader.readAsText(file);
+    });
+
+    function dlFile(content, name, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([content],{type})); a.download = name; a.click(); URL.revokeObjectURL(a.href); }
+
+    // ==========================================
+    // SECURE CLIPBOARD & AUTO-MASK 
+    // ==========================================
+    let copyEndTime = 0; let copyCdInterval;
+
+    function setCopyState(state, sec = 0) {
+        const icon = document.getElementById('copy-icon'); const spin = document.getElementById('copy-spin'); const check = document.getElementById('copy-check'); const lock = document.getElementById('copy-lock'); const txt = document.getElementById('copy-txt'); const badge = document.getElementById('copy-cd'); const ring = document.getElementById('copy-ring-svg'); const ringCirc = document.getElementById('copy-ring');
+        icon.classList.add('hidden'); spin.classList.add('hidden'); check.classList.add('hidden'); lock.classList.add('hidden'); txt.style.display='none'; badge.style.display='none'; ring.classList.add('hidden');
+        
+        switch(state) {
+            case 'default': icon.classList.remove('hidden'); txt.style.display='inline-block'; txt.textContent='نسخ'; break;
+            case 'copying': spin.classList.remove('hidden'); break;
+            case 'copied': check.classList.remove('hidden'); txt.style.display='inline-block'; txt.textContent='تم'; break;
+            case 'cd': 
+                ring.classList.remove('hidden'); badge.style.display='inline-block'; badge.textContent = sec + 's'; 
+                ringCirc.style.transition = 'none'; ringCirc.style.strokeDashoffset = '0';
+                setTimeout(() => { ringCirc.style.transition = `stroke-dashoffset ${sec}s linear`; ringCirc.style.strokeDashoffset = '100'; }, 50);
+                break;
+            case 'cd-tick':
+                ring.classList.remove('hidden'); badge.style.display='inline-block'; badge.textContent = sec + 's';
+                break;
+            case 'expired': lock.classList.remove('hidden'); txt.style.display='inline-block'; txt.textContent='انتهى'; break;
+        }
+    }
+
+    async function doCopy(txt){
+        try {
+            setCopyState('copying');
+            if(!navigator.clipboard || !navigator.clipboard.writeText) throw new Error();
+            await navigator.clipboard.writeText(txt);
+            vibrate(HAPTIC.COPY);
+            
+            const btnMain = document.getElementById('btn-copy');
+            btnMain.style.transform = 'scale(0.92)'; setTimeout(()=>btnMain.style.transform = 'none', 150);
+            
+            setCopyState('copied');
+            
+            setTimeout(() => {
+                copyEndTime = Date.now() + CFG.CLIP_TTL_MS;
+                clearInterval(copyCdInterval);
+                setCopyState('cd', CFG.CLIP_TTL_MS/1000);
+                
+                function updateBadge() {
+                    const left = Math.ceil((copyEndTime - Date.now()) / 1000);
+                    if(left > 0) { setCopyState('cd-tick', left); } 
+                    else {
+                        clearInterval(copyCdInterval);
+                        setCopyState('expired'); vibrate(HAPTIC.EXPIRE);
+                        
+                        // Active Memory Scrubbing on expiration
+                        if (document.hasFocus()) { navigator.clipboard.writeText(''); } 
+                        else { document.addEventListener('focus', ()=>navigator.clipboard.writeText(''), {once:true}); }
+                        
+                        const inp = document.getElementById('out-pwd');
+                        inp.value = '';
+                        document.getElementById('btn-regen').click(); 
+                        showTst('تم تطهير الحافظة أمنياً وتوليد كلمة جديدة ✓', 'info');
+                        
+                        setTimeout(() => setCopyState('default'), 1200);
+                    }
+                }
+                copyCdInterval = setInterval(updateBadge, 1000);
+            }, 600);
+            
+            if(document.getElementById('view-gen').classList.contains('active')) saveHist(txt);
+        } catch(e){ showTst('متصفحك يمنع النسخ الآمن.', 'err'); setCopyState('default'); }
+    }
+
+    document.getElementById('btn-copy').addEventListener('click', ()=>{ const val = document.getElementById('out-pwd').value; if(val) doCopy(val); });
+    document.getElementById('btn-copy-regen').addEventListener('click', async ()=>{ 
+        const val = document.getElementById('out-pwd').value; 
+        if(val) { await doCopy(val); document.getElementById('btn-regen').click(); }
+    });
+
+    // Native Copy Interception
+    document.addEventListener('copy', e => {
+        const inp = document.getElementById('out-pwd');
+        if (document.activeElement === inp || window.getSelection().toString() === inp.value) {
+            e.preventDefault(); document.getElementById('btn-copy').click();
+        }
+    });
+
+    let idleTimer;
+    function resetIdleTimer() {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+            const inp = document.getElementById('out-pwd');
+            if(inp.type === 'text') { document.getElementById('btn-vis').click(); showTst('🔒 تم إخفاء الكلمة تلقائياً للخصوصية', 'info'); }
+        }, CFG.IDLE_HIDE_MS);
+    }['mousemove','keydown','touchstart','pointerdown'].forEach(e => document.addEventListener(e, resetIdleTimer));
+
+    document.addEventListener('visibilitychange', () => {
+        if(document.visibilityState === 'hidden') {
+            const inp = document.getElementById('out-pwd');
+            if(inp.type === 'text') document.getElementById('btn-vis').click();
+            document.querySelectorAll('.hist-val').forEach(el => { if(!el.classList.contains('masked')) { el.classList.add('masked'); el.textContent = '••••••••'; } });
+        } else {
+            const left = Math.ceil((copyEndTime - Date.now()) / 1000);
+            if (left > 0) showTst(`⏱️ الحافظة تحتوي على كلمة مرور — ${left}ث متبقية`, 'warn');
+        }
+    });
+
+    // Shoulder-Surfing Blur
+    window.addEventListener('blur', () => {
+        if (document.getElementById('out-pwd').type === 'text') {
+            document.getElementById('pwd-blur-container').classList.add('blurred');
+            const sw = document.getElementById('screen-warn'); sw.innerHTML = '⚠️ النافذة في الخلفية'; sw.style.display = 'flex'; sw.style.background = 'var(--warning)'; sw.style.color = 'var(--text-dark)'; sw.style.borderColor = 'var(--warning)';
+        }
+    });
+    window.addEventListener('focus', () => {
+        document.getElementById('pwd-blur-container').classList.remove('blurred');
+        updateWarningBadge(false); // Let devTools monitor take over
+    });
+
+    document.addEventListener('keydown', e => {
+        if(document.getElementById('custom-modal').classList.contains('show')) return;
+        if(!document.getElementById('view-gen').classList.contains('active')) return;
+        if((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); document.getElementById('btn-regen').click(); }
+        if((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'c') { e.preventDefault(); document.getElementById('btn-copy-regen').click(); }
+        if((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'c') { 
+            if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName) && document.activeElement.id !== 'out-pwd') return;
+            e.preventDefault(); document.getElementById('btn-copy').click(); 
+        }
+    });
+
+    // INIT
+    setTimeout(() => {['sl-len','sl-words','sl-pron','sl-pin'].forEach(id => { const sl = document.getElementById(id); sl.dispatchEvent(new Event('input')); });
+        updateTabIndicator(document.querySelector('.sub-tab.active'));
+        renderHist(); generatePassword(); 
+    }, 100);
+
+})(); // End IIFE
 </script>
 </body>
 </html>
